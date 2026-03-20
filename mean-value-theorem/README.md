@@ -10,7 +10,7 @@ The Mean Value Theorem (MVT) is pretty straightforward, although its proof is te
 
 It basically states that there exists at least one tangent line that is parallel to a secant line.
 
-![MVT Visualization](./mvt.gif)
+![MVT Visualization](./mvt-intro.gif)
 
 The full proof lies at the end of the document for it requires the preliminary theorems to a rigorous proof.
 

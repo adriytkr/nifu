@@ -81,7 +81,7 @@ class IntroScene(Scene):
 
     moving_point=always_redraw(make_dot)
 
-    self.play(Create(moving_point))
+    self.play(FadeIn(moving_point))
 
     # Draw tangent line
     derivative=lambda x:x*2
