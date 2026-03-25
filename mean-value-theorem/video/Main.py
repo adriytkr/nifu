@@ -1,13 +1,17 @@
 from manim import *
-from utils.theme import HIGHLIGHT_COLOR,NEUTRAL_COLOR
-from utils.tangent import make_tangent_line,ScalarFunc,make_secant_line,CoordinateSystem
+
+from utils.geometry import make_secant_line
+from utils.coordinate_system import CoordinateSystemManager
+from utils.theme import HIGHLIGHT_COLOR,NEUTRAL_COLOR,HIGHLIGHT_COLOR2
 
 class MainScene(Scene):
   axes=Axes(
     x_range=[0,10],
     y_range=[0,6]
   )
-  coords=CoordinateSystem(axes)
+
+  coords=CoordinateSystemManager(axes)
+
   x_A=2
   x_B=9
   c=5.5
@@ -25,140 +29,180 @@ class MainScene(Scene):
     return self.L(t)-self.s(t)
 
   def construct(self):
-    # Draw axes
     self.play(FadeIn(self.axes))
 
-    # Draw s(t)
     s_graph=self.axes.plot(lambda x:self.s(x))
+
     self.play(Create(s_graph))
 
-    # Draw A and B
-    A=self.coords.build_graph_dot(self.x_A,self.s,color=NEUTRAL_COLOR)
-    B=self.coords.build_graph_dot(self.x_B,self.s,color=NEUTRAL_COLOR)
-    self.play(Create(A),Create(B))
+    point_A=self.coords.build_graph_dot(
+      self.x_A,
+      self.s,
+      color=NEUTRAL_COLOR
+    )
+    point_B=self.coords.build_graph_dot(
+      self.x_B,
+      self.s,
+      color=NEUTRAL_COLOR
+    )
 
-    # Draw projection and label of A and B
-    proj_A,label_A=self.coords.build_projection(self.x_A,self.s(self.x_A),'a')
-    proj_B,label_B=self.coords.build_projection(self.x_B,self.s(self.x_B),'b')
-    self.play(Create(proj_A),Create(proj_B))
+    proj_A,label_A=self.coords.build_projection(
+      self.x_A,
+      self.s(self.x_A),
+      'a'
+    )
+    proj_B,label_B=self.coords.build_projection(
+      self.x_B,
+      self.s(self.x_B),
+      'b'
+    )
+
+    self.play(
+      Create(point_A),
+      Create(proj_A),
+      Create(point_B),
+      Create(proj_B)
+    )
+
     self.play(Write(label_A),Write(label_B))
 
-    # Draw secant line
-    static_secant_line=make_secant_line(A.get_center(),B.get_center())
+    static_secant_line=make_secant_line(
+      point_A.get_center(),
+      point_B.get_center()
+    )
+
     self.play(Create(static_secant_line))
 
     highlight=ValueTracker(0)
     t=ValueTracker(self.x_A)
 
-    def TangentPoint(color=WHITE)->Dot:
-      dot=Dot(
-        self.coords.to_graph_point(t.get_value(),self.s),
-        color=color
-      )
-      dot.set_z_index(6)
-      return dot
+    def build_ruby(color=WHITE)->Dot:
+      return self.coords.build_graph_dot(t.get_value(),self.s,color).set_z_index(6)
 
-    def make_dynamic_dot():
+    def build_dynamic_ruby():
       alpha=highlight.get_value()
       color=interpolate_color(WHITE,HIGHLIGHT_COLOR,alpha)
-      return TangentPoint(color)
+      return build_ruby(color)
 
-    static_tangent_point=TangentPoint()
-    static_tangent_line=make_tangent_line(
-      self.coords,
-      t.get_value(),
-      self.s,
-      self.v,
-      5
-    )
-
-    self.play(
-      Create(static_tangent_line),
-      FadeIn(static_tangent_point)
-    )
-
-    # Animate moving tangent line and point
-    def dynamic_tangent_line_logic():
-      alpha=highlight.get_value()
-      color=interpolate_color(WHITE,HIGHLIGHT_COLOR,alpha)
-
-      line=make_tangent_line(
-        self.coords,
+    def build_lailah(color=WHITE)->Line:
+      return self.coords.build_tangent_line(
         t.get_value(),
         self.s,
         self.v,
-        10
+        length=10,
+        color=color
       )
-      line.set_color(color)
 
-      return line
+    def build_dynamic_lailah():
+      alpha=highlight.get_value()
+      color=interpolate_color(WHITE,HIGHLIGHT_COLOR,alpha)
+      return build_lailah(color)
 
-    dynamic_tangent_point=always_redraw(make_dynamic_dot)
-    dynamic_tangent_line=always_redraw(dynamic_tangent_line_logic)
+    static_ruby=build_ruby()
+    static_lailah=build_lailah()
 
-    self.remove(static_tangent_line,static_tangent_point)
-    self.add(dynamic_tangent_line,dynamic_tangent_point)
+    dynamic_ruby=always_redraw(build_dynamic_ruby)
+    dynamic_lailah=always_redraw(build_dynamic_lailah)
+
+    self.play(
+      Create(static_lailah),
+      FadeIn(static_ruby)
+    )
+
+    self.remove(static_lailah,static_ruby)
+    self.add(dynamic_lailah,dynamic_ruby)
 
     self.play(t.animate.set_value(self.x_B))
     self.play(t.animate.set_value(self.x_A))
     self.play(t.animate.set_value(self.c))
 
+    # Highlight when Tangent and Secant become parallel to each other
+    proj_C,label_C=self.coords.build_projection(
+      self.c,
+      self.s(self.c),
+      'c'
+    )
+
     self.play(
       highlight.animate.set_value(1),
       static_secant_line.animate.set_color(HIGHLIGHT_COLOR),
+      Create(proj_C),
       run_time=0.5
     )
+    self.play(Write(label_C))
 
     self.play(
       highlight.animate.set_value(0),
       static_secant_line.animate.set_color(WHITE),
-      FadeOut(dynamic_tangent_line,dynamic_tangent_point),
+      FadeOut(
+        dynamic_lailah,
+        dynamic_ruby,
+        proj_C,
+        label_C
+      ),
       run_time=0.5
     )
 
-    def RolleLine():
+    def build_RolleLine():
       return Line(
         self.coords.to_graph_point(t.get_value(),self.s),
         self.coords.to_graph_point(t.get_value(),self.L),
       )
 
-    static_rolle_line=RolleLine()
-    static_point=TangentPoint()
+    t.set_value(4)
+    static_RolleLine=build_RolleLine()
+    dynamic_rolle_line=always_redraw(build_RolleLine)
+    static_ruby=build_ruby()
+
     self.play(
-      Create(static_rolle_line),
-      FadeIn(static_point)
+      Create(static_RolleLine),
+      FadeIn(static_ruby)
     )
 
-    dynamic_rolle_line=always_redraw(RolleLine)
-    self.remove(static_rolle_line,static_point)
-    self.add(dynamic_rolle_line,dynamic_tangent_point)
+    self.remove(static_RolleLine,static_ruby)
+    self.add(dynamic_rolle_line,dynamic_ruby)
+
     self.play(t.animate.set_value(self.x_B))
     self.play(t.animate.set_value(self.x_A))
     self.play(t.animate.set_value(self.x_B))
 
+    self.play(t.animate.set_value(self.c))
+    self.play(Create(proj_C))
+    self.play(Write(label_C))
+
     h_graph=self.axes.plot(lambda x:self.h(x))
+
     self.play(
       Create(h_graph),
       FadeOut(
         s_graph,
         static_secant_line,
-        dynamic_tangent_point,
-        A,
+        dynamic_ruby,
+        dynamic_rolle_line,
+        point_A,
         proj_A,
-        B,
+        point_B,
         proj_B,
+        label_C,
+        proj_C,
       ),
     )
 
-    horizontal_line=Line(
+    blake=Line(
       self.coords.to_point(-5,self.h(self.c)),
-      self.coords.to_point(10,self.h(self.c))
+      self.coords.to_point(10,self.h(self.c)),
+      color=HIGHLIGHT_COLOR2
+    )
+    blake.set_z_index(7)
+    point_C=self.coords.build_dot(
+      self.c,
+      self.h(self.c),
+      color=HIGHLIGHT_COLOR2
     )
 
-    C=self.coords.build_dot(self.c,self.h(self.c))
     self.play(
-      FadeIn(C),
-      Create(horizontal_line)
+      FadeIn(point_C),
+      Create(blake)
     )
 
     proj_C,label_C=self.coords.build_projection(self.c,self.h(self.c),'c')
@@ -166,16 +210,33 @@ class MainScene(Scene):
     self.play(Create(proj_C))
     self.play(Write(label_C))
 
+    t.set_value(self.c)
     static_secant_line.set_color(HIGHLIGHT_COLOR)
-    static_tangent_point=self.coords.build_graph_dot(self.c,self.s,HIGHLIGHT_COLOR)
+    static_ruby=build_ruby(HIGHLIGHT_COLOR)
+    static_lailah=build_lailah(HIGHLIGHT_COLOR)
+
     self.play(
       FadeIn(
         s_graph,
-        A,
-        B,
+        point_A,
+        point_B,
         static_secant_line,
-        dynamic_tangent_line,
-        static_tangent_point
+        static_lailah,
+        static_ruby
       )
     )
-    
+
+    def end(opacity:float)->None:
+      self.play(
+        s_graph.animate.set_stroke(opacity=opacity),
+        h_graph.animate.set_stroke(opacity=opacity),
+        static_secant_line.animate.set_opacity(opacity),
+        point_A.animate.set_opacity(opacity),
+        label_A.animate.set_opacity(opacity),
+        point_B.animate.set_opacity(opacity),
+        label_B.animate.set_opacity(opacity),
+        self.axes.animate.set_opacity(opacity),
+      )
+
+    end(0.25)
+    end(1)
