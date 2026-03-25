@@ -1,3 +1,1 @@
-# manim-animations
-
-
+# Manim Animations
