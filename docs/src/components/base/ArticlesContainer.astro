@@ -1,0 +1,25 @@
+---
+import {getCollection} from 'astro:content';
+
+import ArticleList from './ArticleList.astro';
+import ArticleCard from './ArticleCard.astro';
+
+const docs=await getCollection('docs');
+const articles=docs.filter(doc=>doc.data.isArticle);
+---
+
+<ArticleList>
+  {
+    articles.map(article=>(
+        <ArticleCard
+          title={article.data.title}
+          href={'/'+article.id}
+          categories={article.data.categories??[]}
+          thumbnail={article.data.thumbnail?.src??''}
+        >
+          <Fragment slot="description">{article.data.description}</Fragment>
+        </ArticleCard>
+      )
+    )
+  }
+</ArticleList>

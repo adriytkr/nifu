@@ -1,0 +1,18 @@
+<section class="twoColumnSection">
+  <div class="twoColumnSection-first">
+    <slot name="first"></slot>
+  </div>
+  <div class="twoColumnSection-second">
+    <slot name="second"></slot>
+  </div>
+</section>
+
+<style>
+.twoColumnSection{
+  margin:96px 0;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+  align-items:center;
+}
+</style>

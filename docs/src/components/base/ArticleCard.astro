@@ -1,0 +1,79 @@
+---
+interface Props{
+  title:string;
+  href:string;
+  thumbnail:string;
+  categories:string[];
+}
+
+const {title,href,thumbnail,categories=[]}=Astro.props;
+
+import {Badge} from '@astrojs/starlight/components';
+---
+
+<a href={href} class="articleCard">
+  <div class="articleCard-img-wrapper">
+    <img src={thumbnail} alt="" class="articleCard-img">
+  </div>
+  <div class="articleCard-content">
+    <div class="articleCard-badge-list">
+      {categories.map(category=>(
+        <Badge text={category}/>
+      ))}
+    </div>
+    <h3 class="articleCard-title">{title}</h3>
+    <p class="articleCard-description">
+      <slot></slot>
+    </p>
+  </div>
+</a>
+
+<style>
+.articleCard{
+  height:100%;
+  background-color:var(--sl-color-bg-nav);
+  border:1px solid var(--sl-color-hairline);
+  border-radius:12px;
+  text-decoration:none;
+  overflow:hidden;
+  display:block;
+  transition:transform 0.2s ease, border-color 0.2s ease;
+}
+
+.articleCard:hover{
+  transform:translateY(-4px);
+  border-color:var(--sl-color-accent-high);
+}
+
+.articleCard-img-wrapper{
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background-color:#000;
+  border-bottom:1px solid var(--sl-color-hairline);
+}
+
+.articleCard-content{
+  padding:1.25rem;
+}
+
+.articleCard-badge-list{
+  margin-bottom:8px;
+  display:flex;
+  gap:8px;
+}
+
+.articleCard-title{
+  margin:0 0 8px 0;
+  color:var(--sl-color-white);
+  font-size:20px;
+  font-weight:600;
+}
+
+.articleCard-description{
+  margin:0;
+  color:var(--sl-color-gray-3);
+  font-size:15px;
+  line-height:1.5;
+}
+</style>

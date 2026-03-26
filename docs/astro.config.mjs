@@ -5,36 +5,68 @@ import starlight from '@astrojs/starlight';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+import vue from '@astrojs/vue';
+
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'Akagi',
+			components:{
+				SocialIcons:'./src/components/base/GlobalPlugin.astro',
+				Footer:'./src/components/base/TheFooter.astro',
+			},
 			sidebar: [
 				{
+					label:'View all Articles',
+					link:'/articles',
+				},
+				{
 					label: 'Calculus',
-					autogenerate: { directory: 'calculus' },
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/calculus',
+					},
 				},
 				{
 					label: 'Advanced Calculus',
-					autogenerate: { directory: 'advanced-calculus' },
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/advanced-calculus',
+					},
 				},
 				{
 					label: 'Linear Algebra',
-					autogenerate: { directory: 'linear-algebra' },
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/linear-algebra',
+					},
 				},
 				{
 					label: 'Physics',
-					autogenerate: { directory: 'physics' },
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/physics',
+					},
 				},
 				{
 					label: 'Competitive Programming',
-					autogenerate: { directory: 'competitive-programming' },
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/competitive-programming',
+					},
+				},
+				{
+					label: 'Statistics',
+					collapsed:true,
+					autogenerate: {
+						directory: 'articles/statistics',
+					},
 				},
 			],
 			customCss: ['./src/assets/styles/custom.css'],
 		}),
+		vue(),
 	],
   markdown: {
     remarkPlugins: [remarkMath],

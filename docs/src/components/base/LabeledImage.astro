@@ -1,0 +1,14 @@
+<figure class="labeledImage">
+  <slot></slot>
+  <figcaption class="labeledImage-description">
+    <slot name="label"></slot>
+  </figcaption>
+</figure>
+
+<style>
+.labeledImage-description{
+  margin-top:6px;
+  color:var(--sl-color-gray-3);
+  text-align:center;
+}
+</style>
