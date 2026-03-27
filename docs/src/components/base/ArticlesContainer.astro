@@ -1,10 +1,95 @@
 ---
-import {getCollection} from 'astro:content';
+// ArticlesContainer.astro
+import { getCollection } from 'astro:content';
 
 import ArticleList from './ArticleList.astro';
+import CategoryButton from './CategoryButton.astro';
 
-const docs=await getCollection('docs');
-const articles=docs.filter(doc=>doc.data.isArticle);
+const allArticles = await getCollection('docs', ({ data }) => data.isArticle);
+
+// Get unique categories for the filter buttons
+const categories = [...new Set(allArticles.flatMap(article=>article.data.categories).filter(Boolean))].sort();
 ---
 
-<ArticleList articles={articles}/>
+<div class="articles-wrapper">
+  <div class="articles-filter">
+    <input
+      type="text"
+      placeholder="Search by title..."
+      class="articles-filter-search"
+    />
+    <div class="articles-filter-categories">
+      <CategoryButton category='All' isActive={true}/>
+      {categories.map(category=>
+        <CategoryButton category={category??''}/>)
+      }
+    </div>
+  </div>
+  <div id="articles-grid" class="grid">
+    {allArticles.length>0?(
+      <ArticleList
+        articles={allArticles}
+      />
+    ):(
+      <p>No articles found.</p>
+    )}
+  </div>
+</div>
+
+<script>
+  const searchInput=document.querySelector('.articles-filter-search') as HTMLInputElement;
+  const categoryBtnEls=document.querySelectorAll('.articles-filter-categoryBtn');
+  const articleEls=document.querySelectorAll('.articleCard') as NodeListOf<HTMLElement>;
+
+  let activeCategory='All';
+  let searchQuery='';
+
+  function filter(query:string,category:string){
+    articleEls.forEach(articleEl=>{
+      const title=articleEl.dataset.title?.toLowerCase()||'';
+      const description=articleEl.dataset.description?.toLowerCase()||'';
+      const categories=JSON.parse(articleEl.dataset.categories||'[]');
+      
+      const matchesSearch=title.includes(query)||description.includes(query);
+      const matchesCategory=category==='All'||categories.includes(category);
+      const matchesFilter=matchesSearch&&matchesCategory;
+
+      articleEl.style.display=matchesFilter?'block':'none';
+    });
+  }
+
+  searchInput?.addEventListener('input',event=>{
+    searchQuery=(event.target as HTMLInputElement).value.toLowerCase();
+    filter(searchQuery,activeCategory);
+  });
+
+  categoryBtnEls.forEach(btn => {
+    btn.addEventListener('click',_=>{
+      categoryBtnEls.forEach(btn=>btn.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      
+      activeCategory=(btn as HTMLElement).dataset.category||'all';
+      filter(searchQuery,activeCategory);
+    });
+  });
+</script>
+
+<style>
+.articles-filter-search{
+  width:100%;
+  max-width:400px;
+  padding:6px;
+  border-radius:8px;
+  border:1px solid var(--sl-color-gray-5);
+  margin-bottom:16px;
+  &:hover{
+    border-color:#000;
+  }
+}
+
+.articles-filter-categories{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+</style>

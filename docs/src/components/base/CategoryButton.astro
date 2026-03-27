@@ -1,0 +1,31 @@
+---
+interface Props{
+  category:string;
+  isActive?:boolean;
+}
+
+const {category,isActive=false}=Astro.props;
+---
+
+<button
+  class="articles-filter-categoryBtn"
+  class:list={[{'is-active':isActive}]}
+  data-category={category}
+>
+  {category}
+</button>
+
+<style>
+.articles-filter-categoryBtn{
+  background-color:var(--sl-color-bg-nav);
+  border:none;
+  border-radius:4px;
+  margin:0;
+  cursor:pointer;
+}
+
+.articles-filter-categoryBtn.is-active{
+  background:var(--sl-color-accent);
+  color:white;
+}
+</style>

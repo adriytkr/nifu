@@ -31,12 +31,18 @@ export default defineConfig({
 				{
 					label:'View all Articles',
 					link:'/articles',
+					translations:{
+						'pt-br':'Ver todos os artigos'
+					},
 				},
 				{
 					label: 'Calculus',
 					collapsed:true,
 					autogenerate: {
 						directory: 'articles/calculus',
+					},
+					translations:{
+						'pt-br':'Cálculo'
 					},
 				},
 				{
@@ -45,12 +51,18 @@ export default defineConfig({
 					autogenerate: {
 						directory: 'articles/advanced-calculus',
 					},
+					translations:{
+						'pt-br':'Cálculo Avançado'
+					},
 				},
 				{
 					label: 'Linear Algebra',
 					collapsed:true,
 					autogenerate: {
 						directory: 'articles/linear-algebra',
+					},
+					translations:{
+						'pt-br':'Algebra Linear'
 					},
 				},
 				{
@@ -59,6 +71,9 @@ export default defineConfig({
 					autogenerate: {
 						directory: 'articles/physics',
 					},
+					translations:{
+						'pt-br':'Física'
+					},
 				},
 				{
 					label: 'Competitive Programming',
@@ -66,12 +81,18 @@ export default defineConfig({
 					autogenerate: {
 						directory: 'articles/competitive-programming',
 					},
+					translations:{
+						'pt-br':'Programação Competitiva'
+					},
 				},
 				{
 					label: 'Statistics',
 					collapsed:true,
 					autogenerate: {
 						directory: 'articles/statistics',
+					},
+					translations:{
+						'pt-br':'Estatística'
 					},
 				},
 			],
