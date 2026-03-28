@@ -13,7 +13,8 @@
     "paths": {
       "@/*":["./src/*"],
       "@components/*":["./src/components/*"],
-      "@assets/*":["./src/assets/*"]
+      "@assets/*":["./src/assets/*"],
+      // "@fragments/*":["./src/content/_fragments/*"]
     }
   },
 }

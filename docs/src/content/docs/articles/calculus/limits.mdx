@@ -11,14 +11,24 @@ isArticle: true
 import TheoremBox from '@components/article/TheoremBox.astro';
 import CheckpointController from '@components/article/CheckpointController.vue';
 import CheckpointQuestion from '@components/article/CheckpointQuestion.vue';
+import CheckpointBoolean from '@components/article/CheckpointBoolean.vue';
 
 export const f=(x)=>x+2;
+export const g=(x)=>x**2+1;
 
 ## Why learn limits?
 
-Limits are the basis of Calculus...
+Limits are the building blocks of **Calculus**.
+
+They allow us to understand the behavior of functions as they approach specific points or infinity. This understanding is crucial for defining [derivatives](/articles/calculus/derivative) and [integrals](/articles/calculus/integral), which are the core concepts of Calculus.
+
+They are usually introduced as the first chapter of most Calculus courses. Once you understand limits, the rest of Calculus becomes much easier.
+
+**Youtube video**
 
 ## Introduction to Limits
+
+Now, we begin our journey to understand limits. Let's start with an intuitive understanding of what limits are.
 
 Consider the following function
 
@@ -53,27 +63,29 @@ $$
 \lim_{x \to 1} f(x) = 3
 $$
 
-That is it! Also, don't forget that we can approach $1$ from the left, so we get $f(x)$
+Limits are as simple as that.
+
+Also, don't forget that we can approach $1$ from the left. Doing so we obtain the following possible values for $f(x)$
 
 $$
 3.5,3.1,3.01,3.001
 $$
 
-we denote this as
+We notice they are approaching $3$ and we write this as
 
 $$
 \lim_{x \to 1^-} f(x) = 3
 $$
 
-the minus sign indicates that we are approaching $1$ from the left, that is, $x < 1$.
+where the minus sign indicates that we are approaching $1$ from the left, that is, $x < 1$.
 
-Similarly, we can approach $1$ from the right, so we get $f(x)$
+Similarly, we can approach $1$ from the right and we obtain the following possible values for $f(x)$
 
 $$
 2.5,2.9,2.99,2.999
 $$
 
-we denote this as
+Once again, we notice that the values are approaching $3$ and we express this behavior as
 
 $$
 \lim_{x \to 1^+} f(x) = 3
@@ -89,6 +101,91 @@ $$
 $$
 </TheoremBox>
 
+<CheckpointController title="Practice: Compute the limit" totalSteps={2} client:load>
+  <div slot="step-0">
+    <CheckpointQuestion 
+      client:visible 
+      optionCount={4} 
+      correctIndex={2}
+    >
+      <div slot="question">Now it is your turn. What is the value of $\lim_{x \to 2} (3x+2)$?</div>
+      <div slot="option-0">$6$</div>
+      <div slot="option-1">$7$</div>
+      <div slot="option-2">$8$</div>
+      <div slot="option-3">The limit does not exist.</div>
+      <div slot="explanation">
+        We choose values for $x$ that are close to $2$ and compute $3x+2$
+
+        <div class="flex flex-row gap-4 justify-evenly">
+          <div>
+            |$x \to 2$|$3x+2$|
+            |---|---|
+            |1.5|{6.5}|
+            |1.9|{7.7}|
+            |1.99|{7.97}|
+            |1.999|{7.997}|
+          </div>
+          <div class="mt-0">
+            |$x \to 2$|$3x+2$|
+            |---|---|
+            |2.5|{9.5}|
+            |2.1|{8.3}|
+            |2.01|{8.03}|
+            |2.001|{8.003}|
+          </div>
+        </div>
+
+        We notice that as $x$ approaches $2$ from both sides, $3x+2$ gets closer to $8$. Therefore, we can conclude that
+
+        $$
+        \lim_{x \to 2} (3x+2) = 8.
+        $$
+      </div>
+    </CheckpointQuestion>
+  </div>
+  <div slot="step-1">
+    <CheckpointQuestion 
+      client:visible 
+      optionCount={4}
+      correctIndex={2}
+    >
+      <div slot="question">What about this limit $\lim_{x \to 2} (x^2+1)$?</div>
+      <div slot="option-0">$3$</div>
+      <div slot="option-1">$4$</div>
+      <div slot="option-2">$5$</div>
+      <div slot="option-3">The limit does not exist.</div>
+      <div slot="explanation">
+        We choose values for $x$ that are close to $2$ and compute $x^2+1$
+
+        <div class="flex flex-row gap-4 justify-evenly">
+          <div>
+            |$x \to 2$|^2+1$|
+            |---|---|
+            |1.5|{3.25}|
+            |1.9|{4.61}|
+            |1.99|{4.9601}|
+            |1.999|{4.996001}|
+          </div>
+          <div class="mt-0">
+            |$x \to 2$|^2+1$|
+            |---|---|
+            |2.5|{7.25}|
+            |2.1|{5.41}|
+            |2.01|{5.0401}|
+            |2.001|{5.004001}|
+          </div>
+        </div>
+
+        We notice that as $x$ approaches $2$ from both sides, $x^2+1$ gets closer to $5$. Therefore, we can conclude that
+
+        $$
+        \lim_{x \to 2} (x^2+1) = 5.
+        $$
+      </div>
+    </CheckpointQuestion>
+  </div>
+</CheckpointController>
+
 ## When the limits breaks
 
 Limits don't always exist. For instance, consider the following function
@@ -100,27 +197,73 @@ f(x) = \begin{cases}
 \end{cases}
 $$
 
-As $x$ approaches $0$ from the left, we have $x < 0$, and according to the definition of $f$, $f(x)=1$ for all $x < 0$. Therefore, we have
+We want to evaluate
 
 $$
-\lim_{x \to 0^-} f(x) = 1
+\lim_{x \to 0} f(x)
 $$
 
-Similarly, as $x$ approaches $0$ from the right, we have $x \geq 0$, and according to the definition of $f$, $f(x)=0$ for all $x \geq 0$. Therefore, we have
+However, the function is defined differently on the left and on the right of $0$. So, we need to evaluate the left-hand limit and the right-hand limit separately.
+
+**Case 1: Left-hand limit**
+
+We try to evaluate
 
 $$
-\lim_{x \to 0^+} f(x) = 0
+\lim_{x \to 0^-} f(x)
+$$
+
+For this, we have $x < 0$, and according to the definition of $f$, $f(x)=1$ for all $x < 0$. Therefore, we have
+
+$$
+\begin{align*}
+\lim_{x \to 0^-} f(x) &= \lim_{x \to 0^-} 1 \\
+&= 1
+\end{align*}
+$$
+
+In other words, as $x$ approaches $0$ from the left, $f(x)$ approaches $1$.
+
+**Case 2: Right-hand limit**
+
+Similarly, we have $x > 0$, and according to the definition of $f$, $f(x)=0$ for all $x \ge 0$. Therefore, we have
+
+$$
+\begin{align*}
+\lim_{x \to 0^+} f(x) &= \lim_{x \to 0^+} 0 \\
+&= 0
+\end{align*}
 $$
 
 The limits aren't equal. So, what does that mean?!
 
-Well, according to the [Introduction](#introduction), for a limit to exist, the left-hand limit and the right-hand limit must be equal. Since, in our particular example, they aren't, that is
+<CheckpointQuestion
+  client:visible 
+  optionCount={3} 
+  correctIndex={2}
+>
+  <div slot="question">
+    What can we conclude from the fact that $\lim_{x \to 0^-} f(x) \neq \lim_{x \to 0^+} f(x)$?
+  </div>
+  <div slot="option-0">
+    The limit $\lim_{x \to 0} f(x)$ exists and is equal to $1$.
+  </div>
+  <div slot="option-1">
+    The limit $\lim_{x \to 0} f(x)$ exists and is equal to $0$.
+  </div>
+  <div slot="option-2">
+    The limit $\lim_{x \to 0} f(x)$ does not exist.
+  </div>
+  <div slot="explanation">
+    Well, according to the [Introduction](#introduction), for a limit to exist, the left-hand limit and the right-hand limit must be equal. Since, in our particular example, they aren't, that is
 
-$$
-\lim_{x \to 0^-} f(x) \neq \lim_{x \to 0^+} f(x)
-$$
+    $$
+    \lim_{x \to 0^-} f(x) \neq \lim_{x \to 0^+} f(x)
+    $$
 
-we can conclude that $\lim_{x \to 0} f(x)$ does not exist.
+    we can conclude that $\lim_{x \to 0} f(x)$ does not exist.
+  </div>
+</CheckpointQuestion>
 
 Next, we explore some of the common ways limits can fail to exist.
 
@@ -130,23 +273,42 @@ We already explored this one in our previous example. It is called **jump discon
 
 A jump discontinuity occurs when the left-hand limit and the right-hand limit exist but are not equal. In such cases, the function abruptly "jumps" from one value to another.
 
+From our previous example,
+
+**SHOW GRAPH**
+
 They commonly show up in piecewise functions, where the function is defined differently on different intervals.
 
 ### Infinite oscillations
 
-An infinite oscillation occurs when a function oscillates infinitely many times as it approaches a particular point. In such cases, the limit does not exist because the function does not approach a single value.
+An **infinite oscillation** occurs when a function oscillates infinitely many times as $x$ approaches a particular value. In such cases, the limit does not exist because the function does not approach a single value (it oscillates).
 
-Take, for instance, the function
+For instance, consider the following function
 
 $$
 f(x) = \sin\left(\frac{1}{x}\right)
 $$
 
-As $x$ approaches $0$, the function oscillates infinitely many times between $-1$ and $1$. Therefore, the limit $\lim_{x \to 0} f(x)$ does not exist.
+|$x \to 0$|$\frac{1}{x}$|$\sin\left(\frac{1}{x}\right)$|
+|---|---|---|
+|0.1|{10}|{0.54}|
+|0.01|{100}|{0.01}|
+|0.001|{1000}|{0.001}|
+|0.0001|{10000}|{0.0001}|
+
+We notice $\sin\left(\frac{1}{x}\right)$ oscillates between $-1$ and $1$, and that should make sense since as we increase the argument of the sine function, sometimes we are above the x-axis and sometimes we are below the x-axis.
+
+Hence, we can conclude that
+
+$$
+\lim_{x \to 0} \sin\left(\frac{1}{x}\right)
+$$
+
+does not exist.
 
 ### Unbounded behavior
 
-An unbounded behavior occurs when a function grows without bound as it approaches a particular point. In such cases, the limit does not exist because the function does not approach a finite value.
+An **unbounded behavior** occurs when a function grows without bound as $x$ approaches a particular value. In such cases, the limit does not exist because the function does not approach a finite value.
 
 Take, for instance, the function
 
@@ -154,7 +316,94 @@ $$
 f(x) = \frac{1}{x}
 $$
 
-As $x$ approaches $0$ from the right, the function grows without bound, and as $x$ approaches $0$ from the left, the function decreases without bound. Therefore, the limit $\lim_{x \to 0} f(x)$ does not exist.
+<CheckpointController
+  title="Practice: Unbounded behavior" 
+  totalSteps={3} 
+  client:load
+>
+  <div slot="step-0">
+    <CheckpointQuestion
+      client:visible 
+      optionCount={3} 
+      correctIndex={0}
+    >
+      <div slot="question">
+        What happens to $f(x)$ as $x$ approaches $0$ from the right?
+      </div>
+      <div slot="option-0">
+        It grows without bound (goes to infinity).
+      </div>
+      <div slot="option-1">
+        It decreases without bound (goes to negative infinity).
+      </div>
+      <div slot="option-2">
+        It approaches a finite value.
+      </div>
+      <div slot="explanation">
+        As $x$ approaches $0$ from the right, $\frac{1}{x}$ grows without bound, meaning it goes to infinity. This is because as $x$ gets closer and closer to $0$, the value of $\frac{1}{x}$ becomes larger and larger without any upper limit.
+      </div>
+    </CheckpointQuestion>
+  </div>
+  <div slot="step-1">
+    <CheckpointQuestion
+      client:visible 
+      optionCount={3} 
+      correctIndex={1}
+    >
+      <div slot="question">
+        What happens to $f(x)$ as $x$ approaches $0$ from the left?
+      </div>
+      <div slot="option-0">
+        It grows without bound (goes to infinity).
+      </div>
+      <div slot="option-1">
+        It decreases without bound (goes to negative infinity).
+      </div>
+      <div slot="option-2">
+        It approaches a finite value.
+      </div>
+      <div slot="explanation">
+        As $x$ approaches $0$ from the right, $\frac{1}{x}$ grows without bound, meaning it goes to infinity. This is because as $x$ gets closer and closer to $0$, the value of $\frac{1}{x}$ becomes larger and larger without any upper limit.
+      </div>
+    </CheckpointQuestion>
+  </div>
+  <div slot="step-2">
+    <CheckpointQuestion
+      client:visible 
+      optionCount={3} 
+      correctIndex={0}
+    >
+      <div slot="question">
+        What do you think about $\lim_{x \to 0} \frac{1}{x}$?
+      </div>
+      <div slot="option-0">
+        It grows without bound (goes to infinity).
+      </div>
+      <div slot="option-1">
+        It decreases without bound (goes to negative infinity).
+      </div>
+      <div slot="option-2">
+        It approaches a finite value.
+      </div>
+      <div slot="explanation">
+        As $x$ approaches $0$ from the right, $\frac{1}{x}$ grows without bound, meaning it goes to infinity. This is because as $x$ gets closer and closer to $0$, the value of $\frac{1}{x}$ becomes larger and larger without any upper limit.
+      </div>
+    </CheckpointQuestion>
+  </div>
+</CheckpointController>
+
+Usually unbounded behavior occurs when $f$
+Usually functions with unbounded behavior at a particular value of $x$ have a vertical asymptote. In our particular example, $f$ had a vertical asymptote at $x=0$.
+
+SHOW GRAPH
+
+Warning: When we write
+
+$$
+\lim_{x \to 0} \frac{1}{x} = \pm \infty
+$$
+
+we are not saying that the limits exists nor that infinity is a number. We are just saying that the function grows without bound as $x$ approaches $0$ and the limit doesn't exist. We are being explicit about the reason why the limit doesn't exist.
 
 ## Formal definition of limits
 
@@ -180,6 +429,10 @@ It looks complicated, but it's actually very straighforward. You can think of th
 
 1. I choose a small number $\epsilon$ that represents how close I want $f(x)$ to be to $L$.
 2. You have to find a small number $\delta$ such that if $x$ is within $\delta$ of $a$, then $f(x)$ is within $\epsilon$ of $L$.
+
+## Continuity
+
+f
 
 ## Limit Laws
 
@@ -282,5 +535,17 @@ To practice using these laws, let's
     </CheckpointQuestion>
   </div>
 </CheckpointController>
+
+<CheckpointBoolean 
+  client:visible 
+  answer={true}
+>
+<div slot="question">
+  Do you notice something? The limit of $3x - 4$ as $x$ approaches $2$ is $2$, and the limit of $3x - 5$ as $x$ approaches $2$ is also $2$. Why is that?
+</div>
+<div slot="explanation">
+This is because the limit of a function as $x$ approaches a particular value depends on the behavior of the function around that value, not just at that value. In both cases, as $x$ approaches $2$, the function values get closer to $2$, regardless of the constant term. This illustrates the idea that limits are about the behavior of functions near a point, rather than just the function's value at that point.
+</div>
+</CheckpointBoolean>
 
 ## Connection to derivatives

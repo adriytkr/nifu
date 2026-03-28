@@ -43,9 +43,14 @@ function checkState(index:number):CheckpointChoiceState{
         <slot :name="`option-${i-1}`"></slot>
       </CheckpointAnswer>
     </div>
-    <div v-if="selectedChoice !== null" class="">
-      <p class="font-bold mb-2" :class="isCorrect ? 'text-emerald-400' : 'text-rose-400'">
-        {{ isCorrect ? '✨ Correct!' : '❌ Not quite.' }}
+    <div v-if="selectedChoice!==null" class="mt-0">
+      <p
+        class="font-bold mb-2"
+        :class="selectedChoice===correctIndex
+          ?'text-emerald-400'
+          :'text-rose-400'"
+      >
+        {{ selectedChoice===correctIndex?'✨ Correct!':'❌ Not quite.'}}
       </p>
       <div class="text-sm text-zinc-400 leading-relaxed">
         <slot name="explanation"></slot>
