@@ -1,13 +1,12 @@
 from manim import *
 
-from utils.geometry import make_secant_line
-from utils.coordinate_system import CoordinateSystemManager
-from utils.theme import HIGHLIGHT_COLOR,NEUTRAL_COLOR,HIGHLIGHT_COLOR2
-
+from utils.theme import HIGHLIGHT_COLOR,NEUTRAL_COLOR
 from mean_value_theorem.video.Base import BaseScene
 
 class MainScene(BaseScene):
   def construct(self):
+    self.wait(0.5)
+
     # Part I
     s_graph=self.coords.axes.plot(lambda t:self.s(t))
 
@@ -82,7 +81,11 @@ class MainScene(BaseScene):
       tangent_point_dynamic
     )
 
-    self.play(t.animate.set_value(self.x_B))
+    self.play(
+      t.animate.set_value(self.x_B),
+      run_time=2.5
+    )
+    self.wait(0.5)
     self.play(t.animate.set_value(self.x_C))
 
     tangent_line=self.s_build_tangent_line(self.x_C)
@@ -91,7 +94,7 @@ class MainScene(BaseScene):
     self.play(
       Blink(tangent_line,blinks=2),
       Blink(secant_line,blinks=2),
-      run_time=1
+      run_time=0.6
     )
 
     # Part II
@@ -153,6 +156,17 @@ class MainScene(BaseScene):
     )
 
     self.play(t.animate.set_value(self.x_B))
+    self.play(t.animate.set_value(self.x_A))
+
+    self.wait(0.5)
+
+    self.play(
+      t.animate.set_value(self.x_B),
+      run_time=2.5
+    )
+
+    self.wait(0.5)
+
     self.play(t.animate.set_value(self.x_C))
 
     self.remove(
@@ -170,6 +184,8 @@ class MainScene(BaseScene):
       bird,
       height
     )
+
+    self.wait(0.5)
 
     self.play(
       FadeOut(
@@ -196,20 +212,38 @@ class MainScene(BaseScene):
       tangent_line_dynamic
     )
 
-    self.play(t.animate.set_value(self.x_B))
+    self.play(
+      t.animate.set_value(self.x_B),
+      run_time=2.5
+    )
 
     point_C=self.coords.build_graph_dot(
       self.x_C,
       self.s,
-      color=HIGHLIGHT_COLOR2
+      color=HIGHLIGHT_COLOR
     )
     point_C.set_z_index(4)
 
     self.play(Create(point_C))
     self.play(t.animate.set_value(self.x_C))
 
+    self.wait(0.5)
+
+    self.remove(tangent_line_dynamic)
+
+    tangent_line=self.s_build_tangent_line(t.get_value())
+
+    self.add(tangent_line)
+    self.play(
+      Blink(secant_line,blinks=2),
+      Blink(tangent_line,blinks=2),
+      run_time=0.6
+    )
+
     # Part III
     self.remove(
+      point_C,
+      tangent_line,
       tangent_line_dynamic,
       bird_dynamic,
       height_dynamic
@@ -230,7 +264,6 @@ class MainScene(BaseScene):
 
     self.play(
       FadeOut(
-        point_C,
         tangent_line,
         s_graph,
         secant_line,
@@ -276,5 +309,9 @@ class MainScene(BaseScene):
       h_tangent_line_dynamic
     )
 
-    self.play(t.animate.set_value(self.x_B))
+    self.play(
+      t.animate.set_value(self.x_B),
+      run_time=2.5
+    )
     self.play(t.animate.set_value(self.x_C))
+    self.wait(0.5)
