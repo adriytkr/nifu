@@ -1,3 +1,7 @@
 from typing import Callable
 
-ScalarFunc=Callable[[float],float]
+import numpy as np
+import numpy.typing as npt
+
+scalarFunc=Callable[[float],float]
+coordinates=npt.NDArray[np.float64]

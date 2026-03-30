@@ -10,8 +10,19 @@ isFeatured: true
 ---
 
 import TheoremBox from '@components/article/TheoremBox.astro';
+import LabeledImage from '@components/sections/LabeledImage.astro';
+
+import MVTIntro from '@assets/animations/mvt-intro.gif';
 
 ## Introduction
+
+The Mean Value Theorem is very straightforward. It basically states that there exists at least one tangent line that is parallel to a secant line on an interval.
+
+<LabeledImage src={MVTIntro} alt="Mean Value Theorem Intro Animation">
+The tangent line becomes parallel to the secant line at some point on the curve. 
+</LabeledImage>
+
+In other words, there exists at least one point on the curve where the slope of the tangent line is equal to the slope of the secant line. More formally,
 
 <TheoremBox>
 **Mean Value Theorem** If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$, then
@@ -23,11 +34,7 @@ $$
 for some $c$ on $(a,b)$
 </TheoremBox>
 
-The Mean Value Theorem (MVT) is pretty straightforward, although its proof is technically demanding.
-
-It basically states that there exists at least one tangent line that is parallel to a secant line.
-
-![Mean Value Theorem Intro Animation](@assets/animations/mvt-intro.gif)
+To prove the Mean Value Theorem, we need to first prove some preliminary theorems.
 
 The full proof lies at the end of the document for it requires the preliminary theorems to a rigorous proof.
 

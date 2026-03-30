@@ -16,14 +16,13 @@ import type { ImageMetadata } from 'astro';
     src={src}
     alt={alt}
   />
-  <figcaption class="labeledImage-description">
+  <figcaption class="mx-16 mt-2 text-center labeledImage-description">
     <slot></slot>
   </figcaption>
 </figure>
 
 <style>
 .labeledImage-description{
-  margin-top:6px;
   color:var(--sl-color-gray-3);
   text-align:center;
 }
