@@ -1,7 +1,25 @@
 import {ref,computed} from 'vue';
 import type { ChoiceStatus } from '@/types/article';
 
-export function useCheckpoint(choices:number[]){
+export function useCheckpoint(correctChoices:number[]){
+  const isFullScreen=ref<boolean>(false);
+
+  function handleEsc(event:KeyboardEvent){
+    if(event.key==='Escape'&&isFullScreen.value)toggleFullScreen();
+  }
+
+  function toggleFullScreen(){
+    isFullScreen.value=!isFullScreen.value;
+
+    if(isFullScreen.value){
+      document.body.style.overflow='hidden';
+      window.addEventListener('keydown',handleEsc)
+    }else{
+      document.body.style.overflow='';
+      window.removeEventListener('keydown',handleEsc)
+    }
+  }
+
   const isSubmitted=ref<boolean>(false);
   const selectedChoices=ref<number[]>([]);
 
@@ -12,10 +30,10 @@ export function useCheckpoint(choices:number[]){
 
     if(!isSubmitted.value)return isSelected?'selected':'default';
 
-    const isCorrect=choices.includes(choiceIndex);
+    const isCorrect=correctChoices.includes(choiceIndex);
 
     if(isSelected)return isCorrect?'correct':'incorrect';
-    if(choices.includes(choiceIndex))return'missed';
+    if(correctChoices.includes(choiceIndex))return'missed';
 
     return 'default';
   }
@@ -31,7 +49,7 @@ export function useCheckpoint(choices:number[]){
       return;
     }
 
-    if(choices.length===1){
+    if(correctChoices.length===1){
       selectedChoices.value[0]=choiceIndex;
       return;
     }
@@ -57,5 +75,7 @@ export function useCheckpoint(choices:number[]){
     isSubmitted,
     checkChoices,
     retry,
+    isFullScreen,
+    toggleFullScreen,
   };
 }

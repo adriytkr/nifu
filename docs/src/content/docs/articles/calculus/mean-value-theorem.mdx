@@ -12,6 +12,7 @@ isFeatured: true
 import ImageWithCaption from '@components/article/ImageWithCaption.astro';
 import TheoremBox from '@components/article/TheoremBox.astro';
 import Checkpoint from '@components/article/Checkpoint.vue';
+import CheckpointCommon from '@components/article/CheckpointCommon.vue';
 
 import placeholderImage from '@assets/images/placeholder.webp';
 
@@ -34,9 +35,9 @@ import placeholderImage from '@assets/images/placeholder.webp';
   $$
 </TheoremBox>
 
-<Checkpoint
+<CheckpointCommon
   choices-count={4}
-  choices={[0,1]}
+  correct-choices={[0,1]}
   client:load
 >
   <Fragment slot="title">Inference: Example</Fragment>
@@ -44,11 +45,6 @@ import placeholderImage from '@assets/images/placeholder.webp';
     Adaptations to cold temperatures have high metabolic costs. It is expensive, in terms of energy use, for land plants and animals to withstand very cold temperatures, and it gets more expensive the colder it gets, which means that the lower the air temperature, the fewer species have evolved to survive it. This factor, in conjunction with the decline in air temperature with increasing elevation, explains the distribution of species diversity in mountain ecosystems: you find fewer species high up a mountain than at the mountain’s base because ______
 
     Which choice best fits the blank?
-  </Fragment>
-  <Fragment slot="command">
-    Choose all answers that apply
-    {/* <p v-if="choices.length===1">Choose 1 answer</p>
-    <p v-else>Choose all answers that apply</p> */}
   </Fragment>
   <Fragment slot="choice-0">
     there are relatively few environments hospitable to species that are adapted to live in low air temperatures.
@@ -62,7 +58,10 @@ import placeholderImage from '@assets/images/placeholder.webp';
   <Fragment slot="choice-3">
     some mountain environments are at elevations so high that no plants or animals can survive them.
   </Fragment>
-</Checkpoint>
+  <Fragment slot="explanation">
+    This is an explanation
+  </Fragment>
+</CheckpointCommon>
 
 ## Fermat's Theorem
 
