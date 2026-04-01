@@ -63,8 +63,11 @@ export function useCheckpoint(correctChoices:number[]){
     isSubmitted.value=true;
   }
 
+  const isExplanationVisible=ref<boolean>(false);
+
   function retry(){
     isSubmitted.value=false;
+    isExplanationVisible.value=false;
     selectedChoices.value=[];
   }
 
@@ -77,5 +80,6 @@ export function useCheckpoint(correctChoices:number[]){
     retry,
     isFullScreen,
     toggleFullScreen,
+    isExplanationVisible,
   };
 }
