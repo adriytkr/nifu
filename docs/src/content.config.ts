@@ -1,22 +1,22 @@
-import { defineCollection } from 'astro:content';
-import { docsLoader } from '@astrojs/starlight/loaders';
-import { docsSchema } from '@astrojs/starlight/schema';
+import {defineCollection} from 'astro:content';
+import {z} from 'astro/zod';
+import {glob} from 'astro/loaders';
 
-import { z } from 'astro/zod';
+const articleSchema=z.object({
+  title:z.string(),
+  description:z.string(),
+  longDescription:z.string(),
+  thumbnail:z.string(),
+});
 
-export const collections = {
-	docs: defineCollection({
-		loader: docsLoader(),
-		schema: docsSchema({
-			extend:(context)=>z.object({
-				title: z.string(),
-				description: z.string(),
-				categories: z.array(z.string()).optional(),
-				thumbnail: context.image().optional(),
-				featured: z.boolean().default(false),
-				isArticle:z.boolean().default(false),
-				isFeatured:z.boolean().default(false),
-			}),
-		}),
-	}),
+const articlesCollection=defineCollection({
+  loader:glob({
+    base:'./src/content/articles',
+    pattern:'**/*.{md,mdx}',
+  }),
+  schema:articleSchema,
+});
+
+export const collections={
+  articles:articlesCollection,
 };

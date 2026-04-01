@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import {getCollection} from 'astro:content';
+
+const allArticles=await getCollection('articles');
+
+console.log(allArticles);
+---
+
+<BaseLayout title="Articles">
+  <h1>Article page</h1>
+</BaseLayout>
