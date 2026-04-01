@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 
-import BaseLayout from '@layouts/BaseLayout.astro';
+import ArticleLayout from '@layouts/ArticleLayout.astro';
 import {getArticlePaths} from '@utils/article';
 
 export const getStaticPaths=getArticlePaths('en');
@@ -10,7 +10,7 @@ const {entry}=Astro.props;
 const {Content}=await render(entry);
 ---
 
-<BaseLayout title={entry.data.title}>
+<ArticleLayout title={entry.data.title}>
   <h1>{entry.data.title}</h1>
   <Content/>
-</BaseLayout>
+</ArticleLayout>

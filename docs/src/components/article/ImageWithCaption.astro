@@ -1,0 +1,31 @@
+---
+import type { ImageMetadata } from 'astro';
+
+import Image from 'astro/components/Image.astro';
+import placeholderImage from '@assets/images/placeholder.webp';
+
+interface Props{
+  src:ImageMetadata;
+  alt?:string;
+  zoomable:boolean;
+}
+
+const {src,alt,zoomable=true}=Astro.props;
+---
+
+<figure>
+  <Image
+    src={src??placeholderImage}
+    alt={alt??''}
+    class="w-full h-auto block object-cover rounded-sm"
+    data-zoomable={zoomable}
+    decoding="sync"
+  />
+  {
+    Astro.slots.has('default')&&(
+      <figcaption class="mx-16 mt-2 text-center text-gray-500 dark:text-gray-400">
+        <slot></slot>
+      </figcaption>
+    )
+  }
+</figure>

@@ -1,1 +1,7 @@
+@import 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css';
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@theme{
+  --color-primary: 0 181 216;
+}
