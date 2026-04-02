@@ -1,0 +1,17 @@
+---
+interface Props{
+  slug:string;
+}
+
+const {slug}=Astro.props;
+---
+
+<li>
+  <a 
+    href={`#${slug}`} 
+    class="inline-block text-muted no-underline transition-colors hover:text-body [&.active]:text-primary [&.active]:font-medium"
+    data-toc-link
+  >
+    <slot></slot>
+  </a>
+</li>

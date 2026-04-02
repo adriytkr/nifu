@@ -1,0 +1,88 @@
+---
+import TableOfContentsItem from './TableOfContentsItem.astro';
+import { buildToc } from '@utils/article';
+import type { Heading } from '@types/article';
+
+interface Props{
+  headings:Heading[];
+}
+
+const { headings } = Astro.props;
+
+const toc=buildToc(
+  headings.filter((heading)=>
+    heading.depth>1&&
+    heading.depth<4
+  )
+);
+---
+
+<nav class="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto" id="toc-nav">
+  <span class="block mb-4 text-xs font-bold uppercase tracking-widest text-body">On this page</span>
+  <ul class="space-y-3 text-sm">
+    {toc.map((item)=>(
+      <TableOfContentsItem slug={item.text}>
+        {item.text}
+        {item.children.length>0&&(
+          <ul class="mt-2 ml-3 space-y-2 pl-4 border-l border-surface-border">
+            {item.children.map((child)=>(
+              <TableOfContentsItem slug={child.slug}>
+                {child.text}
+              </TableOfContentsItem>
+            ))}
+          </ul>
+        )}
+      </TableOfContentsItem>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  const tocNav=document.getElementById('toc-nav');
+  const header=document.querySelector('header');
+
+  function handleScroll(){
+    if(tocNav===null)return;
+
+    tocNav.style.top=header?.classList.contains('scroll-down')
+      ?'1.5rem'
+      :'5rem';
+
+  }
+
+  window.addEventListener('scroll',handleScroll);
+
+  const observerOptions={
+    root:null,
+    rootMargin:'-20% 0px -70% 0px',
+    threshold:1.0,
+  };
+
+  function highlightTocLink(id:string){
+    const tocLink=document.querySelector(`[data-toc-link][href="#${id}"]`);
+
+    document
+      .querySelectorAll('[data-toc-link]')
+      .forEach((link)=>link.classList.remove('active'));
+
+    tocLink?.classList.add('active');
+  }
+
+  const observerCallback=(entries:IntersectionObserverEntry[])=>{
+    entries.forEach(entry=>{
+      const id=entry.target.getAttribute('id');
+
+      if(id===null)return;
+      if(entry.isIntersecting)highlightTocLink(id);
+    });
+  };
+
+  const observer=new IntersectionObserver(
+    observerCallback,
+    observerOptions
+  );
+
+  document
+    .querySelectorAll('article h2,article h3')
+    .forEach(heading=>observer.observe(heading))
+</script>

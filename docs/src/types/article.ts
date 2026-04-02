@@ -4,3 +4,9 @@ export type ChoiceStatus=
   'correct'|
   'missed'|
   'incorrect';
+
+export type Heading={
+  depth:number;
+  slug:string;
+  text:string;
+};

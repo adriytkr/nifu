@@ -7,10 +7,10 @@ import {getArticlePaths} from '@utils/article';
 export const getStaticPaths=getArticlePaths('en');
 
 const {entry}=Astro.props;
-const {Content}=await render(entry);
+const {Content,headings}=await render(entry);
 ---
 
-<ArticleLayout title={entry.data.title}>
+<ArticleLayout title={entry.data.title} headings={headings}>
   <h1>{entry.data.title}</h1>
   <Content/>
 </ArticleLayout>

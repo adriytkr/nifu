@@ -1,16 +1,30 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TableOfContent from '@components/article/TableOfContent.astro';
+
+import type {Heading} from '@types/article';
 
 interface Props{
   title:string;
   lang?:string;
+  headings:Heading[];
 }
 
-const {title,lang=Astro.currentLocale}=Astro.props;
+const {
+  title,
+  lang=Astro.currentLocale,
+  headings,
+}=Astro.props;
 ---
 
 <BaseLayout title={title} lang={lang}>
-  <article class="prose max-w-none w-full">
-    <slot></slot>
-  </article>
+  <div class="flex">
+    <div class="flex-1"></div>
+    <article class="prose max-w-4xl mx-auto my-8 px-4 w-full prose-p:text-body prose-headings:text-body prose-strong:text-body prose-a:text-primary prose-a:hover:text-primary/60">
+      <slot></slot>
+    </article>
+    <aside class="flex-1 ml-8 my-8">
+      <TableOfContent headings={headings}/>
+    </aside>
+  </div>
 </BaseLayout>

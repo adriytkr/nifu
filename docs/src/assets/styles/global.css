@@ -1,7 +1,54 @@
 @import 'https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css';
+
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
 @theme{
-  --color-primary: 0 181 216;
+  --color-primary:var(--color-blue-600);
+
+  --color-surface:var(--color-white);
+  --color-surface-border:var(--color-gray-700);
+
+  --color-body:var(--color-gray-700);
+  --color-muted:var(--color-slate-500);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer theme{
+  :root{
+    @variant dark{
+      --color-primary:var(--color-blue-400);
+
+      --color-surface:var(--color-gray-900);
+      --color-surface-border:var(--color-slate-500);
+
+      --color-body: var(--color-gray-300);
+      --color-muted: var(--color-slate-400);
+    }
+  }
+}
+
+@layer base{
+  html{
+    scroll-padding-top:32px;
+  }
+
+  body,
+  input,
+  button{
+    @apply text-body;
+  }
+
+  body{
+    @apply bg-surface;
+  }
+
+  a{
+    @apply text-primary transition-colors duration-200 hover:text-primary/30 hover:underline;
+  }
+
+  button{
+    @apply cursor-pointer disabled:cursor-default;
+  }
 }

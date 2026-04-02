@@ -20,10 +20,29 @@ const {title,lang=Astro.currentLocale}=Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<script is:inline>
+			const theme=(()=>{
+				if(typeof localStorage !== 'undefined' && localStorage.getItem('theme'))
+					return localStorage.getItem('theme');
+
+				if(window.matchMedia('(prefers-color-scheme: dark)').matches)
+					return 'dark';
+
+				return 'light';
+			})();
+
+			if(theme === 'dark'){
+				document.documentElement.classList.add('dark');
+			}else{
+				document.documentElement.classList.remove('dark');
+			}
+
+			window.localStorage.setItem('theme',theme);
+		</script>
 	</head>
-	<body>
+	<body class="grid grid-rows-[auto_1fr_auto] min-h-screen">
 		<Header/>
-		<main class="max-w-4xl mx-auto my-8 px-4">
+		<main>
 			<slot></slot>
 		</main>
 		<Footer/>
