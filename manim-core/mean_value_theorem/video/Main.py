@@ -86,7 +86,10 @@ class MainScene(BaseScene):
       run_time=2.5
     )
     self.wait(0.5)
-    self.play(t.animate.set_value(self.x_C))
+    self.play(
+      t.animate.set_value(self.x_C),
+      run_time=2.5
+    )
 
     tangent_line=self.s_build_tangent_line(self.x_C)
     self.remove(tangent_line_dynamic)
@@ -155,14 +158,17 @@ class MainScene(BaseScene):
       height_dynamic
     )
 
-    self.play(t.animate.set_value(self.x_B))
+    self.play(
+      t.animate.set_value(self.x_B),
+      run_time=2.5
+    )
     self.play(t.animate.set_value(self.x_A))
 
     self.wait(0.5)
 
     self.play(
       t.animate.set_value(self.x_B),
-      run_time=2.5
+      run_time=5
     )
 
     self.wait(0.5)
@@ -214,7 +220,7 @@ class MainScene(BaseScene):
 
     self.play(
       t.animate.set_value(self.x_B),
-      run_time=2.5
+      run_time=5
     )
 
     point_C=self.coords.build_graph_dot(
