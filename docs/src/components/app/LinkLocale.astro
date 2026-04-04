@@ -1,10 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-
-import {
-  DEFAULT_LOCALE,
-  convertStringToLocale,
-} from '@utils/i18n';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 
 interface Props extends HTMLAttributes<'a'>{
   href:string;
@@ -18,18 +14,19 @@ const {
 
 const { pathname } = Astro.url;
 
-const sanitizedLocale=convertStringToLocale(Astro.currentLocale??'');
-const absoluteHref=sanitizedLocale===DEFAULT_LOCALE
-  ?href
-  :`/${Astro.currentLocale}${href}`;
+const locale=Astro.currentLocale;
+
+let absoluteUrl:string|undefined=undefined;
+
+if(locale)absoluteUrl=getAbsoluteLocaleUrl(locale,href);
 
 const isActive=
-  pathname===absoluteHref||
-  pathname===`${absoluteHref}/`;
+  absoluteUrl!==undefined&&
+  pathname===absoluteUrl
 ---
 
 <a 
-  href={absoluteHref} 
+  href={absoluteUrl}
   class:list={[
     className,
     {'is-active':isActive},

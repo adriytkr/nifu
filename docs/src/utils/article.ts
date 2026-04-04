@@ -1,7 +1,7 @@
 import type { GetStaticPaths } from 'astro';
 import {getCollection} from 'astro:content';
 
-import type { ArticleDifficulty, Heading, TocItem } from '@/types/article';
+import type { Heading, TocItem } from '@/types/article';
 import type { Locale } from '@/types/i18n';
 
 export const getArticlePaths=(locale:Locale)=>(async()=>{
@@ -21,27 +21,27 @@ export const getArticlePaths=(locale:Locale)=>(async()=>{
 }) satisfies GetStaticPaths;
 
 export function buildToc(headings:Heading[]):TocItem[]{
-  const toc: TocItem[] = [];
-  const parentHeadings = new Map<number, TocItem>();
+  const toc:TocItem[]=[];
+  const parentHeadings=new Map<number,TocItem>();
 
-  headings.forEach((h) => {
-    const heading: TocItem = { ...h, children: [] };
-    parentHeadings.set(heading.depth, heading);
+  headings.forEach((h) =>{
+    const heading:TocItem={
+      ...h,
+      children:[],
+    };
 
-    if (heading.depth === 2) {
+    parentHeadings.set(heading.depth,heading);
+
+    if(heading.depth===2){
       toc.push(heading);
-    } else if (heading.depth > 2) {
-      const parent = parentHeadings.get(heading.depth - 1);
-      if (parent) {
-        parent.children.push(heading);
-      }
+      return;
+    }
+    
+    if(heading.depth>2){
+      const parent=parentHeadings.get(heading.depth-1);
+      if(parent)parent.children.push(heading);
     }
   });
+
   return toc;
 }
-
-export const ARTICLE_DIFFICULTIES:ArticleDifficulty[]=[
-  'easy',
-  'medium',
-  'hard',
-];

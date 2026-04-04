@@ -1,9 +1,10 @@
 ---
 import Logo from './Logo.astro';
 import SearchArticle from './SearchArticle.astro';
+import LanguagePicker from './LanguagePicker.astro';
 import ThemeToggleButton from './ThemeToggleButton.astro';
 
-import LinkLocale from '@components/navigation/LinkLocale.astro';
+import LinkLocale from './LinkLocale.astro';
 ---
 
 <header class="sticky z-50 transition-transform duration-300 ease-in-out top-0 bg-surface [&.scroll-down]:-translate-y-full [&.scroll-up]:translate-y-0">
@@ -20,19 +21,10 @@ import LinkLocale from '@components/navigation/LinkLocale.astro';
   </nav>
 </header>
 
-<!-- <style>
-header.scroll-down{
-  transform:translateY(-100%);
-}
-
-header.scroll-up{
-  transform:translateY(0);
-}
-</style> -->
-
 <script>
-  let lastScroll=0;
+  // Hide on scroll logic
   const header=document.querySelector('header');
+  let lastScroll=0;
 
   window.addEventListener('scroll',()=>{
     const currentScroll=window.pageYOffset;
@@ -44,16 +36,21 @@ header.scroll-up{
       return;
     }
 
-    if(
+    const scrollDown=
       currentScroll>lastScroll&&
-      !header.classList.contains('scroll-down')
-    ){
+      !header.classList.contains('scroll-down');
+
+    if(scrollDown){
       header.classList.remove('scroll-up');
       header.classList.add('scroll-down');
-    }else if(
-      currentScroll < lastScroll&&
-      header.classList.contains('scroll-down')
-    ){
+      return;
+    }
+
+    const scrollUp=
+      currentScroll<lastScroll&&
+      header.classList.contains('scroll-down');
+
+    if(scrollUp){
       header.classList.remove('scroll-down');
       header.classList.add('scroll-up');
     }

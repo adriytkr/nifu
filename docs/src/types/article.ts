@@ -1,14 +1,16 @@
-export type ChoiceStatus=
-  'default'|
-  'selected'|
-  'correct'|
-  'missed'|
-  'incorrect';
+export interface ArticleSchema{
+  data:{
+    title:string;
+    description:string;
+    tags:string[];
+  };
+  [key:string]:any;
+}
 
 export type Heading={
   depth:number;
-  slug:string;
   text:string;
+  slug:string;
 };
 
 export interface TocItem{
@@ -16,22 +18,4 @@ export interface TocItem{
   text:string;
   slug:string;
   children:TocItem[];
-}
-
-export type ArticleDifficulty=
-  'easy'|
-  'medium'|
-  'hard';
-
-export interface ArticleSchema{
-  data:{
-    to:string;
-    title:string;
-    description:string;
-    longDescription:string;
-    difficulty:ArticleDifficulty;
-    categories:string[];
-  };
-  slug:string;
-  [key:string]:any;
 }

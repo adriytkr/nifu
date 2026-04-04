@@ -1,10 +1,9 @@
-import type { ArticleDifficulty, ArticleSchema } from '@/types/article';
+import type { ArticleSchema } from '@/types/article';
 
 export function checkArticleMatch(
   article:ArticleSchema,
   query:string,
-  difficulties:ArticleDifficulty[],
-  categories:string[],
+  tags:string[],
 ):boolean{
   const normalizedQuery=query.toLowerCase();
 
@@ -15,23 +14,17 @@ export function checkArticleMatch(
   const matchesDescription=
     article.data.description
       .toLowerCase()
-      .includes(normalizedQuery)||
-    article.data.longDescription
-      .toLowerCase()
       .includes(normalizedQuery);
 
-  const matchesCategory=
-    categories.length===0||
-    categories.some(category=>article.data.categories.includes(category));
+  const matchesQuery=matchesTitle||matchesDescription;
 
-  const matchesDifficulty=
-    difficulties.length===0||
-    difficulties.some(difficulty=>article.data.difficulty===difficulty);
+  const matchesTag=
+    tags.length===0||
+    tags.some(tag=>article.data.tags.includes(tag));
 
   const matchesFlag=
-    (matchesTitle||matchesDescription)&&
-    matchesDifficulty&&
-    matchesCategory;
+    matchesQuery&&
+    matchesTag;
 
   return matchesFlag;
 }

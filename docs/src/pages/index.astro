@@ -1,8 +1,71 @@
 ---
+import { getCollection } from 'astro:content';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
+
 import CommonLayout from '@layouts/CommonLayout.astro';
+
+import LandingHero from '@components/landing/Hero.astro';
+import LandingSection from '@components/landing/Section.astro';
+
+import ArticleCard from '@components/article/index/ArticleCard.vue';
+
+const allArticles=await getCollection(
+  'articles',
+  article=>
+    article.data.featured===true&&
+    article.id.startsWith('en/')
+);
 ---
 
 <CommonLayout title="Kaga">
-  <h1>Welcome to Kaga!</h1>
-  <h2>Knowledge Arises from Geometry and Algorithms</h2>
+  <LandingHero/>
+  <LandingSection title="Featured Articles">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {
+        allArticles.map(article=>
+          <ArticleCard
+            href={getAbsoluteLocaleUrl(
+              Astro.currentLocale??'en',
+              `articles/${article.id.split('/').pop()}`
+            )}
+            title={article.data.title}
+            description={article.data.description}
+          />
+        )
+      }
+    </div>
+  </LandingSection>
+  <LandingSection title="What to expect here?">
+    <p class="mb-4">
+      This isn't a digital textbook. You won't find dry formulas or explanations that skip the why. Instead, you'll find a sandbox for your curiosity.
+    </p>
+    <p class="mb-6">
+      Also, there won't be only texts. There will be first
+    </p>
+    <ul class="pl-10 flex flex-col gap-y-2">
+      <li>
+        <strong>Visual Animations:</strong> Visualize complex topics.
+      </li>
+      <li>
+        <strong>Interactive Graphs:</strong> Change variables and watch the graph react instantly.
+      </li>
+      <li>
+        <strong>Real-World examples:</strong> Learn how the topics are related to the Real World.
+      </li>
+      <li>
+        <strong>Knowledge Gates:</strong> Test your understanding as you go, not just at the end.
+      </li>
+    </ul>
+  </LandingSection>
+  <LandingSection title="Why did I build this?">
+    <p class="mb-4">
+      I spent far too long reading textbooks or watching videos that focused on the <i>how</i> without explaining the <i>why</i>.
+    </p>
+    <p class="mb-4">
+      Most resources prioritize memorization, teaching you how to follow steps, while completely ignoring the <strong>"under the hood"</strong> engineering. I firmly believe that understanding the underlying logic is what leads to <strong>true mastery</strong> of the subject.
+    </p>
+    <p>
+      I built this platform to offer a different approach to learn: one that favors intuition over memorization, while being challenging and dynamic.
+    </p>
+  </LandingSection>
 </CommonLayout>

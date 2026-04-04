@@ -13,7 +13,7 @@ defineProps<{
     <ArticleCard
       v-for="article in articles"
       :key="article.id"
-      :to="article.data.to"
+      :href="article.data.to"
       :title="article.data.title"
       :description="article.data.description"
       :difficulty="article.data.difficulty"

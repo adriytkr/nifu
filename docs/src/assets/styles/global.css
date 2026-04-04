@@ -6,7 +6,7 @@
 @theme{
   --color-primary:var(--color-blue-600);
 
-  --color-surface:var(--color-white);
+  --color-surface:var(--color-slate-50);
   --color-surface-border:var(--color-gray-700);
 
   --color-body:var(--color-gray-700);
@@ -45,7 +45,7 @@
   }
 
   a{
-    @apply text-primary transition-colors duration-200 hover:text-primary/30 hover:underline;
+    @apply text-primary transition-colors duration-200 hover:underline;
   }
 
   button{
