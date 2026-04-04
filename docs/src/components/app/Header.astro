@@ -12,11 +12,16 @@ import LinkLocale from './LinkLocale.astro';
     <LinkLocale href="/">
       <Logo/>
     </LinkLocale>
-    <div class="flex items-center gap-x-4">
-      <LinkLocale href='/articles'>Articles</LinkLocale>
-      <SearchArticle/>
-      <!-- <LanguagePicker/> -->
-      <ThemeToggleButton/>
+    <div class="flex items-center">
+      <div class="flex items-center gap-x-4">
+        <LinkLocale href='/articles'>Articles</LinkLocale>
+        <SearchArticle/>
+      </div>
+      <div class="h-5 w-0.5 mx-4 bg-slate-200"></div>
+      <div class="flex items-center gap-x-4">
+        <LanguagePicker/>
+        <ThemeToggleButton/>
+      </div>
     </div>
   </nav>
 </header>

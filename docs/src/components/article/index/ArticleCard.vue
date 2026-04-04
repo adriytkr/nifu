@@ -24,7 +24,7 @@ defineProps<{
     </div>
     <div class="flex-1 p-4 pt-8">
       <h2 class="font-medium text-lg text-body transition-colors duration-200 group-hover:text-primary">{{title}}</h2>
-      <p class="text-sm text-muted">{{description}}</p>
+      <p class="text-sm text-muted line-clamp-3">{{description}}</p>
     </div>
   </a>
 </template>
