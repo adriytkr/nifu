@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCheckpointType1 } from '@/composables/useCheckpointType1';
 
-import BaseCheckpoint from './BaseCheckpoint.vue';
+import BaseCheckpoint from '../BaseCheckpoint.vue';
 import CheckpointChoice from './CheckpointChoice.vue';
 
 const props=defineProps<{

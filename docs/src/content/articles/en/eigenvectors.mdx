@@ -13,8 +13,13 @@ import YoutubeVideo from '@components/article/post/YoutubeVideo.astro';
 import TheoremBox from '@components/article/post/TheoremBox.astro';
 import CommonAccordion from '@components/article/post/CommonAccordion.astro';
 import ArticleTable from '@components/article/post/Table.astro';
-import CheckpointType1 from '@components/article/post/checkpoint/CheckpointType1.vue';
-import CheckpointType2 from '@components/article/post/checkpoint/CheckpointType2.vue';
+
+import CheckpointType1 from '@components/article/post/checkpoint/type1/CheckpointType1.vue';
+
+import CheckpointType2 from '@components/article/post/checkpoint/type2/CheckpointType2.vue';
+import Blank from '@components/article/post/checkpoint/type2/CheckpointBlank.vue';
+
+import {schema} from './test';
 
 <ImageWithCaption
   src={azurLaneWallpaper}
@@ -94,10 +99,16 @@ import CheckpointType2 from '@components/article/post/checkpoint/CheckpointType2
   </Fragment>
 </CheckpointType1>
 
-<CheckpointType2
-
->
+<CheckpointType2 schema={schema}>
   <Fragment slot="title">
     Discursive Question
   </Fragment>
+  <template #question="{formState}">
+    Maria is twice as old as Ruby (her sister). Ruby is 10 years old.
+
+    Therefore, Maria is <Blank v-model="formState.age"/>.
+    <Select id="42">
+  </Fragment>
 </CheckpointType2>
+
+::component

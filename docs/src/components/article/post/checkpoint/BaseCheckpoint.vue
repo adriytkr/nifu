@@ -19,24 +19,26 @@ defineEmits<{
 </script>
 
 <template>
-  <CheckpointHeader
-    :is-full-screen="isFullScreen"
-    @toggle-fullscreen="toggleFullScreen"
-  >
-    <slot name="title"></slot>
-  </CheckpointHeader>
-  <div class="my-4">
-    <slot name="content"></slot>
+  <div class="mb-8">
+    <CheckpointHeader
+      :is-full-screen="isFullScreen"
+      @toggle-fullscreen="toggleFullScreen"
+    >
+      <slot name="title"></slot>
+    </CheckpointHeader>
+    <div class="my-4">
+      <slot name="content"></slot>
+    </div>
+    <CheckpointActions>
+      <CheckpointButton @click="$emit(`check`)">
+        Check
+      </CheckpointButton>
+      <CheckpointButton @click="$emit(`reset`)">
+        Reset
+      </CheckpointButton>
+      <CheckpointButton @click="$emit(`reveal-answers`)">
+        Reveal Answers
+      </CheckpointButton>
+    </CheckpointActions>
   </div>
-  <CheckpointActions>
-    <CheckpointButton @click="$emit(`check`)">
-      Check
-    </CheckpointButton>
-    <CheckpointButton @click="$emit(`reset`)">
-      Reset
-    </CheckpointButton>
-    <CheckpointButton @click="$emit(`reveal-answers`)">
-      Reveal Answers
-    </CheckpointButton>
-  </CheckpointActions>
 </template>

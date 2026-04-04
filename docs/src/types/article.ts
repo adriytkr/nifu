@@ -37,3 +37,12 @@ export type ChoiceState=
   |'missed'
   |'hidden'
   |'disabled';
+
+export type CheckpointType2Field<T>={
+  validator:(value:T)=>boolean;
+  default:T;
+}
+
+export type Schema=Record<string,CheckpointType2Field<any>>;
+
+export type FormState=Record<string,any>;
