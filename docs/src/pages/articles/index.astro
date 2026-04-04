@@ -1,0 +1,17 @@
+---
+import type { Locale } from '@/types/i18n';
+import { ArticleService } from '@/services/ArticleService';
+
+import CommonLayout from '@layouts/CommonLayout.astro';
+import ArticleFilter from '@components/article/index/ArticleFilter.vue';
+
+const allArticles=await ArticleService.getAllArticlesByLocale('en');
+---
+
+<CommonLayout title="Articles">
+  <ArticleFilter
+    articles={allArticles}
+    locale={Astro.currentLocale as Locale}
+    client:load
+  />
+</CommonLayout>

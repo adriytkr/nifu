@@ -1,8 +1,11 @@
+export type ArticleTagType='calculus';
+
 export interface ArticleSchema{
   data:{
     title:string;
     description:string;
-    tags:string[];
+    thumbnail?:string;
+    tags:ArticleTagType[];
   };
   [key:string]:any;
 }
@@ -19,3 +22,9 @@ export interface TocItem{
   slug:string;
   children:TocItem[];
 }
+
+export interface SearchFilter{
+  focusInput:()=>void;
+}
+
+export type ArticleTagList=Record<ArticleTagType,string>;
