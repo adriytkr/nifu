@@ -4,8 +4,10 @@ import BaseLayout from './base-layout.vue';
 
 <template>
   <BaseLayout>
-    <div class="max-w-4xl h-full mx-auto p-4">
-      <slot></slot>
+    <div class="max-w-2xl h-full mx-auto p-4">
+      <article>
+        <slot></slot>
+      </article>
     </div>
   </BaseLayout>
 </template>

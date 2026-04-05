@@ -1,0 +1,50 @@
+<script setup lang="ts">
+import CommonLayout from '~/layouts/CommonLayout.vue';
+
+import LandingHero from '~/components/landing/Hero.vue';
+import LandingSection from '~/components/landing/Section.vue';
+
+// const featuredArticles=await ArticleService.getAllArticlesByLocale('en');
+</script>
+
+<template>
+  <CommonLayout title="Kaga">
+    <LandingHero/>
+    <LandingSection title="Featured Articles">
+      <ArticleList :articles="[]"/>
+    </LandingSection>
+    <LandingSection title="What to expect here?">
+      <p class="mb-4">
+        This isn't a digital textbook. You won't find dry formulas or explanations that skip the why. Instead, you'll find a sandbox for your curiosity.
+      </p>
+      <p class="mb-6">
+        Also, there won't be only texts. There will be first
+      </p>
+      <ul class="pl-10 flex flex-col gap-y-2">
+        <li>
+          <strong>Visual Animations:</strong> Visualize complex topics.
+        </li>
+        <li>
+          <strong>Interactive Graphs:</strong> Change variables and watch the graph react instantly.
+        </li>
+        <li>
+          <strong>Real-World examples:</strong> Learn how the topics are related to the Real World.
+        </li>
+        <li>
+          <strong>Knowledge Gates:</strong> Test your understanding as you go, not just at the end.
+        </li>
+      </ul>
+    </LandingSection>
+    <LandingSection title="Why did I build this?">
+      <p class="mb-4">
+        I spent far too long reading textbooks or watching videos that focused on the <i>how</i> without explaining the <i>why</i>.
+      </p>
+      <p class="mb-4">
+        Most resources prioritize memorization, teaching you how to follow steps, while completely ignoring the <strong>"under the hood"</strong> engineering. I firmly believe that understanding the underlying logic is what leads to <strong>true mastery</strong> of the subject.
+      </p>
+      <p>
+        I built this platform to offer a different approach to learn: one that favors intuition over memorization, while being challenging and dynamic.
+      </p>
+    </LandingSection>
+  </CommonLayout>
+</template>

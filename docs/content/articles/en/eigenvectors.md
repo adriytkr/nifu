@@ -4,7 +4,10 @@ description: Some vectors don't change directions after a Linear Transformation
 tags:
   - calculus
 featured: true
+
+
 ---
+
 
 # This is a title
 
@@ -16,7 +19,7 @@ Another paragraph with some another very useful content...
 
 ---
 
-::accordion-base
+<!-- ::accordion-base
 This is a test
 
 #label
@@ -44,4 +47,31 @@ One of my favorite songs of all time, and you can watch it [here](https://www.yo
 
 ::theorem-box
 **Mean Value Theorem** You got the idea, right?
+:: -->
+
+<!-- ::checkpoint-type1
+---
+choices-count: 4
+correct-choices: [1,2]
+max: 2
+---
+
+#title
+Checkpoint
+
+#question
+Question+Command
+
+#command
+This is what you need to do
 ::
+
+::eigenvectors1
+#title
+Checkpoint Gate Damn
+
+#question
+Ruby is twice as old as her sister. Her sister is 10.
+
+Therefore, Ruby is :Blank{name="age"} years old.
+:: -->

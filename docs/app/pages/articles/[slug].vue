@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout:'article-layout',
+});
+
 const route=useRoute();
 const {locale}=useI18n();
 
@@ -21,6 +25,8 @@ if(!article.value&&!error.value)
 
 <template>
   <template v-if="article">
-    <ContentRenderer :value="article"/>
+    <article>
+      <ContentRenderer :value="article"/>
+    </article>
   </template>
 </template>

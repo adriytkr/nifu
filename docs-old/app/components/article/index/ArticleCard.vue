@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import placeholderThumbnail from '@assets/images/placeholder.webp';
+
+import ArticleTag from './ArticleTag.vue';
+
 const props=defineProps<{
-  slug:string;
   title:string;
   description:string;
   thumbnail?:string;
@@ -11,12 +14,12 @@ const props=defineProps<{
 
 <template>
   <NuxtLinkLocale
-    :to="`/articles/${slug}`"
+    :to="`/articles/${''}`"
     class="group flex flex-col bg-white rounded-sm overflow-hidden hover:no-underline"
   >
     <div class="aspect-video">
-      <NuxtImg
-        :src="thumbnail??'/images/placeholder-img.png'"
+      <img
+        :src="thumbnail??placeholderThumbnail"
         :alt="thumbnailAlt??''"
         class="w-full h-full object-cover"
       />
