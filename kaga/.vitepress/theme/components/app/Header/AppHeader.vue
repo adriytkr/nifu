@@ -23,7 +23,7 @@ const t:TNavSchema=tNav[lang.value as Locale];
 
 <template>
   <header :class="[
-    'sticky z-50 transition-transform duration-300 ease-in-out top-0 bg-surface [&.scroll-down]:-translate-y-full [&.scroll-up]:translate-y-0',
+    'sticky z-50 bg-background transition-transform duration-300 ease-in-out top-0 [&.scroll-down]:-translate-y-full [&.scroll-up]:translate-y-0',
     scrollClass,
   ]">
     <nav class="max-w-4xl mx-auto p-4 flex justify-between items-center">

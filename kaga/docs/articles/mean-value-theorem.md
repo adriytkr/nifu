@@ -11,10 +11,10 @@ featured: true
 
 The Mean Value Theorem is an elementary theorem of Calculus. Hence, I recommend at least a basic familiarity with Calculus.
 
-The formal proof I show at the end of the article requires the following theorems:
+The formal proof which I present at the end requires the following theorems:
 
-- [Fermat's Theorem](/articles/calculus/fermat-theorem)
-- [Extreme Value Theorem](/articles/calculus/extreme-value-theorem)
+- [Fermat's Theorem](/articles/fermat-theorem)
+- [Extreme Value Theorem](/articles/extreme-value-theorem)
 
 ---
 
@@ -26,18 +26,71 @@ The **Mean Value Theorem** is easy to understand and essential to prove **powerf
 - [Taylor's Theorem with Remainder](https://en.wikipedia.org/wiki/Taylor%27s_theorem)
 - [Corollaries](#corollaries)
 
-Check out this Manim Animation where I explain why the Mean Value Theorem is true visually.
+Check out the video below to visually understand why the Mean Value Theorem is true and grasp a good intuition.
 
 <YoutubeVideo
   id="ibTfv0CwC0A"
   title="Aaro - Indestructable"
 >
-  Visual proof of the Mean Value Theorem. Check out full [video]()
+
+  Visual proof of the Mean Value Theorem. Watch full video [here](/video)
+
 </YoutubeVideo>
 
-The Mean Value Thereom (or MVT) is very straightforward. It basically states that at some point on a given interval, **the derivative equals the average rate of change**.
+Let's carefully view the theorem in detail using the slides below
 
-MVT can be formally stated as follow
+<ManimSlides :slides="6">
+  <template #slide-0>
+
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
+
+  </template>
+
+  <template #slide-1>
+
+For the given interval, we can draw a secant line that passes through $(a,f(a))$ and $(b,f(b))$.
+
+  </template>
+
+  <template #slide-2>
+
+Since $f$ is differentiable, $f$ has a tangent line associated with every point on its curve.
+
+  </template>
+
+  <template #slide-3>
+
+Watch the tangent line moving along the curve. Do you notice something?
+
+<AccordionCommon>
+  <template #label>
+    Hint
+  </template>
+
+  There are two very important points located on the curve
+
+</AccordionCommon>
+
+
+  </template>
+
+  <template #slide-4>
+
+These two points are the important ones on the curve. Why do you think so?
+
+  </template>
+
+  <template #slide-5>
+
+If we a draw their respective tangent line, we notice they are parallel to the secant line.
+
+  </template>
+
+</ManimSlides>
+
+The Mean Value Thereom is very straightforward. It basically states there is **at least one point** on the interval where the tangent line has the same slope as the secant line.
+
+It can be formally stated as follow:
 
 <TheoremBox>
 
@@ -49,35 +102,69 @@ MVT can be formally stated as follow
 
 </TheoremBox>
 
-Since the derivative can be represented as a tangent line and the average rate of change can be seen as the secant line, geometrically, **the secant line is parallel to the tangent line** at some point.
+The Mean Value Theorem can be restated as:
 
-<ImageWithCaption>
-  Tangent line and secant line have the same slope
-</ImageWithCaption>
+<TheQuote>
 
-While this parallel relationship looks purely geometrical, it has profound implications for how we measure things.
+"The instantaneous rate of change (derivative / tangent line) equals the average rate of change (secant line) for at least one point."
 
-Consider the following example where a physical scenario is given.
+</TheQuote>
 
-<CheckpointType1
+---
+
+Try the following problem to solidify your comprehension.
+
+<CheckpointType1Single
   :choices-count="4"
-  :correct-choices="[1]"
+  :correctChoice="1"
 >
-  <template slot="title">Example: Real-life</template>
-  <template slot="question">
-    A car takes 3 hours to reach its destination. It is known that the average velocity was $36\,\mathrm{km/h}$
-  </template>
-  <template slot="command">What can you conclude about the travel?</template>
-  <template slot="choice-0">The car always maintained a velocity greater than $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-1">The car attained a velocity of $36\,\mathrm{km/h}$ at some point.</template>
-  <template slot="choice-2">The car traveled the entire travel at a velocity of $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-3">It is impossible to draw any conclusion.</template>
-  <template slot="explanation">
-    We know the position of the car is continuous and the car doesn't teleport, that is, the velocity changes continuously. Therefore, we can apply the Mean Value Theorem.
+  <template #title>Example: Real-life</template>
 
-    Since the velocity of the car was given to be $36\,\mathrm{km/h}$, we can conclude that the speedometer showed at least once a speed of $36\,\mathrm{km/h}$.
+  <template #body>
+
+A car takes 3 hours to reach its destination. It is known that the average velocity during the trajectory was $36\,\mathrm{km/h}$
+
   </template>
-</CheckpointType1>
+
+  <template #command>
+
+  What can you conclude about the travel?
+
+  </template>
+
+  <template #choice-0>
+
+The car always maintained a velocity greater than $36\,\mathrm{km/h}$.
+
+  </template>
+
+  <template #choice-1>
+
+The car attained a velocity of $36\,\mathrm{km/h}$ at some point.
+
+  </template>
+
+  <template #choice-2>
+
+The car traveled the entire travel at a velocity of $36\,\mathrm{km/h}$.
+
+  </template>
+
+
+  <template #choice-3>
+
+It is impossible to draw any conclusion.
+
+  </template>
+
+  <template #explanation>
+
+We know the position of the car is continuous and the car doesn't teleport, that is, the velocity changes continuously. Therefore, we can apply the Mean Value Theorem.
+
+Since the velocity of the car was given to be $36\,\mathrm{km/h}$, we can conclude that the speedometer showed at least once a speed of $36\,\mathrm{km/h}$.
+
+  </template>
+</CheckpointType1Single>
 
 ---
 
@@ -293,46 +380,4 @@ $$
 
 ## Knowledge Check
 
-Before you leave, try the following problems. Let's begin with one to warm up.
 
-<CheckpointType1
-  :choices-count="4"
-  :correct-choices="[1]"
->
-  <template slot="title">Example: Real-life</template>
-  <template slot="question">
-    A car takes 3 hours to reach its destination. It is known that the average velocity was $36\,\mathrm{km/h}$
-  </template>
-  <template slot="command">What can you conclude about the travel?</template>
-  <template slot="choice-0">The car always maintained a velocity greater than $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-1">The car attained a velocity of $36\,\mathrm{km/h}$ at some point.</template>
-  <template slot="choice-2">The car traveled the entire travel at a velocity of $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-3">It is impossible to draw any conclusion.</template>
-  <template slot="explanation">
-    We know the position of the car is continuous and the car doesn't teleport, that is, the velocity changes continuously. Therefore, we can apply the Mean Value Theorem.
-
-    Since the velocity of the car was given to be $36\,\mathrm{km/h}$, we can conclude that the speedometer showed at least once a speed of $36\,\mathrm{km/h}$.
-  </template>
-</CheckpointType1>
-
-Now, this second problem is a bit more challenging.
-
-<CheckpointType1
-  :choices-count="4"
-  :correct-choices="[1]"
->
-  <template slot="title">Example: Real-life</template>
-  <template slot="question">
-    A car takes 3 hours to reach its destination. It is known that the average velocity was $36\,\mathrm{km/h}$
-  </template>
-  <template slot="command">What can you conclude about the travel?</template>
-  <template slot="choice-0">The car always maintained a velocity greater than $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-1">The car attained a velocity of $36\,\mathrm{km/h}$ at some point.</template>
-  <template slot="choice-2">The car traveled the entire travel at a velocity of $36\,\mathrm{km/h}$.</template>
-  <template slot="choice-3">It is impossible to draw any conclusion.</template>
-  <template slot="explanation">
-    We know the position of the car is continuous and the car doesn't teleport, that is, the velocity changes continuously. Therefore, we can apply the Mean Value Theorem.
-
-    Since the velocity of the car was given to be $36\,\mathrm{km/h}$, we can conclude that the speedometer showed at least once a speed of $36\,\mathrm{km/h}$.
-  </template>
-</CheckpointType1>

@@ -16,6 +16,8 @@ import YoutubeVideo from './components/article-content/Media/YoutubeVideo.vue';
 import AccordionBase from './components/article-content/Accordion/AccordionBase.vue';
 import AccordionCommon from './components/article-content/Accordion/AccordionCommon.vue';
 
+import TheQuote from './components/article-content/TheQuote.vue';
+
 import CheckpointType1Single from './components/article-content/Checkpoint/type1/CheckpointType1Single.vue';
 
 import CheckpointType2 from './components/article-content/Checkpoint/Type2/CheckpointType2.vue';
@@ -37,6 +39,8 @@ export default {
 
     app.component('AccordionBase',AccordionBase);
     app.component('AccordionCommon',AccordionCommon);
+
+    app.component('TheQuote',TheQuote);
 
     app.component('CheckpointType1Single',CheckpointType1Single);
 
