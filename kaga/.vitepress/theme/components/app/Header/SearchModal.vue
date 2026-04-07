@@ -5,9 +5,14 @@ import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
 
 import KeyboardKey from '../KeyboardKey.vue';
 import SearchModalItem from './SearchModalItem.vue';
+import { DialogContext } from '~/types/dialog';
 
 const props=defineProps<{
   isOpen:boolean;
+}>();
+
+defineEmits<{
+  (e:'close'):void;
 }>();
 
 const {
@@ -15,11 +20,19 @@ const {
   inputRef,
   searchQuery,
   clearSearch,
+  context,
+  dialogRef,
 }=useSearchModal(()=>props.isOpen);
+
+defineExpose<DialogContext>(context);
 </script>
 
 <template>
-  <dialog class="absolute w-2xl shadow-lg bg-background rounded-sm top-1/2 left-1/2 -translate-1/2">
+  <dialog
+    ref="dialogRef"
+    class="w-2xl shadow-lg bg-background rounded-sm top-1/2 left-1/2 -translate-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
+    @click.self="$emit('close')"
+  >
     <div class="p-4 flex">
       <input
         type="text"

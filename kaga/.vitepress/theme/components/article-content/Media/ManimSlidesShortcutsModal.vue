@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { DialogContext } from '~/types/dialog';
+import { useDialog } from '~/composables/useDialog';
+
 import AppIconButton from '~/components/app/AppIconButton.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
 
@@ -8,10 +11,21 @@ import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
 defineEmits<{
   (e:'close'):void;
 }>();
+
+const {
+  dialogRef,
+  context,
+}=useDialog();
+
+defineExpose<DialogContext>(context);
 </script>
 
 <template>
-  <div class="absolute w-xl shadow-lg bg-background p-4 rounded-sm top-1/2 left-1/2 -translate-1/2">
+  <dialog
+    ref="dialogRef"
+    class="w-xl shadow-lg bg-background p-4 rounded-sm top-1/2 left-1/2 -translate-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
+    @click.self="$emit('close')"
+  >
     <header class="flex justify-between items-center mb-4">
       <h2 class="font-medium">Keyboard Shortcuts</h2>
       <AppIconButton @click="$emit('close')">
@@ -55,5 +69,5 @@ defineEmits<{
         <KeyboardKey>F</KeyboardKey>
       </li>
     </ul>
-  </div>
+  </dialog>
 </template>

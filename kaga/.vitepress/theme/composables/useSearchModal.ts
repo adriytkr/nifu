@@ -6,6 +6,7 @@ import {
   toValue,
   watch,
 } from 'vue';
+import { DialogContext } from '~/types/dialog';
 
 export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
   const selectedItemIndex=ref(-1);
@@ -51,10 +52,27 @@ export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
     },
   );
 
+  const dialogRef=ref<HTMLDialogElement|null>(null);
+
+  function openDialog(){
+    dialogRef.value?.showModal();
+  }
+
+  function closeDialog(){
+    dialogRef.value?.close();
+  }
+
+  const context:DialogContext={
+    open:openDialog,
+    close:closeDialog,
+  };
+
   return{
     selectedItemIndex,
     inputRef,
     searchQuery,
     clearSearch,
+    dialogRef,
+    context,
   };
 }

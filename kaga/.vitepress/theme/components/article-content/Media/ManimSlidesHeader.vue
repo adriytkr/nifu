@@ -3,7 +3,6 @@ import { useModal } from '~/composables/useModal';
 
 import ExternalLinkIcon from '~/components/icons/ExternalLinkIcon.vue';
 import ManimSlidesShortcutsModal from './ManimSlidesShortcutsModal.vue';
-import AppModal from '~/components/app/AppModal.vue';
 
 defineProps<{
   sourceCodeLink:string;
@@ -14,6 +13,7 @@ defineEmits<{
 }>();
 
 const {
+  dialogContext,
   isModalOpen:isShortcutsModalOpen,
   openModal:openShortcutsModal,
   closeModal:closeShortcutsModal,
@@ -22,18 +22,10 @@ const {
 
 <template>
   <Teleport to="body">
-    <AppModal
+    <ManimSlidesShortcutsModal
+      ref="dialogContext"
       @close="closeShortcutsModal"
-      :is-open="isShortcutsModalOpen"
-    >
-      <ManimSlidesShortcutsModal
-        class="opacity-0 transition-opacity duration-200"
-        :class="{
-          'opacity-100':isShortcutsModalOpen,
-        }"
-        @close="closeShortcutsModal"
-      />
-    </AppModal>
+    />
   </Teleport>
   <div class="mb-2 flex justify-between items-center">
     <div>

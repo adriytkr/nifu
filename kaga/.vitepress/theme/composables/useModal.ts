@@ -4,20 +4,22 @@ import {
   onUnmounted,
 } from 'vue';
 
+import { DialogContext } from '~/types/dialog';
+
 export function useModal(){
-  const dialogRef=ref<HTMLDialogElement|null>(null);
+  const dialogContext=ref<DialogContext|null>(null);
   const isModalOpen=ref(false);
 
   function openModal(){
     isModalOpen.value=true;
     document.body.style.overflow='hidden';
-    dialogRef.value?.showModal();
+    dialogContext.value?.open();
   }
 
   function closeModal(){
     isModalOpen.value=false;
     document.body.style.overflow='auto';
-    dialogRef.value?.close();
+    dialogContext.value?.close();
   }
 
   function handleEsc(event:KeyboardEvent){
@@ -41,7 +43,7 @@ export function useModal(){
   onUnmounted(()=>window.removeEventListener('keydown', handleEsc));
 
   return{
-    dialogRef,
+    dialogContext,
     isModalOpen,
     openModal,
     closeModal,

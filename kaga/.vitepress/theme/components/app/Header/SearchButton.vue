@@ -4,11 +4,10 @@ import { useModal } from '~/composables/useModal';
 import SearchIcon from '~icons/SearchIcon.vue';
 import KeyboardKey from '../KeyboardKey.vue';
 
-import AppModal from '../AppModal.vue';
 import SearchModal from './SearchModal.vue';
 
 const {
-  dialogRef,
+  dialogContext,
   isModalOpen:isSearchModalOpen,
   closeModal: closeSearchModal,
   openModal: openSearchModal,
@@ -17,20 +16,11 @@ const {
 
 <template>
   <Teleport to="body">
-    <AppModal
-      :is-open="isSearchModalOpen"
+    <SearchModal
+      ref="dialogContext"
       @close="closeSearchModal"
-    >
-      <SearchModal
-        ref="dialogRef"
-        class="opacity-0 transition-opacity duration-200"
-        :class="{
-          'opacity-100':isSearchModalOpen,
-        }"
-        @close="closeSearchModal"
-        :is-open="isSearchModalOpen"
-      />
-    </AppModal>
+      :is-open="isSearchModalOpen"
+    />
   </Teleport>
   <button
     class="group flex items-center border border-border-color rounded-sm p-2 transition-colors duration-200 hover:border-body"
