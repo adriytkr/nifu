@@ -12,6 +12,7 @@ export function useSlides(totalSlides:number){
   function enterFullScreen(){
     // videoRef.value?.requestFullscreen();
     videoContainerRef.value?.requestFullscreen();
+    videoRef.value?.focus();
     isFullScreen.value=true;
   }
 
