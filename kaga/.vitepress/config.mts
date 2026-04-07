@@ -57,4 +57,7 @@ export default defineConfig({
     },
     math:true,
   },
+  themeConfig:{
+    outline:[2,4],
+  },
 })

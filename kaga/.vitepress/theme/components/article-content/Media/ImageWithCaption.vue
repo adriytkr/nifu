@@ -14,6 +14,8 @@ defineProps<{
         class="w-full h-auto block object-cover rounded-sm"
       />
     </template>
-    <slot></slot>
+    <template #caption>
+      <slot></slot>
+    </template>
   </MediaWithCaption>
 </template>

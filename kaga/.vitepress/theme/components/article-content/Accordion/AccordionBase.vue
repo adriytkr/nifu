@@ -5,7 +5,7 @@ const isOpen=ref(false);
 </script>
 
 <template>
-  <div class="my-8">
+  <div class="my-5">
     <button
       @click="isOpen=!isOpen"
       class="px-0 mb-2 bg-transparent flex gap-x-1 items-center text-muted"

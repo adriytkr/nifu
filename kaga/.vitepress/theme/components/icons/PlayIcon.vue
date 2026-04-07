@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const {size=24}=defineProps<{
-  size:number;
+  size?:number;
 }>();
 </script>
 

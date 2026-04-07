@@ -1,10 +1,22 @@
 ---
+sourceCodeLink: https://youtube.com
+
 layout: article
 title: Mean Value Theorem
 description: Why your instantaneous speed must eventually match your average speed.
 tags:
   - calculus
 featured: true
+---
+
+# Mean Value Theorem
+
+<div>
+  <SourceLinkGithub :href="$frontmatter.sourceCodeLink">
+    SourceCode
+  </SourceLinkGithub>
+</div>
+
 ---
 
 ## Pre-requisites
@@ -39,11 +51,27 @@ Check out the video below to visually understand why the Mean Value Theorem is t
 
 Let's carefully view the theorem in detail using the slides below
 
-<ManimSlides :slides="6">
+<ManimSlides
+  :total-slides="6"
+  sourceCodeLink='https://youtube.com/test'
+>
+  <template #caption>
+
+Check source code here.
+
+  </template>
+
   <template #slide-0>
 
 Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
 
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
+
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
+
+Consider the following function f. It is continuous and differentiable for all $x \in \mathbb{R}$
   </template>
 
   <template #slide-1>

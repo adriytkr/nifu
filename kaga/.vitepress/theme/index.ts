@@ -7,6 +7,9 @@ import Layout from './layouts/Layout.vue';
 
 import VpLink from './components/app/VpLink.vue';
 
+import SourceLink from './components/article-ui/SourceLink.vue';
+import SourceLinkGithub from './components/article-ui/SourceLinkGithub.vue';
+
 import TheoremBox from './components/article-content/TheoremBox.vue';
 
 import MediaWithCaption from './components/article-content/Media/MediaWithCaption.vue';
@@ -30,6 +33,9 @@ export default {
   Layout,
   enhanceApp({ app, router, siteData }){
     app.component('VpLink',VpLink);
+
+    app.component('SourceLink',SourceLink);
+    app.component('SourceLinkGithub',SourceLinkGithub);
 
     app.component('TheoremBox',TheoremBox);
 

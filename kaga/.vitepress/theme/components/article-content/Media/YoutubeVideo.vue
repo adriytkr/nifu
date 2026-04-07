@@ -13,6 +13,8 @@ defineProps<{
         params="modestbranding=1&rel=0&vq=hd720"
       />
     </template>
-    <slot></slot>
+    <template #caption>
+      <slot></slot>
+    </template>
   </MediaWithCaption>
 </template>
