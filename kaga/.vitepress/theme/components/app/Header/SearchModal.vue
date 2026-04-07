@@ -19,7 +19,7 @@ const {
 </script>
 
 <template>
-  <div class="absolute w-2xl shadow-lg bg-background rounded-sm top-1/2 left-1/2 -translate-1/2">
+  <dialog class="absolute w-2xl shadow-lg bg-background rounded-sm top-1/2 left-1/2 -translate-1/2">
     <div class="p-4 flex">
       <input
         type="text"
@@ -79,5 +79,5 @@ const {
         <span>to close</span>
       </li>
     </ul>
-  </div>
+  </dialog>
 </template>

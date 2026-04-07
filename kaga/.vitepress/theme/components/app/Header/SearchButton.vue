@@ -8,6 +8,7 @@ import AppModal from '../AppModal.vue';
 import SearchModal from './SearchModal.vue';
 
 const {
+  dialogRef,
   isModalOpen:isSearchModalOpen,
   closeModal: closeSearchModal,
   openModal: openSearchModal,
@@ -21,6 +22,7 @@ const {
       @close="closeSearchModal"
     >
       <SearchModal
+        ref="dialogRef"
         class="opacity-0 transition-opacity duration-200"
         :class="{
           'opacity-100':isSearchModalOpen,
