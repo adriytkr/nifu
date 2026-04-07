@@ -6,7 +6,11 @@ import KeyboardKey from '../KeyboardKey.vue';
 import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
 import EnterKeyIcon from '~/components/icons/EnterKeyIcon.vue';
 
+import AppIconButton from '../AppIconButton.vue';
+import CloseIcon from '~/components/icons/CloseIcon.vue';
+
 import SearchModalItem from './SearchModalItem.vue';
+import SearchIcon from '~/components/icons/SearchIcon.vue';
 
 const props=defineProps<{
   isOpen:boolean;
@@ -35,13 +39,25 @@ defineExpose<SearchDialogContext>(context);
     @click.self="$emit('close')"
   >
     <div class="p-4 flex">
-      <input
-        type="text"
-        class="flex-1 outline-none"
-        placeholder="Search articles"
-        ref="inputRef"
-        v-model="searchQuery"
-      >
+      <div class="group flex flex-1 items-center mr-4">
+        <SearchIcon
+          class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
+          @click="context.focusInput()"
+        />
+        <input
+          type="text"
+          class="mx-4 flex-1 outline-none"
+          placeholder="Search articles"
+          ref="inputRef"
+          v-model="searchQuery"
+        >
+        <AppIconButton
+          v-show="searchQuery.length>0"
+          @click="context.clearInput();context.focusInput()"
+        >
+          <CloseIcon/>
+        </AppIconButton>
+      </div>
       <KeyboardKey is-not-single>Ctrl K</KeyboardKey>
     </div>
     <hr class="border-t-border-color">

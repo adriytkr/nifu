@@ -87,7 +87,7 @@ onUnmounted(()=>window.removeEventListener('keydown',handleKeyDown));
     class="group flex items-center border border-border-color rounded-sm p-2 transition-colors duration-200 hover:border-body"
     @click="openModal"
   >
-    <SearchIcon class="transition-colors duration-200 group-hover:text-body group-focus:text-body"/>
+    <SearchIcon class="text-muted transition-colors duration-200 group-hover:text-body group-focus:text-body"/>
     <span class="ml-2 mr-10">Search articles</span>
     <KeyboardKey is-not-single>Ctrl K</KeyboardKey>
   </button>
