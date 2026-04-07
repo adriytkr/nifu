@@ -25,6 +25,10 @@ const {
     <ManimSlidesShortcutsModal
       ref="dialogContext"
       @close="closeShortcutsModal"
+      class="opacity-0 transition-opacity duration-200"
+      :class="{
+        'opacity-100':isShortcutsModalOpen,
+      }"
     />
   </Teleport>
   <div class="mb-2 flex justify-between items-center">

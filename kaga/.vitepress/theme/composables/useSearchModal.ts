@@ -6,7 +6,7 @@ import {
   toValue,
   watch,
 } from 'vue';
-import { DialogContext } from '~/types/dialog';
+import { DialogContext, SearchDialogContext } from '~/types/dialog';
 
 export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
   const selectedItemIndex=ref(-1);
@@ -40,15 +40,22 @@ export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
   const inputRef=ref<HTMLInputElement|null>(null);
   const searchQuery=ref('');
 
-  function clearSearch(){
-    searchQuery.value='';
+  function focusInput(){
     inputRef.value?.focus();
+  }
+
+  function clearSearch(){
+    clearInput();
+    focusInput();
   }
 
   watch(
     ()=>toValue(isOpen),
     (newValue)=>{
-      if(newValue)inputRef.value?.focus();
+      if(!newValue)return;
+
+      focusInput();
+      clearInput();
     },
   );
 
@@ -62,9 +69,15 @@ export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
     dialogRef.value?.close();
   }
 
-  const context:DialogContext={
+  function clearInput(){
+    searchQuery.value='';
+  }
+
+  const context:SearchDialogContext={
     open:openDialog,
     close:closeDialog,
+    focusInput,
+    clearInput,
   };
 
   return{

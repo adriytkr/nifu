@@ -8,6 +8,7 @@ import QuickReferenceModal from './QuickReferenceModal.vue';
 
 const {
   dialogContext,
+  isModalOpen:isQuickReferenceModalOpen,
   closeModal: closeQuickReferenceModal,
   openModal: openQuickReferenceModal,
 }=useModal();
@@ -18,6 +19,10 @@ const {
     <QuickReferenceModal
       ref="dialogContext"
       @close="closeQuickReferenceModal"
+      class="opacity-0 transition-opacity duration-200"
+      :class="{
+        'opacity-100':isQuickReferenceModalOpen,
+      }"
     />
   </Teleport>
   <AppIconButton @click="openQuickReferenceModal">

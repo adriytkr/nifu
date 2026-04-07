@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {useSearchModal} from '~/composables/useSearchModal';
+import { SearchDialogContext } from '~/types/dialog';
 
 import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
 
 import KeyboardKey from '../KeyboardKey.vue';
 import SearchModalItem from './SearchModalItem.vue';
-import { DialogContext } from '~/types/dialog';
 
 const props=defineProps<{
   isOpen:boolean;
@@ -24,7 +24,7 @@ const {
   dialogRef,
 }=useSearchModal(()=>props.isOpen);
 
-defineExpose<DialogContext>(context);
+defineExpose<SearchDialogContext>(context);
 </script>
 
 <template>
