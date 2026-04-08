@@ -47,7 +47,7 @@ defineExpose<SearchDialogContext>(context);
 <template>
   <dialog
     ref="dialogRef"
-    class="w-2xl shadow-lg bg-background rounded-sm top-1/2 left-1/2 -translate-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
+    class="w-2xl shadow-lg bg-background rounded-sm top-10 left-1/2 -translate-x-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
     @click.self="$emit('close')"
   >
     <div class="p-4 flex">
@@ -73,9 +73,9 @@ defineExpose<SearchDialogContext>(context);
       <KeyboardKey is-not-single>Ctrl K</KeyboardKey>
     </div>
     <hr class="border-t-border-color">
-    <div class="max-h-60 h-60 w-full overflow-y-auto">
+    <div class="max-h-120 min-h-60 w-full overflow-y-auto">
       <div v-show="true">
-        <p class="mx-6 my-2">
+        <p class="mx-2 my-4">
           {{ t2.matches(10,searchQuery) }}
         </p>
         <ul>

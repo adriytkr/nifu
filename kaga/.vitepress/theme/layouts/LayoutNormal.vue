@@ -6,7 +6,7 @@ import BaseLayout from './LayoutBase.vue';
 
 <template>
   <BaseLayout>
-    <div class="max-w-4xl h-full mx-auto p-4">
+    <div class="max-w-4xl h-full mx-auto p-4 [&>div]:h-full [&>div>div]:h-full">
       <Content/>
     </div>
   </BaseLayout>

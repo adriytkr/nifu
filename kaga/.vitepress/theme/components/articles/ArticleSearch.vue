@@ -31,7 +31,7 @@ defineExpose<SearchFilter>({focusInput});
 </script>
 
 <template>
-  <div class="group p-2 flex items-center max-w-md w-full border border-border-color rounded-sm transition-colors duration-200 hover:border-body">
+  <div class="group p-2 bg-surface flex items-center max-w-md w-full border border-border-color rounded-sm transition-colors duration-200 hover:border-body">
     <SearchIcon
       class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
       @click="focusInput"

@@ -94,7 +94,7 @@ onUnmounted(()=>window.removeEventListener('keydown',handleKeyDown));
     />
   </Teleport>
   <button
-    class="group flex items-center border border-border-color rounded-sm p-2 transition-colors duration-200 hover:border-body"
+    class="group flex items-center border border-border-color bg-surface rounded-sm p-2 transition-colors duration-200 hover:border-body"
     @click="openModal"
   >
     <SearchIcon class="text-muted transition-colors duration-200 group-hover:text-body group-focus:text-body"/>
