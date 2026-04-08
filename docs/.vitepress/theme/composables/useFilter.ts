@@ -12,6 +12,7 @@ export function useFilter(articles:Article[]){
       isArticleMatch(
         article,
         searchQuery.value,
+        article.tags,
       )
     )
 

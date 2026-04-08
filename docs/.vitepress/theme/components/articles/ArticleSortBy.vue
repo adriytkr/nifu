@@ -37,7 +37,7 @@ function selectSorting(sorting:SortingFilter){
     <div class="relative">
       <button
         @click="isOpen=!isOpen"
-        class="flex items-center gap-x-1 border border-border-color bg-surface px-4 py-2 rounded-sm"
+        class="flex items-center gap-x-1 border border-border-color bg-surface px-4 py-2 rounded-sm transition-colors duration-200 hover:border-body focus:border-body"
       >
         <span>
           {{ t.sort[sortingFilter] }}

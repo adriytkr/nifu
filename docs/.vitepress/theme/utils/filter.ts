@@ -1,8 +1,13 @@
-import type {Article, ArticleDifficulty, SortingFilter} from '~/types/articles';
+import type {
+  Article,
+  ArticleDifficulty,
+  SortingFilter,
+} from '~/types/articles';
 
 export function isArticleMatch(
   article:Article,
   query:string,
+  tags:string[],
 ):boolean{
   const normalizedQuery=query.toLowerCase();
 
@@ -18,7 +23,14 @@ export function isArticleMatch(
 
   const matchQuery=matchTitle||matchDescription;
 
-  return matchQuery;
+  const matchTags=
+    tags.some(tag=>
+      tag
+        .toLowerCase()
+        .includes(normalizedQuery)
+    );
+
+  return matchQuery||matchTags;
 }
 
 export function sortArticles(

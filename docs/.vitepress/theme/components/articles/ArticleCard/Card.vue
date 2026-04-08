@@ -27,7 +27,7 @@ const t=tTags[convertStringToLocale(lang.value)??'en'];
       :to="`/articles/${slug}`"
       class="group h-full flex flex-col bg-surface rounded-sm overflow-hidden hover:no-underline shadow-lg"
     >
-      <div class="aspect-video w-full transition-transform duration-500 group-hover:scale-105">
+      <div class="aspect-video w-full transition-transform duration-500 group-hover:scale-110">
         <img
           :src="thumbnail??'/images/placeholder-img.png'"
           :alt="thumbnailAlt??''"

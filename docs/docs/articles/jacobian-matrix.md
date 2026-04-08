@@ -7,7 +7,7 @@ thumbnail: /images/admiral-graf-spee.jpg
 tags:
   - linear-algebra
   - calculus
-difficulty: Hard
+difficulty: hard
 ---
 
 
