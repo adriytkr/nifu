@@ -7,27 +7,45 @@ export function useShortcuts(){
     isSomeModalOpen,
     closeAllModals,
     toggleModal,
-    isHeaderVisible,
   }=useUI();
 
-  let isMovingDown = false;
-  let isMovingUp = false;
-  const scrollSpeed = 12;
+  let velocity = 0;
+  const acceleration = 1.8;
+  const friction = 0.92;
+  const maxSpeed = 22;
+  const startDelay = 450;
 
-  function scrollLoop(){
-    if(isMovingDown)window.scrollBy(0,scrollSpeed);
-    if(isMovingUp)window.scrollBy(0, -scrollSpeed);
-    
-    if(isMovingDown||isMovingUp)requestAnimationFrame(scrollLoop);
-  }
+  let scrollTimer:ReturnType<typeof setTimeout>|null=null;
+  let isLoopRunning=false;
+  let activeDirection:'up'|'down'|null=null;
 
-  function moveUp(){
-    isMovingUp=true;
-    requestAnimationFrame(scrollLoop);
-  }
+  function scrollLoop() {
+    if(isSomeModalOpen.value){
+      activeDirection=null;
+      velocity=0;
+      isLoopRunning=false;
+      return;
+    }
 
-  function moveDown(){
-    isMovingDown=true;
+    if(
+      Math.abs(velocity)<0.1&&
+      activeDirection===null
+    ){
+      velocity=0;
+      isLoopRunning=false;
+      return;
+    }
+
+    if(activeDirection === 'down')velocity+=acceleration;
+    if(activeDirection === 'up')velocity-=acceleration;
+
+    velocity*=friction;
+    if(velocity>maxSpeed)velocity=maxSpeed;
+    if(velocity<-maxSpeed)velocity=-maxSpeed;
+
+    window.scrollBy(0,velocity);
+
+    isLoopRunning=true;
     requestAnimationFrame(scrollLoop);
   }
 
@@ -54,7 +72,7 @@ export function useShortcuts(){
 
     if(isInputFocused)return;
 
-    if(key==='r'){
+    if(!event.ctrlKey&&key==='r'){
       event.preventDefault();
       toggleModal('quick-reference');
       return;
@@ -66,35 +84,47 @@ export function useShortcuts(){
       return;
     }
 
-    if(
-      event.key==='j'&&
-      !isMovingDown&&
-      !isSomeModalOpen.value
-    ){
-      event.preventDefault();
-      moveDown();
-      return;
-    }
+    if(event.repeat)return;
+
+    const isDown=key==='j'||key==='arrowdown';
+    const isUp=key==='k'||key==='arrowup';
 
     if(
-      event.key==='k'&&
-      !isMovingUp&&
+      (isDown||isUp)&&
       !isSomeModalOpen.value
     ){
       event.preventDefault();
-      moveUp();
-      return;
+      activeDirection=(key==='j'||key==='arrowdown')
+        ?'down'
+        :'up';
+
+      window.scrollBy({
+        top:(key==='j'||key==='arrowdown')?40:-40,
+        behavior:'smooth',
+      });
+
+      scrollTimer=setTimeout(
+        ()=>{
+          if(!isLoopRunning)scrollLoop();
+        },
+        startDelay,
+      );
     }
   }
 
   function handlekeyUp(event:KeyboardEvent){
     const key=event.key.toLowerCase();
 
-    switch(key){
-      case 'j':
-        isMovingDown=false;
-      case 'k':
-        isMovingUp=false;
+    const isDown=key==='j'||key==='arrowdown';
+    const isUp=key==='k'||key==='arrowup';
+
+    if(isUp||isDown){
+      activeDirection=null;
+
+      if(scrollTimer!==null){
+        clearTimeout(scrollTimer);
+        scrollTimer=null;
+      }
     }
   }
 

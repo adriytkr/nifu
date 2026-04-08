@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { DialogContext } from '~/types/dialog';
-import { useDialog } from '~/composables/useDialog';
-
 import AppIconButton from '~/components/app/AppIconButton.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
 
