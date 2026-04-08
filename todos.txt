@@ -1,21 +1,11 @@
 Add table of contents
-Add header
-Zen mode when user scroll down. When they scroll up, header and table of contents show up again
 
-Add dark mode
-Fix i18n
-
-Fix article formating
-Improve MVT
-Add and improve Fermat's Theorem
-
-Record Video of MVT
-
-zoom image like Medium
 Add quick reference button
 
----
-LATER
-Build landing page
-Build articles page
-Add search feature
+Search Modal
+
+Improve shortcuts
+
+Improve design/layout/dark theme
+
+mobile

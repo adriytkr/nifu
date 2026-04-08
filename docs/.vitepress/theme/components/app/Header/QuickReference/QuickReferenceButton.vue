@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import { useUI } from '~/composables/useUi';
+
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 import QuickReferenceIcon from '~/components/icons/QuickReferenceIcon.vue';
 
 import QuickReferenceModal from './QuickReferenceModal.vue';
-
-import { useUI } from '~/composables/useUi';
 
 const {
   isQuickReferenceModalOpen,
@@ -21,7 +21,7 @@ const {
       }"
     />
   </Teleport>
-  <AppIconButton @click="openModal('quick-reference')">
+  <AppButtonIcon @click="openModal('quick-reference')">
     <QuickReferenceIcon/>
-  </AppIconButton>
+  </AppButtonIcon>
 </template>

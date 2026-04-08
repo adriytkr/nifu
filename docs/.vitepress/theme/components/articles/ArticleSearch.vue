@@ -8,7 +8,7 @@ import type { Locale } from '~/i18n';
 
 import SearchIcon from '../icons/SearchIcon.vue';
 import CloseIcon from '../icons/CloseIcon.vue';
-import AppIconButton from '../app/AppIconButton.vue';
+import AppButtonIcon from '../app/AppButtonIcon.vue';
 
 const {lang}=useData();
 const t=tFilter[lang.value as Locale];
@@ -43,11 +43,11 @@ defineExpose<SearchFilter>({focusInput});
       :placeholder="t.placeholder"
       v-model="query"
     >
-    <AppIconButton
+    <AppButtonIcon
       v-show="query"
       @click="clearInput"
     >
       <CloseIcon/>
-    </AppIconButton>
+    </AppButtonIcon>
   </div>
 </template>

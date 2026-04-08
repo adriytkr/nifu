@@ -5,7 +5,7 @@ import KeyboardKey from '~/components/app/KeyboardKey.vue';
 import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
 import EnterKeyIcon from '~/components/icons/EnterKeyIcon.vue';
 
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
 
 import SearchModalItem from './SearchModalItem.vue';
@@ -72,12 +72,12 @@ watch(
         ref="inputRef"
         v-model="searchQuery"
       >
-      <AppIconButton
+      <AppButtonIcon
         v-show="searchQuery.length>0"
         @click="clearSearch"
       >
         <CloseIcon/>
-      </AppIconButton>
+      </AppButtonIcon>
     </div>
     <div class="max-h-120 min-h-60 w-full overflow-y-auto">
       <div v-show="true">

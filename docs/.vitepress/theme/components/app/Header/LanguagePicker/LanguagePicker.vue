@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue';
+import {computed} from 'vue';
 import {useData} from 'vitepress';
 
-import type {
-  Locale,
-  LocaleItem,
-} from '~/i18n';
+import type { Locale } from '~/i18n';
 
 import LanguagePickerButton from './LanguagePickerButton.vue';
 import ChevronLeftIcon from '~/components/icons/ChevronLeftIcon.vue';
+
+export interface LocaleItem{
+  code:Locale;
+  label:string;
+}
 
 const isOpen=defineModel('open',{default:false});
 

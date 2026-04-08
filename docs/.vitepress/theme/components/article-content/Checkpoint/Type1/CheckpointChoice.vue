@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <button
-    class="block w-full text-left px-4 py-2 rounded-sm border border-transparent"
+    class="reset block w-full text-left px-4 py-2 rounded-sm border border-transparent"
     :class="{
       'bg-slate-200':status==='idle',
       'bg-slate-200 border-surface-border!':status==='selected',
@@ -18,6 +18,5 @@ defineProps<{
     }"
   >
     <slot></slot>
-    {{ status }}
   </button>
 </template>

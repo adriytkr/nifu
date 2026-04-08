@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 
 import ArrowIcon from '~/components/icons/ArrowIcon.vue';
 import LastPageIcon from '~/components/icons/LastPageIcon.vue';
@@ -52,37 +52,37 @@ watch(
       >
         <div class="flex w-full mt-4 items-center justify-between">
           <div class="flex gap-x-4 justify-between items-center">
-            <AppIconButton
+            <AppButtonIcon
               @click="$emit('first')"
               :disabled="currentSlide===0"
             >
               <LastPageIcon class="rotate-180"/>
-            </AppIconButton>
-            <AppIconButton
+            </AppButtonIcon>
+            <AppButtonIcon
               @click="$emit('previous')"
               :disabled="currentSlide===0"
             >
               <ArrowIcon class="rotate-180"/>
-            </AppIconButton>
-            <AppIconButton
+            </AppButtonIcon>
+            <AppButtonIcon
               @click="$emit('toggle-play')"
             >
               <PauseIcon v-if="isPlaying"/>
               <PlayIcon v-else/>
-            </AppIconButton>
-            <AppIconButton
+            </AppButtonIcon>
+            <AppButtonIcon
               @click="$emit('next')"
               :disabled="currentSlide===totalSlides-1"
             >
               <ArrowIcon/>
-            </AppIconButton>
-            <AppIconButton
+            </AppButtonIcon>
+            <AppButtonIcon
               @click="$emit('last')"
               :disabled="currentSlide===totalSlides-1"
             >
               <LastPageIcon/>
-            </AppIconButton>
-            <AppIconButton
+            </AppButtonIcon>
+            <AppButtonIcon
               @click="showText=!showText"
               v-if="isFullScreen"
             >
@@ -94,7 +94,7 @@ watch(
                 <VisibilityOffIcon/>
                 <span>Hide</span>
               </span>
-            </AppIconButton>
+            </AppButtonIcon>
           </div>
           <div v-if="isFullScreen">
             <button @click="$emit('leave-full-screen')">

@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { useData, useRoute } from 'vitepress';
 import { computed } from 'vue';
-import { Locale } from '~/i18n';
 
+import { Locale } from '~/i18n';
 import {
   convertStringToLocale,
   makeLocalizedUrl,
 } from '~/i18n/utils';
-
-const route=useRoute();
 
 const props=defineProps<{
   to:string;
@@ -16,11 +14,12 @@ const props=defineProps<{
   exactActiveClass?:string;
 }>();
 
+const route=useRoute();
 const { lang }=useData()
 
 const localizedPath=computed(()=>
   makeLocalizedUrl(
-    convertStringToLocale(props.locale??'en')??'en',
+    convertStringToLocale(props.locale??lang.value)??'en',
     props.to,
   ),
 )
@@ -35,7 +34,7 @@ const isActive=computed<boolean>(()=>
     :href="localizedPath"
     :class="[
       $attrs.class,
-      isActive??exactActiveClass,
+      isActive&&exactActiveClass,
     ]"
   >
     <slot></slot>

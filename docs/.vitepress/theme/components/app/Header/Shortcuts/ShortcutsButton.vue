@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 import KeyboardIcon from '~/components/icons/KeyboardIcon.vue';
 
 import ShortcutsModal from './ShortcutsModal.vue';
@@ -21,7 +21,7 @@ const {
       }"
     />
   </Teleport>
-  <AppIconButton @click="openModal('shortcuts')">
+  <AppButtonIcon @click="openModal('shortcuts')">
     <KeyboardIcon/>
-  </AppIconButton>
+  </AppButtonIcon>
 </template>

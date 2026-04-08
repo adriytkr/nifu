@@ -1,10 +1,10 @@
 import type { Locale } from './types';
 import { DEFAULT_LOCALE } from './constants';
 
-export function getAbsoluteUrlWithoutLocale(
+export const getAbsoluteUrlWithoutLocale=(
   locale:Locale,
   localizedUrl:string,
-):string{
+):string=>{
   const cleanPath=localizedUrl.replace(/^\/[a-z]{2}-[a-z]{2}\//, '/');
 
   const sanitizedUrl=
@@ -15,16 +15,18 @@ export function getAbsoluteUrlWithoutLocale(
   return sanitizedUrl;
 }
 
-export function makeLocalizedUrl(
+export const makeLocalizedUrl=(
   locale:Locale,
   pureUrl:string,
-):string{
-  if(locale===DEFAULT_LOCALE)return pureUrl;
+):string=>
+  locale===DEFAULT_LOCALE
+    ?pureUrl
+    :`/${locale}${pureUrl}`;
 
-  return `/${locale}${pureUrl}`;
-}
+export const STRING_TO_LOCALE_MAP:Record<string,Locale>={
+  'en':'en',
+  'pt-br':'pt-br',
+};
 
-export function convertStringToLocale(str:string):Locale|undefined{
-  if(str==='en')return 'en';
-  if(str==='pt-br')return 'pt-br';
-}
+export const convertStringToLocale=(str:string):Locale|undefined=>
+  STRING_TO_LOCALE_MAP[str];

@@ -7,7 +7,7 @@ import { useTheme } from '~/composables/useTheme';
 
 import AppLogo from '~icons/LogoIcon.vue';
 
-import NavTooltip from '../NavTooltip.vue';
+import NavTooltip from './NavTooltip.vue';
 
 import BrowserIcon from '~/components/icons/BrowserIcon.vue';
 import SearchButton from './Search/SearchButton.vue';

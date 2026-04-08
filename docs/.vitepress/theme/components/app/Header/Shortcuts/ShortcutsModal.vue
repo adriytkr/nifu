@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
 
 import KeyboardKey from '~/components/app/KeyboardKey.vue';
@@ -48,9 +48,9 @@ watch(
       <h2 class="font-medium">
         {{ t.shortcuts.title }}
       </h2>
-      <AppIconButton @click="closeModal('shortcuts')">
+      <AppButtonIcon @click="closeModal('shortcuts')">
         <CloseIcon/>
-      </AppIconButton>
+      </AppButtonIcon>
     </header>
     <ul class="flex flex-col gap-y-4">
       <ShortcutsModalItem>

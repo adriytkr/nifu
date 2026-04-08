@@ -2,7 +2,7 @@
 import { DialogContext } from '~/types/dialog';
 import { useDialog } from '~/composables/useDialog';
 
-import AppIconButton from '~/components/app/AppIconButton.vue';
+import AppButtonIcon from '~/components/app/AppButtonIcon.vue';
 import CloseIcon from '~/components/icons/CloseIcon.vue';
 
 import KeyboardKey from '~/components/app/KeyboardKey.vue';
@@ -28,9 +28,9 @@ defineExpose<DialogContext>(context);
   >
     <header class="flex justify-between items-center mb-4">
       <h2 class="font-medium">Keyboard Shortcuts</h2>
-      <AppIconButton @click="$emit('close')">
+      <AppButtonIcon @click="$emit('close')">
         <CloseIcon/>
-      </AppIconButton>
+      </AppButtonIcon>
     </header>
     <p class="mb-8">
       Your video should be focused to use these shortcuts (click anywhere on the video to focus).
