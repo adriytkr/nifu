@@ -1,10 +1,10 @@
 ---
 layout: article
 
-sourceCodeLink: https://github.com/adriytkr/kaga/blob/main/docs/docs/articles/jacobian-matrix.md
+sourceCodeLink: https://github.com/adriytkr/kaga/blob/main/docs/docs/pt-br/articles/jacobian-matrix.md
 
-title: Jacobian Matrix
-description: Real geometric interpretation of derivatives
+title: Matriz Jacobiana
+description: Interpretação geométrica da derivada
 thumbnail: /images/admiral-graf-spee.jpg
 tags:
   - linear-algebra
@@ -12,14 +12,14 @@ tags:
 difficulty: hard
 ---
 
-# Jacobian Matrix
+# Matriz Jacobiana
 
 <div>
   <SourceLinkGithub :href="$frontmatter.sourceCodeLink">
-    SourceCode
+    Código
   </SourceLinkGithub>
 </div>
 
 ---
 
-Content
+Conteúdo

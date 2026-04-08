@@ -30,14 +30,14 @@ function selectSorting(sorting:SortingFilter){
 </script>
 
 <template>
-  <div class="flex gap-x-2 items-center">
-    <span class="text-xs text-muted">
+  <div class="flex gap-x-2 items-center w-full md:w-auto">
+    <span class="text-xs text-muted hidden md:inline-block">
       {{ t.sort.label }}
     </span>
-    <div class="relative">
+    <div class="relative w-full md:w-auto">
       <button
         @click="isOpen=!isOpen"
-        class="flex items-center gap-x-1 border border-border-color bg-surface px-4 py-2 rounded-sm transition-colors duration-200 hover:border-body focus:border-body"
+        class="flex items-center gap-x-1 border w-full md:w-auto border-border-color bg-surface px-4 py-2 rounded-sm transition-colors duration-200 hover:border-body focus:border-body"
       >
         <span>
           {{ t.sort[sortingFilter] }}

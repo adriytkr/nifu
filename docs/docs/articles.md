@@ -8,9 +8,8 @@ import { nextTick, ref } from 'vue';
 import type { SearchFilter } from '~/types/articles/article';
 import {useFilter} from '~/composables/useFilter';
 
-import ArticleSearch from '~/components/articles/ArticleSearch.vue';
+import ArticleFilter from '~/components/articles/ArticleFilter.vue';
 import ArticleList from '~/components/articles/ArticleList.vue';
-import ArticleSortBy from '~/components/articles/ArticleSortBy.vue';
 
 import {filter} from '~/i18n/locales/en/filter';
 import { data as articles } from '~/content/en-articles.data.ts';
@@ -32,13 +31,11 @@ async function clearSearch(){
 </script>
 
 <div class="min-h-full flex flex-col">
-  <div class="mb-8 flex justify-between items-center">
-    <ArticleSearch
-      ref="searchRef"
-      v-model="searchQuery"
-    />
-    <ArticleSortBy v-model="selectedSortingFilter"/>
-  </div>
+  <ArticleFilter
+    ref="searchRef"
+    v-model:query="searchQuery"
+    v-model:sorting="selectedSortingFilter"
+  />
   <div v-if="matchesFound>0">
     <p class="mb-4" v-if="searchQuery.trim().length>0">
       {{filter.matches(matchesFound,searchQuery)}}

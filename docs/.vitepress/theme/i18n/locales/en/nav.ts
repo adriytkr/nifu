@@ -6,6 +6,7 @@ export const nav:TNavSchema={
     quickReference:'Quick Reference',
     shortcuts:'Show Shortcuts',
     language:'Switch Language',
+    search:'Search Articles',
     theme:{
       light:'Switch to dark mode',
       dark:'Switch to light mode',

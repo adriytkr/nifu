@@ -3,71 +3,72 @@ layout: normal
 ---
 
 <script setup lang="ts">
-import LandingSection from '~/components/landing/Section.vue';
-import BrowserIcon from '~/components/icons/BrowserIcon.vue';
+  import LandingSection from '~/components/landing/Section.vue';
+  import BrowserIcon from '~/components/icons/BrowserIcon.vue';
 
-import ArticleList from '~/components/articles/ArticleList.vue';
+  import ArticleList from '~/components/articles/ArticleList.vue';
 
-import { data as articles } from '~/content/pt-br-articles.data.ts';
+  import { data as articles } from '~/content/en-featured-articles.data.ts';
 </script>
 
 <LandingSection>
   <div class="px-0 text-center md:px-32">
-    <h1 class="mb-2 text-4xl font-bold">Bem vindo à Kaga</h1>
+    <h1 class="mb-2 text-4xl font-bold">Bem-vindo ao Kaga</h1>
     <p class="mb-6 italic text-sm text-muted font-medium">
-      (Knowledge Arises from Geometry and Algorithms)
+      (O Conhecimento Surge da Geometria e dos Algoritmos)
     </p>
     <p class="mb-8 leading-relaxed">
-      Kaga isn't your run-of-the-mill blog. I show how things actually work under the hood. By prioritizing <strong>intuition over memorization</strong> and using clever analogies, I make hard topics feel <strong>obvious and intuitive</strong>.
+      O Kaga não é um blog comum. Eu mostro como as coisas realmente funcionam por baixo do capô. Ao priorizar a
+      <strong>intuição sobre a memorização</strong> e usar analogias inteligentes, eu faço tópicos difíceis parecerem
+      <strong>óbvios e intuitivos</strong>.
     </p>
-    <VpLink
-      to="/articles"
-      class="inline-flex gap-x-2 items-center bg-primary/80 px-6 py-3 text-white font-bold rounded-lg transition-colors duration-200 hover:no-underline hover:bg-primary"
-    >
-      <BrowserIcon/>
-      Browse Articles
+    <VpLink to="/articles"
+      class="inline-flex gap-x-2 items-center bg-primary/80 px-6 py-3 text-white font-bold rounded-lg transition-colors duration-200 hover:no-underline hover:bg-primary">
+      <BrowserIcon />
+      Explorar Artigos
     </VpLink>
   </div>
 </LandingSection>
 
-<LandingSection title="Featured Articles">
-  <ArticleList
-    v-if="articles"
-    :articles="articles"
-  />
+<LandingSection title="Artigos em Destaque">
+  <ArticleList v-if="articles" :articles="articles" />
 </LandingSection>
 
-<LandingSection title="What to expect here?">
+<LandingSection title="O que esperar por aqui?">
   <p class="mb-4">
-    This isn't a digital textbook. You won't find dry formulas or explanations that skip the why. Instead, you'll find a sandbox for your curiosity.
+    Este não é um livro didático digital. Você não encontrará fórmulas secas ou explicações que pulam o "porquê". Em vez
+    disso, encontrará um laboratório para a sua curiosidade.
   </p>
   <p class="mb-6">
-    Also, there won't be only texts. There will be first
+    Além disso, não haverá apenas textos. Teremos primeiramente:
   </p>
   <ul class="pl-10 flex flex-col gap-y-2">
     <li>
-      <strong>Visual Animations:</strong> Visualize complex topics.
+      <strong>Animações Visuais:</strong> Visualize tópicos complexos.
     </li>
     <li>
-      <strong>Interactive Graphs:</strong> Change variables and watch the graph react instantly.
+      <strong>Gráficos Interativos:</strong> Altere variáveis e veja o gráfico reagir instantaneamente.
     </li>
     <li>
-      <strong>Real-World examples:</strong> Learn how the topics are related to the Real World.
+      <strong>Exemplos do Mundo Real:</strong> Saiba como os temas se relacionam com o mundo real.
     </li>
     <li>
-      <strong>Knowledge Gates:</strong> Test your understanding as you go, not just at the end.
+      <strong>Portais de Conhecimento:</strong> Teste seu entendimento ao longo do caminho, não apenas no final.
     </li>
   </ul>
 </LandingSection>
 
-<LandingSection title="Why did I build this?">
+<LandingSection title="Por que eu construí isso?">
   <p class="mb-4">
-    I spent far too long reading textbooks or watching videos that focused on the <i>how</i> without explaining the <i>why</i>.
+    Passei tempo demais lendo livros ou assistindo vídeos que focavam no <i>como</i> sem explicar o <i>porquê</i>.
   </p>
   <p class="mb-4">
-    Most resources prioritize memorization, teaching you how to follow steps, while completely ignoring the <strong>"under the hood"</strong> engineering. I firmly believe that understanding the underlying logic is what leads to <strong>true mastery</strong> of the subject.
+    A maioria dos recursos prioriza a memorização, ensinando você a seguir passos, enquanto ignora completamente a
+    engenharia <strong>"por baixo do capô"</strong>. Acredito firmemente que entender a lógica subjacente é o que leva
+    ao <strong>verdadeiro domínio</strong> do assunto.
   </p>
   <p>
-    I built this platform to offer a different approach to learn: one that favors intuition over memorization, while being challenging and dynamic.
+    Construí esta plataforma para oferecer uma abordagem diferente de aprendizado: uma que favorece a intuição em vez da
+    memorização, sendo ao mesmo tempo desafiadora e dinâmica.
   </p>
 </LandingSection>

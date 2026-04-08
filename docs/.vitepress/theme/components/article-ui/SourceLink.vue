@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <a
     :href="href"
-    class="inline-flex gap-x-2 items-center no-underline text-black! hover:underline"
+    class="inline-flex gap-x-2 items-center no-underline text-body! hover:underline"
   >
     <slot></slot>
   </a>

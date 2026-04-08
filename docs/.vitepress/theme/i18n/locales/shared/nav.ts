@@ -8,6 +8,7 @@ export type TNavSchema={
     quickReference:string;
     shortcuts:string;
     language:string;
+    search:string;
     theme:{
       light:string;
       dark:string;
