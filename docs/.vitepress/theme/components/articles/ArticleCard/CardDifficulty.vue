@@ -19,11 +19,11 @@ const t=tDifficulties[convertStringToLocale(lang.value)??'en'];
       :class="[
         'w-2 h-2 aspect-square rounded-full',
         {
-          'bg-blue-400': difficulty === 'training',
+          'bg-sky-700': difficulty === 'training',
           'bg-green-400': difficulty === 'easy',
           'bg-yellow-500': difficulty === 'medium',
           'bg-red-600': difficulty === 'hard',
-          'bg-black': difficulty === 'insane',
+          'bg-purple-700': difficulty === 'insane',
         }
       ]"
     ></span>
@@ -31,11 +31,11 @@ const t=tDifficulties[convertStringToLocale(lang.value)??'en'];
       :class="[
         'text-body text-xs font-medium uppercase',
         {
-          'text-blue-400': difficulty === 'training',
+          'text-sky-700': difficulty === 'training',
           'text-green-400': difficulty === 'easy',
           'text-yellow-500': difficulty === 'medium',
           'text-red-600': difficulty === 'hard',
-          'text-black': difficulty === 'insane',
+          'text-purple-700': difficulty === 'insane',
         },
       ]"
     >

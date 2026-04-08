@@ -2,4 +2,6 @@ import type { TTagsSchema } from '../shared/tags';
 
 export const tags:TTagsSchema={
   calculus:'Calculus',
+  'linear-algebra':'Linear Algebra',
+  algorithm:'Algorithms',
 };

@@ -5,8 +5,6 @@ description: Fundamental Theorem for optimization
 tags:
   - calculus
 difficulty: hard
-
-featured: true
 ---
 
 ## Pre-requisites

@@ -1,9 +1,10 @@
 ---
 layout: article
+
 title: Eigenvectors
 description: Some vectors don't change directions after a Linear Transformation
 tags:
-  - calculus
+  - linear-algebra
 difficulty: medium
 
 featured: true
