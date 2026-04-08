@@ -4,6 +4,8 @@ title: Fermat's Theorem
 description: Fundamental Theorem for optimization
 tags:
   - calculus
+difficulty: hard
+
 featured: true
 ---
 

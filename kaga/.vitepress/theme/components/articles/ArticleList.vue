@@ -18,6 +18,7 @@ defineProps<{
       :description="article.description"
       :thumbnail="article.thumbnail"
       :tags="article.tags"
+      :difficulty="article.difficulty"
     />
   </div>
 </template>

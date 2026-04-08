@@ -13,6 +13,7 @@ export default createContentLoader('pt-br/articles/**/*.md', {
       description:frontmatter.description,
       thubmnail:frontmatter.thubmnail,
       tags:frontmatter.tags,
+      difficulty:frontmatter.difficulty,
     }));
   }
 })

@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { ArticleDifficulty } from '~/types/articles';
+import { tTags } from '~/i18n/locales/shared/tags';
+import { useData } from 'vitepress';
+
 import CardTag from './CardTag.vue';
+import CardDifficulty from './CardDifficulty.vue';
+import { convertStringToLocale } from '~/i18n';
 
 const props=defineProps<{
   slug:string;
@@ -8,7 +14,11 @@ const props=defineProps<{
   thumbnail?:string;
   thumbnailAlt?:string;
   tags?:string[];
+  difficulty:ArticleDifficulty;
 }>();
+
+const {lang}=useData();
+const t=tTags[convertStringToLocale(lang.value)??'en'];
 </script>
 
 <template>
@@ -24,6 +34,9 @@ const props=defineProps<{
       />
     </div>
     <div class="flex-1 flex flex-col p-4 pt-8">
+      <div>
+        <CardDifficulty :difficulty="difficulty"/>
+      </div>
       <div class="flex-1">
         <h2 class="mb-2 font-medium text-lg text-body transition-colors duration-200 group-hover:text-primary">{{title}}</h2>
         <p class="text-sm text-muted line-clamp-3">{{description}}</p>
@@ -33,7 +46,7 @@ const props=defineProps<{
           v-for="tag in tags"
           :key="tag"
         >
-          {{ tag }}
+          {{ t[tag]??tag }}
         </CardTag>
       </div>
     </div>

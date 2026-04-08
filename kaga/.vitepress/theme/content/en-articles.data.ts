@@ -13,6 +13,7 @@ export default createContentLoader('articles/**/*.md', {
       description:frontmatter.description,
       thubmnail:frontmatter.thubmnail,
       tags:frontmatter.tags,
+      difficulty:frontmatter.difficulty,
     }));
   }
 })
