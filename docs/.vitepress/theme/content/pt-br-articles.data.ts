@@ -11,9 +11,10 @@ export default createContentLoader('pt-br/articles/**/*.md', {
       slug:formatURL(url),
       title:frontmatter.title,
       description:frontmatter.description,
-      thubmnail:frontmatter.thubmnail,
+      thumbnail:frontmatter.thumbnail,
       tags:frontmatter.tags,
       difficulty:frontmatter.difficulty,
+      featured:frontmatter.featured,
     }));
   }
 })

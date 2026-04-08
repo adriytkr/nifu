@@ -8,7 +8,7 @@ import BrowserIcon from '~/components/icons/BrowserIcon.vue';
 
 import ArticleList from '~/components/articles/ArticleList.vue';
 
-import { data as articles } from '~/content/en-articles.data.ts';
+import { data as articles } from '~/content/en-featured-articles.data.ts';
 </script>
 
 <LandingSection>

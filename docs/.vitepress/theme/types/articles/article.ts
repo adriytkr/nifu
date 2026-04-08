@@ -12,4 +12,5 @@ export type Article={
   thumbnail?:string;
   tags:string[];
   difficulty:ArticleDifficulty;
+  featured:boolean;
 }

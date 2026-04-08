@@ -6,7 +6,7 @@ title: Mean Value Theorem
 description: Why your instantaneous speed must eventually match your average speed.
 tags:
   - calculus
-difficulty: insane
+difficulty: easy
 
 featured: true
 ---

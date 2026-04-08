@@ -22,33 +22,35 @@ const t=tTags[convertStringToLocale(lang.value)??'en'];
 </script>
 
 <template>
-  <VpLink
-    :to="`/articles/${slug}`"
-    class="group flex flex-col bg-surface rounded-sm overflow-hidden hover:no-underline"
-  >
-    <div class="aspect-video">
-      <img
-        :src="thumbnail??'/images/placeholder-img.png'"
-        :alt="thumbnailAlt??''"
-        class="w-full h-full object-cover"
-      />
-    </div>
-    <div class="flex-1 flex flex-col p-4 pt-8">
-      <div>
-        <CardDifficulty :difficulty="difficulty"/>
+  <li>
+    <VpLink
+      :to="`/articles/${slug}`"
+      class="group h-full flex flex-col bg-surface rounded-sm overflow-hidden hover:no-underline shadow-lg"
+    >
+      <div class="aspect-video w-full transition-transform duration-500 group-hover:scale-105">
+        <img
+          :src="thumbnail??'/images/placeholder-img.png'"
+          :alt="thumbnailAlt??''"
+          class="w-full h-full object-cover"
+        />
       </div>
-      <div class="flex-1">
-        <h2 class="mb-2 font-medium text-lg text-body transition-colors duration-200 group-hover:text-primary">{{title}}</h2>
-        <p class="text-sm text-muted line-clamp-3">{{description}}</p>
+      <div class="flex-1 flex flex-col p-4 pt-8">
+        <div>
+          <CardDifficulty :difficulty="difficulty"/>
+        </div>
+        <div class="flex-1">
+          <h2 class="mb-2 font-medium text-lg text-body transition-colors duration-200 group-hover:text-primary">{{title}}</h2>
+          <p class="text-sm text-muted line-clamp-3">{{description}}</p>
+        </div>
+        <div class="mt-4" v-if="tags!==undefined">
+          <CardTag
+            v-for="tag in tags"
+            :key="tag"
+          >
+            {{ t[tag]??tag }}
+          </CardTag>
+        </div>
       </div>
-      <div class="mt-4" v-if="tags!==undefined">
-        <CardTag
-          v-for="tag in tags"
-          :key="tag"
-        >
-          {{ t[tag]??tag }}
-        </CardTag>
-      </div>
-    </div>
-  </VpLink>
+    </VpLink>
+  </li>
 </template>

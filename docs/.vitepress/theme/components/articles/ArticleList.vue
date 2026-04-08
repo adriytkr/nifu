@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+  <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
     <ArticleCard
       v-for="article in articles"
       :key="article.slug"
@@ -20,5 +20,5 @@ defineProps<{
       :tags="article.tags"
       :difficulty="article.difficulty"
     />
-  </div>
+  </ul>
 </template>
