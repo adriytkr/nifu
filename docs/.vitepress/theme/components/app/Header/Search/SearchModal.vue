@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {useSearchModal} from '~/composables/useSearchModal';
-import type { SearchDialogContext } from '~/types/dialog';
 
 import KeyboardKey from '~/components/app/KeyboardKey.vue';
 import ArrowKeyIcon from '~/components/icons/ArrowKeyIcon.vue';
@@ -20,62 +19,69 @@ import {
 } from '~/i18n';
 import { useData } from 'vitepress';
 
+import { useUI } from '~/composables/useUi';
+import { watch } from 'vue';
+
 const {lang}=useData();
 const t=tNav[convertStringToLocale(lang.value)??DEFAULT_LOCALE];
 const t2=tFilter[convertStringToLocale(lang.value)??DEFAULT_LOCALE];
 
-const props=defineProps<{
-  isOpen:boolean;
-}>();
-
-defineEmits<{
-  (e:'close'):void;
-}>();
-
 const {
-  selectedItemIndex,
+  dialogRef,
   inputRef,
   searchQuery,
+  clearInput,
+  focusInput,
   clearSearch,
-  context,
-  dialogRef,
-}=useSearchModal(()=>props.isOpen);
+  selectedItemIndex,
+}=useSearchModal();
 
-defineExpose<SearchDialogContext>(context);
+const {
+  isSearchModalOpen,
+  closeModal,
+}=useUI();
+
+watch(
+  isSearchModalOpen,
+  (newValue)=>{
+    if(newValue){
+      dialogRef.value?.showModal();
+      return;
+    }
+
+    dialogRef.value?.close();
+  },
+);
 </script>
 
 <template>
   <dialog
     ref="dialogRef"
     class="w-2xl shadow-lg bg-background rounded-sm top-10 left-1/2 -translate-x-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
-    @click.self="$emit('close')"
+    @click.self="closeModal('search')"
   >
-    <div class="p-4 flex">
-      <div class="group flex flex-1 items-center mr-4">
-        <SearchIcon
-          class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
-          @click="context.focusInput()"
-        />
-        <input
-          type="text"
-          class="mx-4 flex-1 outline-none"
-          :placeholder="t.search.modal.placeholder"
-          ref="inputRef"
-          v-model="searchQuery"
-        >
-        <AppIconButton
-          v-show="searchQuery.length>0"
-          @click="context.clearInput();context.focusInput()"
-        >
-          <CloseIcon/>
-        </AppIconButton>
-      </div>
-      <KeyboardKey is-not-single>Ctrl K</KeyboardKey>
+    <div class="p-4 flex items-center border border-border-color m-4">
+      <SearchIcon
+        class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
+        @click="focusInput"
+      />
+      <input
+        type="text"
+        class="mx-4 flex-1 outline-none"
+        :placeholder="t.search.modal.placeholder"
+        ref="inputRef"
+        v-model="searchQuery"
+      >
+      <AppIconButton
+        v-show="searchQuery.length>0"
+        @click="clearSearch"
+      >
+        <CloseIcon/>
+      </AppIconButton>
     </div>
-    <hr class="border-t-border-color">
     <div class="max-h-120 min-h-60 w-full overflow-y-auto">
       <div v-show="true">
-        <p class="mx-2 my-4">
+        <p class="mx-4 mb-4">
           {{ t2.matches(10,searchQuery) }}
         </p>
         <ul>
@@ -103,7 +109,6 @@ defineExpose<SearchDialogContext>(context);
         </div>
       </div>
     </div>
-    <hr class="border-t-border-color">
     <ul class="p-4 flex gap-x-6 items-center">
       <li class="flex items-center gap-x-2">
         <KeyboardKey>

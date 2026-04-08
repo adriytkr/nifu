@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <li class="m-2">
+  <li class="m-4">
     <a
       href="#"
       class="group flex gap-x-4 items-center p-4 rounded-sm transition-colors duration-200 bg-border-color hover:no-underline hover:bg-primary"

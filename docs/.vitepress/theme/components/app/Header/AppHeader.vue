@@ -22,7 +22,7 @@ import {
   DEFAULT_LOCALE,
 } from '~/i18n';
 
-const {scrollClass,showHeader}=useHideOnScroll();
+const {isHeaderVisible}=useHideOnScroll();
 
 const isLanguagePickerModalOpen=ref(false);
 
@@ -38,10 +38,11 @@ const themeTooltipMessage=computed<string>(()=>
 </script>
 
 <template>
-  <header :class="[
-      'sticky z-50 bg-background transition-transform duration-300 ease-in-out top-0 [&.scroll-down]:-translate-y-full [&.scroll-up]:translate-y-0',
-      scrollClass,
-    ]"
+  <header
+    class="sticky z-50 bg-background transition-transform duration-300 ease-in-out top-0"
+    :class="{
+      '-translate-y-full':!isHeaderVisible,
+    }"
   >
     <nav class="max-w-4xl mx-auto p-4 flex justify-between items-center">
       <VpLink to="/">
@@ -72,7 +73,7 @@ const themeTooltipMessage=computed<string>(()=>
               {{ t.tooltip.shortcuts }}
             </template>
           </NavTooltip>
-          <SearchButton @show-header="showHeader"/>
+          <SearchButton/>
         </div>
         <div class="h-5 w-0.5 mx-4 bg-slate-200"></div>
         <div class="flex items-center gap-x-4">

@@ -18,29 +18,40 @@ import ShortcutsModalItem from './ShortcutsModalItem.vue';
 const {lang}=useData();
 const t=tNav[convertStringToLocale(lang.value)??DEFAULT_LOCALE];
 
-defineEmits<{
-  (e:'close'):void;
-}>();
+import { useUI } from '~/composables/useUi';
+import { ref, watch } from 'vue';
 
 const {
-  dialogRef,
-  context,
-}=useDialog();
+  isShortcutsModalOpen,
+  closeModal,
+}=useUI();
 
-defineExpose<DialogContext>(context);
+const dialogRef=ref<HTMLDialogElement|null>(null);
+
+watch(
+  isShortcutsModalOpen,
+  (newValue)=>{
+    if(newValue){
+      dialogRef.value?.showModal();
+      return;
+    }
+
+    dialogRef.value?.close();
+  },
+);
 </script>
 
 <template>
   <dialog
     ref="dialogRef"
     class="w-xl shadow-lg bg-background p-4 rounded-sm top-1/2 left-1/2 -translate-1/2 backdrop:bg-black/40 backdrop:backdrop-blur-sm"
-    @click.self="$emit('close')"
+    @click.self="closeModal('shortcuts')"
   >
     <header class="flex justify-between items-center mb-4">
       <h2 class="font-medium">
         {{ t.shortcuts.title }}
       </h2>
-      <AppIconButton @click="$emit('close')">
+      <AppIconButton @click="closeModal('shortcuts')">
         <CloseIcon/>
       </AppIconButton>
     </header>
@@ -66,6 +77,8 @@ defineExpose<DialogContext>(context);
       <ShortcutsModalItem>
         {{ t.shortcuts.list.shortcutsModal }}
         <template #keys>
+          <KeyboardKey>H</KeyboardKey>
+          <span class="font-bold">or</span>
           <KeyboardKey>?</KeyboardKey>
         </template>
       </ShortcutsModalItem>

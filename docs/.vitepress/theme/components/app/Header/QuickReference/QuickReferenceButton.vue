@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import { useModal } from '~/composables/useModal';
-
 import AppIconButton from '~/components/app/AppIconButton.vue';
 import QuickReferenceIcon from '~/components/icons/QuickReferenceIcon.vue';
 
 import QuickReferenceModal from './QuickReferenceModal.vue';
 
+import { useUI } from '~/composables/useUi';
+
 const {
-  dialogContext,
-  isModalOpen:isQuickReferenceModalOpen,
-  closeModal: closeQuickReferenceModal,
-  openModal: openQuickReferenceModal,
-}=useModal();
+  isQuickReferenceModalOpen,
+  openModal,
+}=useUI();
 </script>
 
 <template>
   <Teleport to="body">
     <QuickReferenceModal
-      ref="dialogContext"
-      @close="closeQuickReferenceModal"
       class="opacity-0 transition-opacity duration-200"
       :class="{
         'opacity-100':isQuickReferenceModalOpen,
       }"
     />
   </Teleport>
-  <AppIconButton @click="openQuickReferenceModal">
+  <AppIconButton @click="openModal('quick-reference')">
     <QuickReferenceIcon/>
   </AppIconButton>
 </template>

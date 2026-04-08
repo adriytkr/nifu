@@ -1,18 +1,11 @@
 import {
-  MaybeRefOrGetter,
   onMounted,
   onUnmounted,
   ref,
-  toValue,
-  watch,
 } from 'vue';
+import { useUI } from './useUi';
 
-import {
-  DialogContext,
-  SearchDialogContext,
-} from '~/types/dialog';
-
-export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
+export function useSearchModal(){
   const selectedItemIndex=ref(-1);
 
   function handleArrowUp(){
@@ -27,13 +20,29 @@ export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
     selectedItemIndex.value++;
   }
 
+  function selectItem(index:number){
+    if(index===-1)return;
+
+    console.log(index);
+  }
+
+  const{
+    isSearchModalOpen,
+    closeModal,
+  }=useUI();
+
   function handleKeyDown(event:KeyboardEvent){
+    if(!isSearchModalOpen.value)return;
+
     switch(event.code){
       case 'ArrowUp':
         handleArrowUp();
         break;
       case 'ArrowDown':
         handleArrowDown();
+        break;
+      case 'Enter':
+        selectItem(selectedItemIndex.value);
         break;
     }
   }
@@ -48,48 +57,24 @@ export function useSearchModal(isOpen:MaybeRefOrGetter<boolean>){
     inputRef.value?.focus();
   }
 
+  function clearInput(){
+    searchQuery.value='';
+  }
+
   function clearSearch(){
     clearInput();
     focusInput();
   }
 
-  watch(
-    ()=>toValue(isOpen),
-    (newValue)=>{
-      if(!newValue)return;
-
-      focusInput();
-      clearInput();
-    },
-  );
-
   const dialogRef=ref<HTMLDialogElement|null>(null);
 
-  function openDialog(){
-    dialogRef.value?.showModal();
-  }
-
-  function closeDialog(){
-    dialogRef.value?.close();
-  }
-
-  function clearInput(){
-    searchQuery.value='';
-  }
-
-  const context:SearchDialogContext={
-    open:openDialog,
-    close:closeDialog,
-    focusInput,
-    clearInput,
-  };
-
   return{
-    selectedItemIndex,
+    dialogRef,
     inputRef,
     searchQuery,
+    clearInput,
+    focusInput,
     clearSearch,
-    dialogRef,
-    context,
+    selectedItemIndex,
   };
 }

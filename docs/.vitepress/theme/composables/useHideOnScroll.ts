@@ -1,12 +1,14 @@
 import {
   onMounted,
   onUnmounted,
-  ref,
 } from 'vue';
 
+import { useUI } from './useUi';
+
 export function useHideOnScroll(){
-  const scrollClass=ref('');
   let lastScrollY=0;
+
+  const {isHeaderVisible}=useUI();
 
   function handleScroll(){
     const currentScrollY=window.scrollY;
@@ -17,26 +19,16 @@ export function useHideOnScroll(){
       currentScrollY>lastScrollY&&
       currentScrollY>80;
 
-    if(scrollDownFlag)hideHeader();
-    else showHeader();
-    
+    if(scrollDownFlag)isHeaderVisible.value=false;
+    else isHeaderVisible.value=true;
+
     lastScrollY=currentScrollY;
   };
-
-  function showHeader(){
-    scrollClass.value='scroll-up';
-  }
-
-  function hideHeader(){
-    scrollClass.value='scroll-down';
-  }
 
   onMounted(()=>window.addEventListener('scroll',handleScroll));
   onUnmounted(()=>window.removeEventListener('scroll',handleScroll));
 
   return{
-    scrollClass,
-    showHeader,
-    hideHeader,
+    isHeaderVisible,
   };
 }
