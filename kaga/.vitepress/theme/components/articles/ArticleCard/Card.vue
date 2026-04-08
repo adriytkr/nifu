@@ -24,7 +24,7 @@ const t=tTags[convertStringToLocale(lang.value)??'en'];
 <template>
   <VpLink
     :to="`/articles/${slug}`"
-    class="group flex flex-col bg-white rounded-sm overflow-hidden hover:no-underline"
+    class="group flex flex-col bg-surface rounded-sm overflow-hidden hover:no-underline"
   >
     <div class="aspect-video">
       <img

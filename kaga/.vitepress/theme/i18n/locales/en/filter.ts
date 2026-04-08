@@ -6,7 +6,14 @@ export const filter:TFilterSchema={
     if(count===0)return `No matches for "${query}"`;
     if(count===1)return `1 match for "${query}"`;
 
-    return `No matches for "${query}"`;
+    return `${count} matches for "${query}"`;
   },
   clear:'Clear Search',
+  sort:{
+    label:'Sort by',
+    nameAsc:'Name (A-Z)',
+    nameDesc:'Name (Z-A)',
+    difficultyAsc:'Difficulty (+Easy)',
+    difficultyDesc:'Difficulty (+Hard)',
+  },
 };

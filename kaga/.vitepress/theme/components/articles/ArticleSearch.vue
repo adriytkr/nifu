@@ -6,6 +6,10 @@ import type {SearchFilter} from '~/types/articles';
 import {tFilter} from '~/i18n/locales/shared/filter';
 import type { Locale } from '~/i18n';
 
+import SearchIcon from '../icons/SearchIcon.vue';
+import CloseIcon from '../icons/CloseIcon.vue';
+import AppIconButton from '../app/AppIconButton.vue';
+
 const {lang}=useData();
 const t=tFilter[lang.value as Locale];
 
@@ -18,15 +22,32 @@ function focusInput(){
   inputRef.value.focus();
 }
 
+function clearInput(){
+  query.value='';
+  focusInput();
+}
+
 defineExpose<SearchFilter>({focusInput});
 </script>
 
 <template>
-  <input
-    ref="inputRef"
-    type="text"
-    v-model="query"
-    :placeholder="t.placeholder"
-    class="px-4 py-2 w-full max-w-md border border-surface-border/30 rounded-sm transition-colors duration-200 hover:border-surface-border"
-  />
+  <div class="group p-2 flex items-center max-w-md w-full border border-border-color rounded-sm transition-colors duration-200 hover:border-body">
+    <SearchIcon
+      class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
+      @click="focusInput"
+    />
+    <input
+      ref="inputRef"
+      type="text"
+      class="mx-4 flex-1 outline-none"
+      :placeholder="t.placeholder"
+      v-model="query"
+    >
+    <AppIconButton
+      v-show="query"
+      @click="clearInput"
+    >
+      <CloseIcon/>
+    </AppIconButton>
+  </div>
 </template>

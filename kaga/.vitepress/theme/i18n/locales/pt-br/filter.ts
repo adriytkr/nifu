@@ -6,7 +6,14 @@ export const filter:TFilterSchema={
     if(count===0)return `Nenhum resultado para "${query}"`;
     if(count===1)return `1 resultado para "${query}"`;
 
-    return `Nenhum resultado para "${query}"`;
+    return `${count} resultados para "${query}"`;
   },
   clear:'Limpar Pesquisa',
+  sort:{
+    label:'Ordenar por',
+    nameAsc:'Nome (A-Z)',
+    nameDesc:'Nome (Z-A)',
+    difficultyAsc:'Dificuldade (+Fácil)',
+    difficultyDesc:'Dificuldade (+Difícil)',
+  },
 };
