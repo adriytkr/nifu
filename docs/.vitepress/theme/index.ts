@@ -23,7 +23,7 @@ import TheQuote from './components/article-content/TheQuote.vue';
 
 import DefinitionTooltip from './components/article-content/DefinitionTooltip.vue';
 
-import CheckpointType1Single from './components/article-content/Checkpoint/type1/CheckpointType1Single.vue';
+// import CheckpointType1Single from './components/article-content/Checkpoint/type1/CheckpointType1Single.vue';
 
 import CheckpointType2 from './components/article-content/Checkpoint/Type2/CheckpointType2.vue';
 import CheckpointBlank from './components/article-content/Checkpoint/Type2/CheckpointBlank.vue';
@@ -52,7 +52,7 @@ export default {
 
     app.component('DefinitionTooltip',DefinitionTooltip);
 
-    app.component('CheckpointType1Single',CheckpointType1Single);
+    // app.component('CheckpointType1Single',CheckpointType1Single);
 
     app.component('CheckpointType2',CheckpointType2);
     app.component('CheckpointBlank',CheckpointBlank);

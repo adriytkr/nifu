@@ -1,7 +1,6 @@
 from manim import *
 
 from src.utils.coordinate_system import CoordinateSystemManager
-from src.utils.custom_types import scalarFunc
 from src.utils.theme import HIGHLIGHT_COLOR
 
 class BaseScene(Scene):
