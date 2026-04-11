@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { useData } from 'vitepress';
 
-import { useShortcuts } from '~/composables/useShortcuts';
-
 import NormalLayout from './LayoutNormal.vue';
 import ArticleLayout from './LayoutArticle.vue';
 
 const { frontmatter }=useData();
-
-useShortcuts();
 </script>
 
 <template>

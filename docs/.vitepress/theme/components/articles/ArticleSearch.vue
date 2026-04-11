@@ -6,9 +6,9 @@ import type {SearchFilter} from '~/types/articles';
 import {tFilter} from '~/i18n/locales/shared/filter';
 import type { Locale } from '~/i18n';
 
-import SearchIcon from '../icons/SearchIcon.vue';
-import CloseIcon from '../icons/CloseIcon.vue';
-import AppButtonIcon from '../app/AppButtonIcon.vue';
+import SearchIcon from '~icons/base/SearchIcon.vue';
+import CloseIcon from '~icons/base/CloseIcon.vue';
+import IconButton from '../base/IconButton.vue';
 
 const {lang}=useData();
 const t=tFilter[lang.value as Locale];
@@ -18,7 +18,6 @@ const inputRef=ref<HTMLInputElement|null>(null);
 
 function focusInput(){
   if(inputRef.value===null)return;
-
   inputRef.value.focus();
 }
 
@@ -31,9 +30,9 @@ defineExpose<SearchFilter>({focusInput});
 </script>
 
 <template>
-  <div class="group p-2 bg-surface flex items-center md:max-w-md w-full border border-border-color rounded-sm transition-colors duration-200 hover:border-body">
+  <div class="group p-2 bg-surface flex items-center md:max-w-md w-full border border-border-color rounded-sm transition-colors duration-200">
     <SearchIcon
-      class="text-muted cursor-text transition-colors duration-200 group-hover:text-body peer-focus-within:text-body"
+      class="text-muted cursor-text transition-colors duration-200 group-hover:text-body"
       @click="focusInput"
     />
     <input
@@ -43,11 +42,11 @@ defineExpose<SearchFilter>({focusInput});
       :placeholder="t.placeholder"
       v-model="query"
     >
-    <AppButtonIcon
+    <IconButton
       v-show="query"
       @click="clearInput"
     >
       <CloseIcon/>
-    </AppButtonIcon>
+    </IconButton>
   </div>
 </template>

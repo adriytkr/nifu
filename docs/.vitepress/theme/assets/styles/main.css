@@ -6,9 +6,9 @@
 
 @theme{
   --color-primary: var(--color-blue-600);
-  --color-secondary: var(--color-slate-600);
+  --color-secondary: var(--color-blue-800);
 
-  --color-background: var(--color-slate-50);
+  --color-background: var(--color-gray-100);
   --color-surface: var(--color-white);
   --color-border-color: var(--color-slate-200);
 
@@ -21,8 +21,8 @@
 @layer theme{
   :root{
     @variant dark{
-      --color-primary: var(--color-blue-400);
-      --color-secondary: var(--color-slate-400);
+      --color-primary: var(--color-blue-600);
+      --color-secondary: var(--color-blue-800);
 
       --color-background: var(--color-slate-950);
       --color-surface: var(--color-slate-900);

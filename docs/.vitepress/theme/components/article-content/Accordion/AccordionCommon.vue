@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ChevronLeftIcon from '~icons/ChevronLeftIcon.vue';
+import ChevronLeftIcon from '~icons/base/ChevronLeftIcon.vue';
 </script>
 
 <template>

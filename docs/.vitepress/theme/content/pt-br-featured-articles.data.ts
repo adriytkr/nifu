@@ -1,0 +1,22 @@
+import { createContentLoader } from 'vitepress';
+
+import { Article } from '~/types/articles/article';
+
+const formatURL=(url:string):string=>
+  url.split('/').pop()?.replace('.html','')??'';
+
+export default createContentLoader('pt-br/articles/**/*.md', {
+  transform(raw){
+    return raw
+      .map<Article>(({url,frontmatter})=>({
+        slug:formatURL(url),
+        title:frontmatter.title,
+        description:frontmatter.description,
+        thumbnail:frontmatter.thumbnail,
+        tags:frontmatter.tags,
+        difficulty:frontmatter.difficulty,
+        featured:frontmatter.featured,
+      }))
+      .filter((article)=>article.featured);
+  }
+})

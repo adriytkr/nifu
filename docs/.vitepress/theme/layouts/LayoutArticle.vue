@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Content } from 'vitepress';
 
-import BaseLayout from './LayoutBase.vue';
+import LayoutBase from './LayoutBase.vue';
 </script>
 
 <template>
-  <BaseLayout>
+  <LayoutBase>
     <div class="max-w-2xl h-full mx-auto p-4">
       <article class="prose max-w-none prose-a:text-primary prose-headings:text-body prose-p:text-muted prose-strong:text-body prose-hr:border-t-border-color
         [&_mjx-container]:inline-block
@@ -17,5 +17,5 @@ import BaseLayout from './LayoutBase.vue';
         <Content/>
       </article>
     </div>
-  </BaseLayout>
+  </LayoutBase>
 </template>

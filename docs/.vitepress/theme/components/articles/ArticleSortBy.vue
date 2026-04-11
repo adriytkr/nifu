@@ -4,7 +4,7 @@ import { useData } from 'vitepress';
 
 import { SortingFilter } from '~/types/articles';
 
-import ChevronLeftIcon from '../icons/ChevronLeftIcon.vue';
+import ChevronLeftIcon from '../icons/base/ChevronLeftIcon.vue';
 import ArticleSortByItem from './ArticleSortByItem.vue';
 
 import { tFilter } from '~/i18n/locales/shared/filter';

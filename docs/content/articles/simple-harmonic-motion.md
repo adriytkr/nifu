@@ -1,7 +1,7 @@
 ---
 layout: article
 
-title: Jacobian Matrix
+title: Simple Harmonic Motion
 description: Real geometric interpretation of derivatives
 thumbnail: /images/admiral-graf-spee.jpg
 tags:
@@ -12,4 +12,4 @@ difficulty: hard
 featured: true
 ---
 
-# Jacobian Matrix
+# Simple Harmonic Motion

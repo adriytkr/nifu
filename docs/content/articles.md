@@ -30,7 +30,7 @@ async function clearSearch(){
 }
 </script>
 
-<div class="min-h-full flex flex-col">
+<div class="max-w-4xl min-h-full mx-auto px-4 py-12 flex flex-col">
   <ArticleFilter
     ref="searchRef"
     v-model:query="searchQuery"

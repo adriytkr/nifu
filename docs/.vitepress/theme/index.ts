@@ -5,16 +5,13 @@ import 'lite-youtube-embed/src/lite-yt-embed.css';
 
 import Layout from './layouts/Layout.vue';
 
-import VpLink from './components/app/VpLink.vue';
-
-import SourceLink from './components/article-ui/SourceLink.vue';
-import SourceLinkGithub from './components/article-ui/SourceLinkGithub.vue';
+import VpLink from './components/base/VpLink.vue';
 
 import TheoremBox from './components/article-content/TheoremBox.vue';
 
-import MediaWithCaption from './components/article-content/Media/MediaWithCaption.vue';
-import ImageWithCaption from './components/article-content/Media/ImageWithCaption.vue';
-import YoutubeVideo from './components/article-content/Media/YoutubeVideo.vue';
+import MediaWithCaption from './components/media/MediaWithCaption.vue';
+import ImageWithCaption from './components/media/ImageWithCaption.vue';
+import YoutubeVideo from './components/media/YoutubeVideo.vue';
 
 import AccordionBase from './components/article-content/Accordion/AccordionBase.vue';
 import AccordionCommon from './components/article-content/Accordion/AccordionCommon.vue';
@@ -29,15 +26,12 @@ import CheckpointType2 from './components/article-content/Checkpoint/Type2/Check
 import CheckpointBlank from './components/article-content/Checkpoint/Type2/CheckpointBlank.vue';
 import CheckpointSelect from './components/article-content/Checkpoint/Type2/CheckpointSelect.vue';
 
-import ManimSlides from './components/article-content/Media/ManimSlides.vue';
+import Presentation from './components/article-content/Presentation/Presentation.vue';
 
 export default {
   Layout,
   enhanceApp({ app, router, siteData }){
     app.component('VpLink',VpLink);
-
-    app.component('SourceLink',SourceLink);
-    app.component('SourceLinkGithub',SourceLinkGithub);
 
     app.component('TheoremBox',TheoremBox);
 
@@ -58,7 +52,7 @@ export default {
     app.component('CheckpointBlank',CheckpointBlank);
     app.component('CheckpointSelect',CheckpointSelect);
 
-    app.component('ManimSlides',ManimSlides);
+    app.component('Presentation',Presentation);
 
     if(inBrowser)import('lite-youtube-embed');
   },

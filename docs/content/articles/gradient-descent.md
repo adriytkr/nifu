@@ -1,15 +1,13 @@
 ---
 layout: article
 
-title: Jacobian Matrix
+title: Gradient Descent
 description: Real geometric interpretation of derivatives
 thumbnail: /images/admiral-graf-spee.jpg
 tags:
   - linear-algebra
   - calculus
 difficulty: hard
-
-featured: true
 ---
 
-# Jacobian Matrix
+# Gradient Descent

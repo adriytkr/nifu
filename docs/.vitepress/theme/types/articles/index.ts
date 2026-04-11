@@ -4,5 +4,3 @@ export * from './article';
 export * from './checkpoint-type2';
 
 export * from './filter';
-
-export * from './ui';
