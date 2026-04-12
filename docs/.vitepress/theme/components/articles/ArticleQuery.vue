@@ -26,7 +26,10 @@ defineExpose({clearInput});
 </script>
 
 <template>
-  <div class="mx-auto max-w-md flex gap-x-2 px-2 items-center border border-muted rounded-md">
+  <div
+    class="mx-auto max-w-md flex gap-x-2 px-2 items-center border border-muted bg-white rounded-md cursor-text"
+    @click="inputRef?.focus()"
+  >
     <SearchIcon/>
     <input
       type="text"
@@ -35,7 +38,7 @@ defineExpose({clearInput});
       :placeholder="placeholder"
       class="flex-1 py-2 outline-none font-medium placeholder:font-medium"
     />
-    <button @click="clearInput">
+    <button @click.self="clearInput">
       <CloseIcon/>
     </button>
   </div>
