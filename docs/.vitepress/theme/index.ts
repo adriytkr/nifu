@@ -21,7 +21,7 @@ import DefinitionTooltip from './components/article/DefinitionTooltip.vue';
 // import CheckpointBlank from './components/article/Checkpoint/Type2/CheckpointBlank.vue';
 // import CheckpointSelect from './components/article/Checkpoint/Type2/CheckpointSelect.vue';
 
-// import Presentation from './components/article/Presentation/Presentation.vue';
+import Presentation from './components/article/Presentation/Presentation.vue';
 
 export default {
   Layout,
@@ -42,7 +42,7 @@ export default {
     // app.component('CheckpointBlank',CheckpointBlank);
     // app.component('CheckpointSelect',CheckpointSelect);
 
-    // app.component('Presentation',Presentation);
+    app.component('Presentation',Presentation);
 
     if(inBrowser)import('lite-youtube-embed');
   },

@@ -63,11 +63,35 @@ This is the title
 
 </Theorem>
 
-Suppose you have a
+<!-- Suppose you have a <Definition>continuous<template #tooltip>A function with no breaks, jumps, or discontinuities.</template></Definition> function. -->
+
+<p>
+This is a test
 <Definition>
   continuous
   <template #tooltip>
     A function with no breaks, jumps, or discontinuities.
   </template>
 </Definition>
-function.
+function
+</p>
+
+<Presentation :total-slides="3">
+<template #slide-1>
+
+The Gram-Schmidt process is a linear algebra method for transforming a set of linearly independent vectors into an orthonormal set (orthogonal and unit length) that spans the same subspace
+
+</template>
+<template #slide-2>
+
+Eigenvectors are special non-zero vectors that do not change direction when a linear transformation (matrix multiplication) is applied to them; 
+
+</template>
+<template #slide-3>
+
+Linear regression is a foundational supervised machine learning algorithm and statistical technique used to predict a continuous, numerical dependent variable (target) based on one or more independent variables (features).
+
+Linear regression is a foundational supervised machine learning algorithm and statistical technique used to predict a continuous, numerical dependent variable (target) based on one or more independent variables (features).
+
+</template>
+</Presentation>

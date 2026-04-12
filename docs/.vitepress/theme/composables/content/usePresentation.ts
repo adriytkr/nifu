@@ -13,7 +13,7 @@ export function usePresentation(totalSlides:number){
     isStarted.value=true;
   }
 
-  function firstSlide(){
+  function goToFirstSlide(){
     currentSlide.value=0;
 
     if(iframeRef.value?.contentWindow){
@@ -22,7 +22,16 @@ export function usePresentation(totalSlides:number){
     }
   }
 
-  function previousSlide(){
+  function goToLastSlide(){
+    currentSlide.value=totalSlides-1;
+
+    if(iframeRef.value?.contentWindow){
+      const method=JSON.stringify({ method: 'slide',args:[totalSlides-1] });
+      iframeRef.value.contentWindow.postMessage(method,'*');
+    }
+  }
+
+  function goToPreviousSlide(){
     if(currentSlide.value-1<0)return;
 
     currentSlide.value--;
@@ -33,7 +42,7 @@ export function usePresentation(totalSlides:number){
     }
   }
 
-  function nextSlide(){
+  function goToNextSlide(){
     if(currentSlide.value+1>=totalSlides)return;
 
     currentSlide.value++;
@@ -71,15 +80,6 @@ export function usePresentation(totalSlides:number){
     pause();
   }
 
-  function lastSlide(){
-    currentSlide.value=totalSlides-1;
-
-    if(iframeRef.value?.contentWindow){
-      const method=JSON.stringify({ method: 'slide',args:[totalSlides-1] });
-      iframeRef.value.contentWindow.postMessage(method,'*');
-    }
-  }
-
   function handleMessage(event:MessageEvent){
     const data=JSON.parse(event.data);
 
@@ -99,11 +99,13 @@ export function usePresentation(totalSlides:number){
     currentSlide,
 
     isPlaying,
-    togglePlay,
 
-    previousSlide,
-    nextSlide,
-    firstSlide,
-    lastSlide,
+    goToFirstSlide,
+    goToLastSlide,
+
+    goToPreviousSlide,
+    goToNextSlide,
+
+    togglePlay,
   };
 }
