@@ -38,7 +38,6 @@ function closeMenu(){
           </div>
           <ul class="group/nav flex flex-col gap-y-4">
             <NavItem to="/about">About</NavItem>
-            <NavItem to="/philosophy">Philosophy</NavItem>
             <NavItem to="/articles">Articles</NavItem>
           </ul>
         </nav>
