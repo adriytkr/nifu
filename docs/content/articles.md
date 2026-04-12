@@ -16,11 +16,13 @@ const {
 }=useArticles();
 </script>
 
-<ArticleQuery
-  placeholder="Search articles"
-  v-model="query"
-  ref="queryRef"
-/>
+<div class="sm:max-w-md mx-auto">
+  <ArticleQuery
+    placeholder="Search articles"
+    v-model="query"
+    ref="queryRef"
+  />
+</div>
 
 <div
   class="not-prose mt-4 px-4"

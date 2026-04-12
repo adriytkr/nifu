@@ -16,7 +16,7 @@ defineProps<{
     >
       <div class="aspect-video overflow-hidden rounded-md">
         <img
-          :src="article.thumbnail??'/images/admiral-graf-spee.jpg'"
+          :src="article.thumbnail??'/images/placeholder.png'"
           alt=""
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"

@@ -27,7 +27,7 @@ defineExpose({clearInput});
 
 <template>
   <div
-    class="mx-auto max-w-md flex gap-x-2 px-2 items-center border border-muted bg-white rounded-md cursor-text"
+    class="w-full flex gap-x-2 px-2 items-center border border-muted bg-white rounded-md cursor-text"
     @click="inputRef?.focus()"
   >
     <SearchIcon/>
