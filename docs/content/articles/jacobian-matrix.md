@@ -1,6 +1,6 @@
 ---
 title: Jacobian Matrix
-description: Jacobian Matrix Description
+description: Jacobian Matrix Description Jacobian Matrix Description Jacobian Matrix Description Jacobian Matrix Description Jacobian Matrix Description
 
 featured: true
 ---

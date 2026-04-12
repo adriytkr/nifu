@@ -38,8 +38,11 @@ export default defineConfig({
       alias:{
         '~':fileURLToPath(new URL('./theme',import.meta.url)),
         '~~':fileURLToPath(new URL('..',import.meta.url)),
-        '~content':fileURLToPath(new URL('../content',import.meta.url)),
+
         '~icons':fileURLToPath(new URL('./theme/components/icons',import.meta.url)),
+
+        '~content':fileURLToPath(new URL('../content',import.meta.url)),
+        '~data':fileURLToPath(new URL('./theme/data',import.meta.url)),
       },
     },
     publicDir:fileURLToPath(new URL('../public',import.meta.url)),

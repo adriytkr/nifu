@@ -7,21 +7,21 @@ import Layout from './layouts/Layout.vue';
 
 import VpLink from './components/base/VpLink.vue';
 
-import Theorem from './components/article/Theorem.vue';
-import Accordion from './components/article/Accordion/Accordion.vue';
-import Quote from './components/article/Quote.vue';
+import Theorem from './components/content/Theorem.vue';
+import Accordion from './components/content/Accordion/Accordion.vue';
+import Quote from './components/content/Quote.vue';
 
 import Media from './components/Media/Media.vue';
 import Image from './components/Media/Image.vue';
 import Youtube from './components/Media/Youtube.vue';
 
-import DefinitionTooltip from './components/article/DefinitionTooltip.vue';
+import DefinitionTooltip from './components/content/DefinitionTooltip.vue';
 
 // import CheckpointType2 from './components/article/Checkpoint/Type2/CheckpointType2.vue';
 // import CheckpointBlank from './components/article/Checkpoint/Type2/CheckpointBlank.vue';
 // import CheckpointSelect from './components/article/Checkpoint/Type2/CheckpointSelect.vue';
 
-import Presentation from './components/article/Presentation/Presentation.vue';
+import Presentation from './components/content/Presentation/Presentation.vue';
 
 export default {
   Layout,
