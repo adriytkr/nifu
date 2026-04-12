@@ -19,7 +19,7 @@ const selectedViewMode=inject(ViewModeKey);
     class="not-prose"
     :class="{
       'flex flex-col':selectedViewMode==='list',
-      'grid grid-cols-4 gap-2':selectedViewMode==='grid',
+      'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2':selectedViewMode==='grid',
     }"
   >
     <ArticleCard
