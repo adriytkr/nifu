@@ -1,6 +1,4 @@
 ---
-layout: article
-
 title: Simple Harmonic Motion
 description: Simple Harmonic Motion Description
 

@@ -1,5 +1,0 @@
----
-layout: normal
----
-
-# Landing Page

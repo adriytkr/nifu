@@ -7,8 +7,5 @@ const { frontmatter }=useData();
 </script>
 
 <template>
-  <ArticleLayout v-if="frontmatter.layout==='article'"/>
-  <div v-else>
-    <p>Couldn't load any layout :/</p>
-  </div>
+  <ArticleLayout v-if="frontmatter.layout===undefined"/>
 </template>

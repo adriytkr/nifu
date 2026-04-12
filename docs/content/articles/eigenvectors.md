@@ -1,6 +1,4 @@
 ---
-layout: article
-
 title: Eigenvectors
 description: Eigenvectors Description
 

@@ -1,6 +1,4 @@
 ---
-layout: article
-
 title: Sparse Table
 description: Sparse Table Description
 

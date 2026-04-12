@@ -1,6 +1,4 @@
 ---
-layout: article
-
 title: Jacobian Matrix
 description: Jacobian Matrix Description
 
