@@ -15,7 +15,7 @@ const selectedViewMode=inject(ViewModeKey);
 </script>
 
 <template>
-  <ul 
+  <ul
     class="not-prose"
     :class="{
       'flex flex-col':selectedViewMode==='list',
