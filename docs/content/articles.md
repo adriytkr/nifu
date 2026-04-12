@@ -3,9 +3,14 @@ layout: large
 ---
 
 <script setup lang="ts">
+import {provide} from 'vue';
+
 import {useArticles} from '~/composables/useArticles';
+import {ViewModeKey} from '~/types/filter';
 
 import ArticleQuery from '~/components/articles/ArticleQuery.vue';
+import ArticleViewMode from '~/components/articles/ArticleViewMode.vue';
+
 import ArticleList from '~/components/articles/ArticleList.vue';
 
 const {
@@ -13,7 +18,10 @@ const {
   filteredArticles,
   matchesFound,
   queryRef,
+  selectedViewMode,
 }=useArticles();
+
+provide(ViewModeKey,selectedViewMode);
 </script>
 
 <div class="sm:max-w-md mx-auto">
@@ -22,6 +30,9 @@ const {
     v-model="query"
     ref="queryRef"
   />
+  <div class="mt-4">
+    <ArticleViewMode v-model="selectedViewMode"/>
+  </div>
 </div>
 
 <div
@@ -47,5 +58,6 @@ const {
 <div class="mt-8">
   <ArticleList
     :articles="filteredArticles"
+    :view-mode="selectedViewMode"
   />
 </div>
