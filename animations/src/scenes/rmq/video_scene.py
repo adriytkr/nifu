@@ -4,6 +4,16 @@ from src.scenes.rmq.video_scene_assets import VideoSceneAssets
 
 class VideoScene(VideoSceneAssets):
   def construct(self):
+    # ---------------- Config ----------------
+    BG_COLOR=ManimColor('#121212')
+    CELL_COLOR=BLACK
+    HIGHLIGHT_COLOR=PURPLE
+    HIGHLIGHT_COLOR2=GREEN
+    HIGHLIGHT_COLOR3=BLUE
+
+    self.camera.background_color=BG_COLOR
+
+
     # ---------------- Start Buff ----------------
     self.wait(1)
 
@@ -13,10 +23,10 @@ class VideoScene(VideoSceneAssets):
     for idx,n in enumerate(self.array):
       square=Square(
         side_length=1,
-        fill_color=BLACK,
+        fill_color=CELL_COLOR,
         fill_opacity=1,
         stroke_width=1.6,
-        stroke_color=WHITE
+        stroke_color=CELL_COLOR
       )
 
       label=MathTex(str(n)).scale(0.75)
@@ -27,7 +37,7 @@ class VideoScene(VideoSceneAssets):
         .next_to(
           square,
           DOWN,
-          buff=0.08
+          buff=0.16
         )
 
       element=VGroup(square,label,el_index)
@@ -50,7 +60,7 @@ class VideoScene(VideoSceneAssets):
       animations.append(
         array_vgroup[row][0]
           .animate
-          .set_color(PURPLE)
+          .set_color(HIGHLIGHT_COLOR)
       )
 
     self.play(*animations)
@@ -58,8 +68,8 @@ class VideoScene(VideoSceneAssets):
 
     # ---------------- Pointer Triangle ----------------
     pointer=Triangle(
-      color=YELLOW,
-      fill_color=YELLOW,
+      color=PURE_YELLOW,
+      fill_color=PURE_YELLOW,
       fill_opacity=1
     )
     pointer.scale(0.1)
@@ -130,8 +140,7 @@ class VideoScene(VideoSceneAssets):
       animations.append(
         array_vgroup[row][0]
           .animate
-          .set_stroke(WHITE)
-          .set_fill(opacity=0)
+          .set_color(CELL_COLOR)
       )
 
     self.play(
@@ -143,11 +152,22 @@ class VideoScene(VideoSceneAssets):
 
 
     # ---------------- Move array up and scale down ----------------
-    self.play(
-      array_vgroup.animate
-        .scale(0.7)
-        .to_edge(UP,buff=1)
-    )
+    array_vgroup.generate_target()
+    for el in array_vgroup.target:
+      el[2].next_to(
+        el[0],
+        LEFT,
+        buff=0.3
+      )
+
+    array_vgroup.target\
+      .scale(0.7)\
+      .arrange(
+        DOWN,
+        buff=0.1
+      )
+
+    self.play(MoveToTarget(array_vgroup))
     self.wait(0.3)
 
 
@@ -156,6 +176,7 @@ class VideoScene(VideoSceneAssets):
     col_count=3
     cell_buff=0.1
 
+
     # ---------------- Rows ----------------
     st_rows=[]
     for row in range(row_count):
@@ -163,9 +184,8 @@ class VideoScene(VideoSceneAssets):
       for col in range(col_count):
         square=Square(
           side_length=0.7,
-          fill_color=BLACK,
+          color=CELL_COLOR,
           fill_opacity=1,
-          stroke_color=WHITE,
           stroke_width=1.6
         )
 
@@ -195,18 +215,13 @@ class VideoScene(VideoSceneAssets):
       buff=cell_buff
     )
 
+
     # ---------------- Exponent Label ----------------
     col_labels=VGroup(*[
       MathTex(str(j)).scale(0.5)
       for j in range(col_count)
     ])
 
-    for j,lbl in enumerate(col_labels):
-      lbl.next_to(
-        st_rows[0][j],
-        UP,
-        buff=0.2
-      )
 
     # ---------------- Index Label ----------------
     row_labels=VGroup(*[
@@ -214,12 +229,6 @@ class VideoScene(VideoSceneAssets):
       for i in range(row_count)
     ])
 
-    for row,lbl in enumerate(row_labels):
-      lbl.next_to(
-        st_rows[row][0],
-        LEFT,
-        buff=0.25
-      )
 
     # ---------------- Draw Sparse Table ----------------
     table_group=VGroup(
@@ -229,14 +238,35 @@ class VideoScene(VideoSceneAssets):
     )
     table_group.next_to(
       array_vgroup,
-      DOWN,
-      buff=0.5
+      RIGHT,
+      buff=1.6
     )
-    table_group.move_to([
-      0,
-      table_group.get_center()[1],
-      0
-    ])
+
+    for row_idx in range(row_count):
+        st_grid[row_idx].align_to(
+          array_vgroup[row_idx][0],
+          UP
+        )
+        row_labels[row_idx]\
+          .move_to(
+            st_grid[row_idx],
+            LEFT
+          )\
+          .shift(LEFT*0.4)
+
+    for j,lbl in enumerate(col_labels):
+      lbl.next_to(
+        st_rows[0][j],
+        UP,
+        buff=0.16
+      )
+
+    for row,lbl in enumerate(row_labels):
+      lbl.next_to(
+        st_rows[row][0],
+        LEFT,
+        buff=0.16
+      )
 
     self.play(
       FadeIn(st_grid),
@@ -244,45 +274,47 @@ class VideoScene(VideoSceneAssets):
       FadeIn(col_labels)
     )
 
-    self.wait(1)
+    # ---------------- Align Center ----------------
+    main=VGroup(array_vgroup,table_group)
+    self.play(main.animate.move_to(ORIGIN))
+
 
     # ---------------- Highlight (idx=3,exp=2) ----------------
     self.play(
       st_grid[3][2][0]
         .animate
-        .set_color(PURPLE)
+        .set_color(HIGHLIGHT_COLOR)
     )
+
 
     # ---------------- Highlight N[3:7] ----------------
     self.play(*[
       elements[row][0]
         .animate
-        .set_fill(PURPLE,opacity=1)
-        .set_stroke(PURPLE)
+        .set_fill(HIGHLIGHT_COLOR,opacity=1)
+        .set_stroke(HIGHLIGHT_COLOR)
       for row in range(3,7)
     ])
 
 
     # ---------------- Write cell(idx=3,exp=2) ----------------
     self.play(st_grid[3][2][1].animate.set_opacity(1))
-    self.wait(1)
 
 
     # ---------------- RESET ----------------
     self.play(
       st_rows[3][2][0]
         .animate
-        .set_stroke(WHITE)
-        .set_fill(BLACK),
+        .set_color(CELL_COLOR),
       st_grid[3][2][1].animate.set_opacity(0),
       *[
         elements[row][0]
           .animate
-          .set_fill(BLACK)
-          .set_stroke(WHITE)
+          .set_color(CELL_COLOR)
         for row in range(3,7)
       ]
     )
+
 
     # ---------------- Fill first two columns (exp=0),(exp=1) ----------------
     animations=[]
@@ -308,38 +340,39 @@ class VideoScene(VideoSceneAssets):
     # ---------------- Highlight st_table[2][0] ----------------
     self.play(st_grid[0][2][0].animate.set_color(PURPLE))
 
+
     # ---------------- Highlight N[0:4] ----------------
     self.play(*[
       elements[row][0]
         .animate
-        .set_fill(PURPLE,opacity=1)
-        .set_stroke(PURPLE)
+        .set_color(HIGHLIGHT_COLOR)
       for row in range(0,4)
     ])
+
 
     # ---------------- Two subarrays ----------------
     self.play(
       *[
         elements[row][0]
           .animate
-          .set_fill(BLUE,opacity=1)
-          .set_stroke(BLUE)
+          .set_color(HIGHLIGHT_COLOR2)
         for row in range(0,2)
       ],
       *[
         elements[row][0]
           .animate
-          .set_fill(GREEN,opacity=1)
-          .set_stroke(GREEN)
+          .set_color(HIGHLIGHT_COLOR3)
         for row in range(2,4)
       ]
     )
 
+
     # ---------------- Highlight (idx=0,exp=1), (idx=2,exp=1) ----------------
     self.play(
-      st_grid[0][1][0].animate.set_color(BLUE),
-      st_grid[2][1][0].animate.set_color(GREEN),
+      st_grid[0][1][0].animate.set_color(HIGHLIGHT_COLOR2),
+      st_grid[2][1][0].animate.set_color(HIGHLIGHT_COLOR3),
     )
+
 
     # ---------------- Write (idx=0,exp=2) ----------------
     self.play(st_grid[0][2][1].animate.set_opacity(1))
@@ -348,22 +381,14 @@ class VideoScene(VideoSceneAssets):
     # ---------------- RESET ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(BLACK,opacity=1)
-          .set_stroke(WHITE)
+        elements[row][0].animate.set_color(CELL_COLOR)
         for row in range(0,4)
       ],
-      st_grid[0][1][0].animate
-        .set_fill(BLACK)
-        .set_stroke(WHITE),
-      st_grid[2][1][0].animate
-        .set_fill(BLACK)
-        .set_stroke(WHITE),
-      st_grid[0][2][0].animate
-        .set_fill(BLACK)
-        .set_stroke(WHITE),
+      st_grid[0][1][0].animate.set_color(CELL_COLOR),
+      st_grid[2][1][0].animate.set_color(CELL_COLOR),
+      st_grid[0][2][0].animate.set_color(CELL_COLOR)
     )
+
 
     # ---------------- Fill Rest of the table ----------------
     animations=[]
@@ -388,29 +413,22 @@ class VideoScene(VideoSceneAssets):
     # ---------------- Highlight subarray ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(PURPLE,opacity=1)
-          .set_stroke(PURPLE)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR)
         for row in range(1,5)
       ]
     )
 
     # ---------------- Highlight cell ----------------
-    self.play(st_grid[1][2][0].animate.set_color(PURPLE))
+    self.play(st_grid[1][2][0].animate.set_color(HIGHLIGHT_COLOR))
+
 
     # ---------------- RESET ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(BLACK,opacity=1)
-          .set_stroke(WHITE)
+        elements[row][0].animate.set_color(CELL_COLOR)
         for row in range(1,5)
       ],
-      st_grid[1][2][0].animate
-        .set_fill(BLACK)
-        .set_stroke(WHITE)
+      st_grid[1][2][0].animate.set_color(CELL_COLOR)
     )
 
 
@@ -419,35 +437,29 @@ class VideoScene(VideoSceneAssets):
     # ---------------- Highlight subarray ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(PURPLE,opacity=1)
-          .set_stroke(PURPLE)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR)
         for row in range(1,6)
       ]
     )
 
+
     # ---------------- Leftmost lookup ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(GREEN,opacity=1)
-          .set_stroke(GREEN)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR2)
         for row in range(1,5)
       ]
     )
 
+
     # ---------------- Leftmost lookup: highlight cell ----------------
-    self.play(st_grid[1][2][0].animate.set_color(GREEN))
+    self.play(st_grid[1][2][0].animate.set_color(HIGHLIGHT_COLOR2))
+
 
     # ---------------- Reset Leftmost lookup ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(PURPLE,opacity=1)
-          .set_stroke(PURPLE)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR)
         for row in range(1,5)
       ]
     )
@@ -456,26 +468,24 @@ class VideoScene(VideoSceneAssets):
     # ---------------- Rightmost lookup ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(BLUE,opacity=1)
-          .set_stroke(BLUE) for row in range(2,6)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR3)
+        for row in range(2,6)
       ]
     )
 
+
     # ---------------- Rightmost lookup: highlight cell ----------------
-    self.play(st_grid[2][2][0].animate.set_color(BLUE))
+    self.play(st_grid[2][2][0].animate.set_color(HIGHLIGHT_COLOR3))
+
 
     # ---------------- Reset rightmost lookup ----------------
     self.play(
       *[
-        elements[row][0]
-          .animate
-          .set_fill(PURPLE,opacity=1)
-          .set_stroke(PURPLE)
-        for row in range(2,5)
+        elements[row][0].animate.set_color(HIGHLIGHT_COLOR)
+        for row in range(2,6)
       ]
     )
+
 
     # ---------------- End Buff ----------------
     self.wait(1)
