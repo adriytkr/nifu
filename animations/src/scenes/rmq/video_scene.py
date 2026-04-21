@@ -357,7 +357,6 @@ class VideoScene(VideoSceneAssets):
         .set_stroke(WHITE),
     )
 
-
     # ---------------- Fill Rest of the table ----------------
     animations=[]
 
@@ -375,6 +374,100 @@ class VideoScene(VideoSceneAssets):
       run_time=1.5
     )
 
+
+    # ---------------- Example 1 ----------------
+
+    # ---------------- Highlight subarray ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(PURPLE,opacity=1)
+          .set_stroke(PURPLE)
+        for row in range(1,5)
+      ]
+    )
+
+    # ---------------- Highlight cell ----------------
+    self.play(st_grid[1][2][0].animate.set_color(PURPLE))
+
+    # ---------------- RESET ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(BLACK,opacity=1)
+          .set_stroke(WHITE)
+        for row in range(1,5)
+      ],
+      st_grid[1][2][0].animate
+        .set_fill(BLACK)
+        .set_stroke(WHITE)
+    )
+
+
+    # ---------------- Example 2 ----------------
+
+    # ---------------- Highlight subarray ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(PURPLE,opacity=1)
+          .set_stroke(PURPLE)
+        for row in range(1,6)
+      ]
+    )
+
+    # ---------------- Leftmost lookup ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(GREEN,opacity=1)
+          .set_stroke(GREEN)
+        for row in range(1,5)
+      ]
+    )
+
+    # ---------------- Leftmost lookup: highlight cell ----------------
+    self.play(st_grid[1][2][0].animate.set_color(GREEN))
+
+    # ---------------- Reset Leftmost lookup ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(PURPLE,opacity=1)
+          .set_stroke(PURPLE)
+        for row in range(1,5)
+      ]
+    )
+
+
+    # ---------------- Rightmost lookup ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(BLUE,opacity=1)
+          .set_stroke(BLUE) for row in range(2,6)
+      ]
+    )
+
+    # ---------------- Rightmost lookup: highlight cell ----------------
+    self.play(st_grid[2][2][0].animate.set_color(BLUE))
+
+    # ---------------- Reset rightmost lookup ----------------
+    self.play(
+      *[
+        elements[row][0]
+          .animate
+          .set_fill(PURPLE,opacity=1)
+          .set_stroke(PURPLE)
+        for row in range(2,5)
+      ]
+    )
 
     # ---------------- End Buff ----------------
     self.wait(1)
