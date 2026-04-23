@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.rmq.video_scene_assets import VideoSceneAssets
+from src.scenes.rmq.rmq_scene_assets import RMQSceneAssets
 
-class VideoScene(VideoSceneAssets):
+class RMQScene(RMQSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
@@ -20,7 +20,9 @@ class VideoScene(VideoSceneAssets):
 
 
     # ---------------- Traverse subarray ----------------
-    self.play(*self.highlight_subarray(2,6,self.HIGHLIGHT_COLOR))
+    self.play(
+      *self.highlight_subarray(2,6,self.HIGHLIGHT_COLOR),
+    )
     pointer=self.create_pointer()
     pointer.next_to(
       self.array_vgroup[2],
@@ -41,10 +43,7 @@ class VideoScene(VideoSceneAssets):
         buff=0.3
       )
 
-      self.play(
-        pointer.animate.move_to(target_pos.get_center()),
-        run_time=0.5
-      )
+      self.play(pointer.animate.move_to(target_pos.get_center()))
 
       if self.array[row]<current_min:
         current_min=self.array[row]
@@ -140,10 +139,7 @@ class VideoScene(VideoSceneAssets):
       for cell in row:
         cell[1].set_opacity(0)
 
-    self.play(
-      MoveToTarget(all_content),
-      run_time=1.5
-    )
+    self.play(MoveToTarget(all_content))
 
 
 
@@ -211,10 +207,8 @@ class VideoScene(VideoSceneAssets):
 
         animations.append(cell_label.animate.set_opacity(1))
 
-    self.play(
-      LaggedStart(*animations,lag_ratio=0.15),
-      run_time=1.5
-    )
+    self.play(LaggedStart(*animations,lag_ratio=0.15))
+
 
 
     # ---------------- Example 1 ----------------

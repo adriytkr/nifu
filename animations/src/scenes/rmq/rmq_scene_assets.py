@@ -1,6 +1,6 @@
 from manim import *
 
-class VideoSceneAssets(Scene):
+class RMQSceneAssets(Scene):
   array=[1,3,7,4,2,-2,-3] # length=7
   st_table=[
     [1,1,1],
@@ -23,6 +23,16 @@ class VideoSceneAssets(Scene):
 
   CELL_GAP=0.1
 
+  def play(
+    self,
+    *args,
+    **kwargs
+  ):
+    if 'run_time' not in kwargs:
+      kwargs['run_time']=0.5
+
+    super().play(*args,**kwargs)
+
   def setup(self):
     elements=[]
 
@@ -43,7 +53,7 @@ class VideoSceneAssets(Scene):
         .next_to(
           square,
           DOWN,
-          buff=0.16
+          buff=0.15
         )
 
       element=VGroup(square,label,el_index)
@@ -101,7 +111,6 @@ class VideoSceneAssets(Scene):
       for i in range(start,end)
     ]
 
-
   def highlight_st_cell(
     self,
     row:int,
@@ -120,7 +129,7 @@ class VideoSceneAssets(Scene):
   def create_min_display(self,value):
     min_box=Square(
       side_length=1,
-      color=GREEN,
+      color=self.HIGHLIGHT_COLOR2,
       stroke_width=1.6,
       fill_opacity=1
     )
