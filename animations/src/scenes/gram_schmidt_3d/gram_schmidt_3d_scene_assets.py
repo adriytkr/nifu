@@ -1,6 +1,6 @@
 from manim import *
 
-class LeastSquaresSceneAssets(Scene):
+class GramSchmidt3DSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
 
   def play(

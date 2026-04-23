@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.least_squares.least_squares_scene_assets import LeastSquaresSceneAssets
+from src.scenes.gram_schmidt_3d.gram_schmidt_3d_scene_assets import GramSchmidt3DSceneAssets
 
-class LeastSquaresScene(LeastSquaresSceneAssets):
+class GramSchmidt3DScene(GramSchmidt3DSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
