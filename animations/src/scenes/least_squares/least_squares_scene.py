@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.eigenvectors.eigenvectors_scene_assets import EigenvectorsSceneAssets
+from src.scenes.least_squares.least_squares_scene_assets import LeastSquaresSceneAssets
 
-class EigenvectorsScene(EigenvectorsSceneAssets):
+class LeastSquaresScene(LeastSquaresSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
@@ -16,3 +16,4 @@ class EigenvectorsScene(EigenvectorsSceneAssets):
 
     # ---------------- End Buff ----------------
     self.wait(1)
+    

@@ -1,8 +1,6 @@
 from manim import *
 
-from typing import Optional
-
-class EigenvectorsSceneAssets(Scene):
+class LeastSquaresSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
 
   def play(

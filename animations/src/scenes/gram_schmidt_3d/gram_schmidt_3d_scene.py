@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.eigenvectors.eigenvectors_scene_assets import EigenvectorsSceneAssets
+from src.scenes.gram_schmidt_3d.gram_schmidt_3d_scene_assets import GramSchmidt3DSceneAssets
 
-class EigenvectorsScene(EigenvectorsSceneAssets):
+class GramSchmidt3DScene(GramSchmidt3DSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
@@ -16,3 +16,4 @@ class EigenvectorsScene(EigenvectorsSceneAssets):
 
     # ---------------- End Buff ----------------
     self.wait(1)
+    

@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.eigenvectors.eigenvectors_scene_assets import EigenvectorsSceneAssets
+from src.scenes.graham_scan.graham_scan_scene_assets import GrahamScanSceneAssets
 
-class EigenvectorsScene(EigenvectorsSceneAssets):
+class GrahamScanScene(GrahamScanSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
@@ -16,4 +16,3 @@ class EigenvectorsScene(EigenvectorsSceneAssets):
 
     # ---------------- End Buff ----------------
     self.wait(1)
-    

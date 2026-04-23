@@ -1,6 +1,6 @@
 from manim import *
 
-class EigenvectorsSceneAssets(Scene):
+class JarvisMarchSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
 
   def play(

@@ -1,0 +1,72 @@
+######
+How do we find the subarray with the largest possible sum?
+(3s)
+
+We can apply Kadane’s Algorithm.
+(2s)
+
+
+
+######
+Best sum so far.
+(1s)
+
+Best sum of subarray that ends at current index.
+(2s)
+
+
+
+######
+For each element, we ask:
+(1s)
+
+Should we extend the current subarray or start a new one?
+(3s)
+
+If we add -7, the current sum becomes 4 + (-7) = -3.
+(2s)
+
+If we start a new subarray, the current sum becomes -7.
+(2s)
+
+Since -3 > -7, we extend the current subarray.
+(1s)
+
+
+
+######
+We ask the same question once again.
+(2s)
+
+If we add 2, the current sum becomes -3 + 2 = -1.
+(2s)
+
+If we start a new subarray, the current sum becomes 2.
+(2s)
+
+Since 2 > -1, we start a new subarray.
+(1s)
+
+
+
+######
+Once again, same question.
+(1s)
+
+If we add 3, the current sum becomes 2 + 3 = 5
+(2s)
+
+If we start a new subarray, the sum becomes 3.
+(2s)
+
+Since 5 > 3, we extend the current subarray.
+(1s)
+
+
+
+######
+We continue this process for every element.
+(2s)
+
+At each step, we decide whether to extend the current subarray or start a new one.
+(2s)

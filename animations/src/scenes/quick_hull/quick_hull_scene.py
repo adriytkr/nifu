@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.eigenvectors.eigenvectors_scene_assets import EigenvectorsSceneAssets
+from src.scenes.quick_hull.quick_hull_scene_assets import QuickHullSceneAssets
 
-class EigenvectorsScene(EigenvectorsSceneAssets):
+class QuickHullScene(QuickHullSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR

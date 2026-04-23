@@ -1,8 +1,8 @@
 from manim import *
 
-from src.scenes.eigenvectors.eigenvectors_scene_assets import EigenvectorsSceneAssets
+from src.scenes.chan.chan_scene_assets import ChanSceneAssets
 
-class EigenvectorsScene(EigenvectorsSceneAssets):
+class ChanScene(ChanSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
     self.camera.background_color=self.BG_COLOR
