@@ -2,39 +2,53 @@
 
 ![](https://raw.githubusercontent.com/iuricode/readme-template/main/repositorio/imagem.png)
 
-**NIFU** (_Now, I Finally Understand_) is a project focused on presenting **Mathematics, Physics, and Computer Science** in an intuitive way. The explanations are **intuitive** and **dynamic**, while still maintaining rigorous demonstrations.
+**NIFU** (_Now, I Finally Understand!_) is a project focused on presenting **Mathematics, Physics, and Computer Science** in an intuitive way. The explanations are **intuitive** and **dynamic**, while still maintaining rigorous demonstrations.
 
-The main goal is to help readers build both **insight** and **solid technical understanding**.
+The goal is simple: help readers build both **insight** and **solid technical understanding**.
 
 - [Overview](#-overview)
 - [Purpose](#-purpose)
 - [Contribution](#-contribution)
-- [Pipeline](#-pipeline)
+- [Engineering](#%EF%B8%8F-engineering)
 - [License](#-license)
+
+---
 
 ## 📌 Overview
 
-The articles are written so hat the intuition is built first, before diving into rigorous proofs. You can read them [here](https://nifu-blog.vercel.app/).
+The articles are designed to introduce **intuition first**, and only then move into formal reasoning and proofs.
+
+👉 Read the articles [here](https://nifu-blog.vercel.app).
 
 By intuition, I mean:
 
-- Use of **analogies**: Turning abstract concepts into something concrete. I firmly believe that **any topic can be visualized**.
+- **Analogies**:
+  Turning abstract concepts into something concrete. I firmly believe that if you cannot explain a topic in simple words, you don't fully understand it.
 
-- **Interactivity**: You will be constantly challenged as you read the article.
+- **Active Engaging**:
+  You will be constantly challenged as you read the article. You are not just passively consuming the content, you are actively building it.
 
-- **Challenges**: One of the best way to learn is by attempting difficult problems. They are located at the end.
+- **Challenges**:
+  Carefully selected problems at the end of each article to reinforce understanding. In my opinion, one of the best way to master any topic is by attempting difficult problems.
 
-They were written to be **fast and fun**, rather than slow or tedious.
+The content is intentionally **fast-paced and engaging**, avoiding unnecessary complexity while preserving depth.
 
-I have also created a Youtube series where I explain topics in under 60 seconds. You can visit my channelc [here](https://www.youtube.com/@nifu-intuition).
+In addition, there is a YouTube series focused on explaining key ideas in under 60 seconds:  
+👉 You can watch it [here](https://www.youtube.com/@nifu-intuition).
+
+---
 
 ## 🎯 Purpose
 
-There are several reasons why I built this website, but the main ones are:
+This project was built around two core ideas:
 
-- **Reduce complexity barrier:** Helping enthusiasts and students **master complex topics** in a way that feels **intuitive and precise**.
+- **Reduce complexity barrier:**
+  Make advanced concepts in Math, Physics, and Computer Science feel **approachable, intuitive, and precise**.
 
-- **Cultivate an Open Academic Culture:** Encouraging people to share academic and technical knowledge on the Internet, fostering **a community that builds and teaches**.
+- **Cultivate an Open Academic Culture:**
+  Encouraging people to share academic and technical knowledge on the Internet, fostering **a community that builds and teaches**.
+
+---
 
 ## 🤝 Contribution
 
@@ -47,14 +61,20 @@ If you spot any issue in the articles or videos, such as:
 - Performance issues with the website;
 - Or anything else that you find that could be refined.
 
-you are **very welcome** to create an [issue](https://github.com/adriytkr/kaga/issues), and I shall attend your request 🤗.
+you are very welcome to open an [issue](https://github.com/adriytkr/kaga/issues), and I'll address it 🤗.
 
-## ⚙️ Pipeline
+All constructive feedback is appreciated and will be reviewed.
+
+---
+
+## ⚙️ Engineering
 
 The website was built using [Vitepress](https://vitepress.dev/) and [Tailwind CSS](https://tailwindcss.com/).
 
 The Youtube animations were created using [Manim](https://www.manim.community/), and the website animations were built using [Manim Slides](https://www.manim.community/plugin/manim-slides/).
 
+---
+
 ## 📄 License
 
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
