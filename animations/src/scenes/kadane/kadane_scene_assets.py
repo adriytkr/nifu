@@ -1,22 +1,22 @@
 from manim import *
-
 from typing import Optional
-
 class KadaneSceneAssets(Scene):
-  array=[4,-7,2,3,-6,1,5,-2]
-
   BG_COLOR=ManimColor('#1a1b26')
-  CELL_COLOR=BLACK
-  BEST_SUM_DISPLAY_COLOR=ManimColor("#8ed245")
-  CURRENT_SUM_DISPLAY_COLOR=ManimColor("#4b7be5")
+
+  CELL_COLOR=ManimColor('#24283b')
 
   SUBARRAY_COLORS=[
-    ManimColor('#e06c75'),
-    ManimColor('#e5c07b'),
-    ManimColor('#56b6c2'),
-    ManimColor('#c678dd'),
-    ManimColor('#98c379')
+    ManimColor('#f7768e'),
+    ManimColor('#bb9af7'),
+    ManimColor('#73daca'),
+    ManimColor('#ff9e64'),
+    ManimColor('#9ece6a')
   ]
+
+  BEST_SUM_DISPLAY_COLOR=ManimColor('#ffd700')
+  CURRENT_SUM_DISPLAY_COLOR=ManimColor('#00e676')
+
+  array=[4,-7,2,3,-6,1,5,-2]
 
   def play(
     self,
@@ -41,68 +41,77 @@ class KadaneSceneAssets(Scene):
       self.CURRENT_SUM_DISPLAY_COLOR
     )
 
-    self.pointer=self.build_pointer()
+    self.el_pointer=self.build_pointer()
 
     self._ks_best=float('-inf')
     self._ks_current=0
     self._ks_color=0
 
-  def build_pointer(self):
-    return Triangle(
+  def build_pointer(self)->Triangle:
+    el_pointer=Triangle(
       fill_opacity=1,
       fill_color=PURE_YELLOW,
       stroke_width=0
-    ).scale(0.1)
+    )
+    el_pointer.scale(0.1)
 
-  def move_pointer_to(self,target:int)->None:
+    return el_pointer
+
+  def move_pointer_to(
+    self,
+    target:int
+  )->None:
     el=self.el_array[target]
 
     self.play(
-      self.pointer.animate.next_to(
+      self.el_pointer.animate.next_to(
         el,
         DOWN,
         buff=0.3
       ),
     )
 
-  def build_array(self,array:list[int]):
+  def build_array(
+    self,
+    array:list[int]
+  )->VGroup:
     elements=[]
 
     for idx,n in enumerate(array):
-      square=Square(
+      el_square=Square(
         side_length=1,
-        fill_color=self.CELL_COLOR,
+        color=self.CELL_COLOR,
         fill_opacity=1,
         stroke_width=1.6,
-        stroke_color=self.CELL_COLOR,
       )
 
-      label=MathTex(str(n)).scale(0.75)
-      label.move_to(square.get_center())
+      el_value=MathTex(r'\boldsymbol{'+str(n)+'}')\
+        .scale(0.8)\
+        .move_to(el_square.get_center())
 
-      el_index=MathTex(idx)\
-        .scale(0.75)\
+      el_index=MathTex(str(idx))\
+        .scale(0.67)\
         .next_to(
-          square,
+          el_square,
           DOWN,
           buff=0.16
         )
 
-      element=VGroup(square,label,el_index)
+      element=VGroup(el_square,el_value,el_index)
       elements.append(element)
 
-    return VGroup(*elements).arrange(RIGHT,buff=0.1)
+    return VGroup(*elements).arrange(
+      RIGHT,
+      buff=0.1
+    )
 
-  def kadane_step(
-    self,
-    i:int,
-    start:int=0
-  )->list:
+  def _advance_kadane(self,i:int)->bool:
     n=self.array[i]
+    reset=i>0 and self._ks_current+n<n
 
-    if i==start:
+    if i==0:
       self._ks_current=n
-    elif self._ks_current+n<n:
+    elif reset:
       self._ks_current=n
       self._ks_color=(self._ks_color+1)%len(self.SUBARRAY_COLORS)
     else:
@@ -111,68 +120,65 @@ class KadaneSceneAssets(Scene):
     if self._ks_current>self._ks_best:
       self._ks_best=self._ks_current
 
+    return reset
+
+  def kadane_step(self,i:int)->list:
+    reset=self._advance_kadane(i)
     color=self.SUBARRAY_COLORS[self._ks_color]
 
     return [
-      *self.highlight(i,i+1,color=color),
+      *self.highlight_cell(i,color),
       *self.update_display(
         best=self._ks_best,
         curr=self._ks_current
       ),
     ]
 
-  def highlight(
+  def highlight_cell(
     self,
-    start:int,
-    end:int,
+    index:int,
     color:ManimColor
-  )->None:
-    return [
-      el[0].animate.set_color(color)
-      for el in self.el_array[start:end]
-    ]
+  )->list:
+    return [self.el_array[index][0].animate.set_color(color)]
 
   def build_display(
     self,
-    initial_value:Optional[int],
+    initial_value:int,
     color:ManimColor
   ):
-    square=Square(
+    el_square=Square(
       side_length=1,
       color=color,
       fill_opacity=1,
       stroke_width=0
     )
 
-    if initial_value is None:
-      label=MathTex('').scale(0.75)
-    else:
-      label=MathTex(str(initial_value)).scale(0.75)
+    el_label=MathTex(r'\boldsymbol{'+str(initial_value)+'}')\
+      .scale(0.75)\
+      .move_to(el_square.get_center())
 
-    label.move_to(square.get_center())
-
-    return VGroup(square,label)
+    return VGroup(el_square,el_label)
 
   def update_display(
     self,
     best:int,
     curr:int
-  ):
-    new_best_label=MathTex(str(best))\
+  )->list:
+    el_new_best_label=MathTex(r'\boldsymbol{'+str(best)+'}')\
       .scale(0.75)\
       .move_to(self.el_best_sum_display[0].get_center())
 
-    new_cur_label=MathTex(str(curr))\
-      .scale(0.525)\
+    el_new_cur_label=MathTex(r'\boldsymbol{'+str(curr)+'}')\
+      .scale(0.75)\
       .move_to(self.el_current_sum_display[0].get_center())
 
-    return (
+    return [
       Transform(
         self.el_best_sum_display[1],
-        new_best_label
+        el_new_best_label
       ),
       Transform(
         self.el_current_sum_display[1],
-        new_cur_label
+        el_new_cur_label
       )
-    )
+    ]
