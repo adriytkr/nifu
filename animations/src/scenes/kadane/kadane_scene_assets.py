@@ -1,5 +1,5 @@
 from manim import *
-from typing import Optional
+
 class KadaneSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
 

@@ -1,1 +1,35 @@
+Kadane's Algorithm - Find subarray with largest sum
 
+Start a subarray
+
+Keep track of best sum thus far (global)
+
+Keep track of best possible sum that ends at current index (local)
+
+For each iteration, we ask
+
+Should we include this element to the current subarray, or
+
+should we start a new subarray?
+
+If we include -7 to our current subarray [4], we obtain [4, -7]
+
+Our current sum becomes 4 + (-7) = -3.
+
+If we start a new subarray, our current subarray becomes [-7].
+
+Our sum becomes simply -7.
+
+Since -3 > -7, we extend our current subarray.
+
+If we include 2 to our current subarray [4, -7], we obtain [4, -7, 2].
+
+Our current sum becomes 4 + (-7) + 2 = -1.
+
+If we start a new subarray, our current subarray becomes [2].
+
+Our sum becomes simply 2.
+
+Since 2 > -1, we start a new subarray.
+
+We continue doing that for the remaining elements.
