@@ -3,8 +3,10 @@ from manim import *
 
 class RMQSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
+
   CELL_COLOR=BLACK
   CELL_GAP=0.1
+
   HIGHLIGHT_COLOR=ManimColor('#7a41e4')
   HIGHLIGHT_COLOR2=ManimColor('#ffd700')
   HIGHLIGHT_COLOR3=ManimColor('#00e676')

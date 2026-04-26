@@ -3,7 +3,7 @@ from manim import *
 class KadaneSceneAssets(Scene):
   BG_COLOR=ManimColor('#1a1b26')
 
-  CELL_COLOR=ManimColor('#24283b')
+  CELL_COLOR=BLACK
 
   SUBARRAY_COLORS=[
     ManimColor('#f7768e'),

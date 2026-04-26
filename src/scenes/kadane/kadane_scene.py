@@ -1,5 +1,7 @@
 from manim import *
+
 from src.scenes.kadane.kadane_scene_assets import KadaneSceneAssets
+
 class KadaneScene(KadaneSceneAssets):
   def construct(self):
     # ---------------- Config ----------------
