@@ -39,6 +39,7 @@ class EigenvectorsSceneAssets(Scene):
   def play(self,*args,**kwargs):
     if 'run_time' not in kwargs:
       kwargs['run_time']=0.6
+
     super().play(*args,**kwargs)
 
   def build_vec(self,vec)->Arrow:
@@ -51,6 +52,7 @@ class EigenvectorsSceneAssets(Scene):
 
   def build_span(self,vec)->DashedLine:
     u=vec/np.linalg.norm(vec)
+
     return DashedLine(
       start=self.coords.c2p(*(u*10)),
       end=self.coords.c2p(*(-u*10)),
@@ -59,16 +61,20 @@ class EigenvectorsSceneAssets(Scene):
 
   def mv(self,matrix,*vectors)->list:
     animations=[]
+
     for el_v in vectors:
       math_coords=self.coords.p2c(el_v.get_end())
       new_v=matrix@math_coords
+
       el_new_v=Arrow(
         start=ORIGIN,
         end=self.coords.c2p(new_v[0],new_v[1]),
         buff=0,
         color=self.VECTOR_COLOR
       )
+
       animations.append(Transform(el_v,el_new_v))
+
     return animations
 
   def build_eigen_family(self,eigen_v,scalar_range=range(-4,4))->list:
